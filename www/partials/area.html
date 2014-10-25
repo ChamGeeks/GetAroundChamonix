@@ -2,7 +2,7 @@
   <ion-content class="padding">
 
     <ul class="stops list">
-      <li class="stop item" ng-repeat="stop in stops">
+      <li class="stop item" ng-repeat="stop in stops" ng-click="selectStop(stop)">
         <div class="line line-{{line}}" ng-repeat="line in stop.lines"></div>
         {{ stop.name }}
       </li>

@@ -1,0 +1,21 @@
+<ion-view title="Your trip">
+  <ion-content class="padding">
+
+    <div class="card">
+      <div class="item item-text-wrap">
+        <strong>Start:</strong> {{ trip.start.name }}
+        <br>
+        <small>{{ trip.start.lat +' - '+ trip.start.lon }}</small>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-text-wrap">
+        <strong>End:</strong> {{ trip.end.name }}
+        <br>
+        <small>{{ trip.end.lat +' - '+ trip.end.lon }}</small>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

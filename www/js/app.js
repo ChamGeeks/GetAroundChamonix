@@ -4,17 +4,15 @@
 
 var mockApi = {
   areas: [
-    { id: 1, name: 'Le Tour' },
-    { id: 2, name: 'Argentiere', meta: {
-      lifts: [ 'Grand Montets' ]
-    } },
-    { id: 3, name: 'Le Praz', meta: {
-      lifts: [ 'Flegere' ]
-    } },
-    { id: 4, name: 'Chamonix', meta: {
-      lifts: [ 'Brevant', 'Aiguille du Midi' ]
-    } },
-    { id: 5, name: 'Les Houches' }
+    { id: 1, name: 'Chamonix' },
+    { id: 2, name: 'Servoz' },
+    { id: 3, name: 'Les Houches' },
+    { id: 4, name: 'Vaudagne' },
+    { id: 5, name: 'Bossons/Pelerins' },
+    { id: 6, name: 'Les Praz' },
+    { id: 7, name: 'Les Tines' },
+    { id: 8, name: 'Argentière' },
+    { id: 9, name: 'Le Tour' }
   ],
   stops: [
     { id: 1, name: 'Les Praz Flégèr', lines: [ 1, 2, 11, 12] },
@@ -31,7 +29,7 @@ var mockApi = {
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -64,6 +62,11 @@ angular.module('starter', ['ionic'])
       url: '/stop/:id',
       templateUrl: 'partials/stop.html',
       controller: 'StopCtrl'
+    })
+    .state('result', {
+      url: '/result',
+      templateUrl: 'partials/result.html',
+      controller: 'ResultCtrl'
     });
 
    $urlRouterProvider.otherwise('/');
@@ -71,7 +74,26 @@ angular.module('starter', ['ionic'])
 })
 
 
-.factory('BusAPI', function($q){
+.factory('BusAPI', function($q, $http){
+
+  // var db = window.openDatabase('gtfs', '1.0', 'my first database', 2 * 1024 * 1024);
+
+  // db.transaction(function (tx) {
+  //   console.log(tx);
+  //   // tx.executeSql('create table block (id INTEGER, name TEXT, PRIMARY KEY(id))');
+  //   // tx.executeSql('insert into block (id,name) values (1,"Chamonix")');
+  //   tx.executeSql('SELECT * FROM block', [], function(tx, result){
+  //     console.log(tx, result);
+  //     for
+  //   });
+  // });
+
+  // db.transaction(function (tx) {
+  //   tx.executeSql('SELECT * FROM block', [], function(tx, result){
+  //     console.log(tx, result);
+  //   });
+  // });
+
   return {
 
     getAreas: function getAreas() {
@@ -95,16 +117,75 @@ angular.module('starter', ['ionic'])
 
       return deferred.promise;
     },
-    getStops: function getStops(id) {
-      var deferred = $q.defer();
-      deferred.resolve(mockApi.stops);
-      return deferred.promise;
+
+    getStops: function getStops(area_id) {
+
+      var url = 'https://peaceful-chamber-9756.herokuapp.com/api/search?block='+ area_id;
+      return $http.get(url);
+
+    },
+
+    getNerbyStops: function(coords, radius) {
+      radius = radius || 500;
+      var url = 'https://afternoon-cliffs-4353.herokuapp.com/api/closest';
+
+      return $http.get(url +'?lat='+ coords.latitude +'&lng='+ coords.longitude +'&radius='+ radius);
     }
   };
 })
 
 
-.controller('HomeCtrl', function($scope, $location, BusAPI) {
+
+.controller('MainCtrl', function($scope, trip){
+
+  this.isPlaning = function() {
+    return trip.start;
+  };
+
+  this.reset = function() {
+    trip.reset();
+  };
+})
+
+
+.controller('HomeCtrl', function($scope, trip, $cordovaGeolocation, BusAPI) {
+
+  $scope.closeStops = [];
+
+  $cordovaGeolocation
+    .getCurrentPosition()
+    .then(function (position) {
+      console.log(position.coords.accuracy);
+      if(position.coords.accuracy < 150){
+        BusAPI.getNerbyStops(position.coords).then(function(resp){
+          $scope.closeStops = resp.data.slice(0, 3);
+        });
+      }
+    });
+
+  if(!trip.start) {
+    $scope.selectAreaTitle = 'Select start area';
+  }else{
+    $scope.selectAreaTitle = 'Select end area';
+  }
+
+})
+
+.factory('trip', function($location){
+  return {
+    start: false,
+    stop: false,
+    reset: function() {
+      this.start = false;
+      this.stop = false;
+      $location.path('/');
+    }
+  };
+})
+
+
+
+.controller('SelectAreaCtrl', function($scope, $location, BusAPI) {
 
   $scope.areas = [];
 
@@ -119,7 +200,9 @@ angular.module('starter', ['ionic'])
 
 })
 
-.controller('AreaCtrl', function($scope, $stateParams, BusAPI) {
+
+
+.controller('AreaCtrl', function($scope, $stateParams, BusAPI, $location, trip) {
 
   $scope.area = '';
   $scope.stops = [];
@@ -129,24 +212,37 @@ angular.module('starter', ['ionic'])
     $scope.area = data;
   });
 
-  BusAPI.getStops('id').then(function(data){
-    $scope.stops = data;
+  BusAPI.getStops($stateParams.id).then(function(resp){
+    $scope.stops = resp.data;
   });
 
-  $scope.linesClass = function(lines) {
-    var cssClasses = '';
-    lines.forEach(function(line){
-      cssClasses += ' line-'+ line;
-    });
-    return cssClasses;
-  };
+
+  $scope.selectStop = function(stop) {
+    if(!trip.start){
+      trip.start = stop;
+      $location.path('/');
+      return;
+    }else{
+      trip.end = stop;
+    }
+    $location.path('/result');
+    console.log('Show times', trip.start, trip.end);
+  }
 
 })
 
 
-.controller('StopCtrl', function($scope, $stateParams, BusAPI) {
+
+.controller('ResultCtrl', function($scope, trip){
+  $scope.trip = trip;
+})
+
+
+// Not used
+.controller('StopCtrl', function($scope, $stateParams) {
   $scope.stop = {
-    name: 'The stop'
+    name: 'The stop',
+    id: $stateParams.id
   };
 });
 

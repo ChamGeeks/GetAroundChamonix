@@ -15,16 +15,21 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter" ng-controller="MainCtrl as main">
 
     <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button>
+
+      <ion-nav-buttons side="right">
+        <button ng-show="main.isPlaning()" class="button icon ion-ios7-reload" ng-click="main.reset()"></button>
+      </ion-nav-buttons>
     </ion-nav-bar>
 
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
