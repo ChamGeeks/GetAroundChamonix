@@ -23,3 +23,18 @@
 .line-12 {
   background: #B0773D;
   left: 26px; }
+
+.line-badge {
+  color: #fff;
+  padding: 1px 7px 3px;
+  border-radius: 100%; }
+
+.desc {
+  margin: 0 0 20px;
+  border: 1px solid #43cee6;
+  padding: 5px;
+  font-size: 12px;
+  overflow: hidden; }
+
+.desc button {
+  float: right; }
