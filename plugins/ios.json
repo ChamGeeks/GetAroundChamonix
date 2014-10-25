@@ -19,6 +19,20 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "framework": {
+                "parents": {
+                    "libsqlite3.dylib": [
+                        {
+                            "xml": "false",
+                            "count": 1
                         }
                     ]
                 }
@@ -33,6 +47,9 @@
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         },
         "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.ionicframework.myapp914728"
+        },
+        "com.brodysoft.sqlitePlugin": {
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         }
     },

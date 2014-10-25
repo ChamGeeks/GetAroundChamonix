@@ -1,7 +1,13 @@
 <ion-view title="Select area">
   <ion-content class="padding">
 
-    <h1>{{ area }}</h1>
+    <h1>{{ area.name }}</h1>
+
+    <ul class="stops">
+      <li class="stop" ng-repeat="stop in stops">
+        {{ stop.name }}
+      </li>
+    </ul>
 
   </ion-content>
 </ion-view>
