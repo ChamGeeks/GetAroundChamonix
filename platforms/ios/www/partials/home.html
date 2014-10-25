@@ -1,0 +1,13 @@
+<ion-view title="Select area">
+  <ion-content class="padding">
+
+    <div class="areas">
+      <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
+        <div class="item item-text-wrap">
+          {{ area.name }}
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

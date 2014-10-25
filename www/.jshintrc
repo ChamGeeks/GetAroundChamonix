@@ -1,0 +1,9 @@
+{
+  "browser": true,
+  "globals": {
+    "angular": true,
+    "cordova": true,
+    "console": true,
+    "StatusBar": true
+  }
+}
