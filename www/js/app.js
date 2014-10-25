@@ -5,10 +5,22 @@
 var mockApi = {
   areas: [
     { id: 1, name: 'Le Tour' },
-    { id: 2, name: 'Argentiere' },
-    { id: 3, name: 'Le Praz' },
-    { id: 4, name: 'Chamonix' },
+    { id: 2, name: 'Argentiere', meta: {
+      lifts: [ 'Grand Montets' ]
+    } },
+    { id: 3, name: 'Le Praz', meta: {
+      lifts: [ 'Flegere' ]
+    } },
+    { id: 4, name: 'Chamonix', meta: {
+      lifts: [ 'Brevant', 'Aiguille du Midi' ]
+    } },
     { id: 5, name: 'Les Houches' }
+  ],
+  stops: [
+    { id: 132, name: 'Stop 1' },
+    { id: 12, name: 'Stop 2' },
+    { id: 2, name: 'Stop 3' },
+    { id: 32, name: 'Stop 4' }
   ]
 };
 
@@ -17,7 +29,7 @@ var mockApi = {
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -56,6 +68,18 @@ angular.module('starter', ['ionic'])
   return {
     getAreas: function getAreas(callback) {
       return callback(mockApi.areas);
+    },
+    getAreaById: function(id, callback) {
+      var area = {};
+      mockApi.areas.forEach(function(value){
+        if(value.id == id) {
+          area = value;
+        }
+      });
+      return callback(area);
+    },
+    getStops: function getStops(id, callback) {
+      return callback(mockApi.stops);
     }
   };
 })
@@ -76,7 +100,20 @@ angular.module('starter', ['ionic'])
 
 })
 
-.controller('AreaCtrl', function($scope, $stateParams) {
+.controller('AreaCtrl', function($scope, $stateParams, BusAPI) {
 
-  $scope.area = $stateParams.id;
+  $scope.area = '';
+  $scope.stops = [];
+
+
+  BusAPI.getAreaById($stateParams.id, function(data){
+    $scope.area = data;
+  });
+
+  BusAPI.getStops('id', function(data){
+    $scope.stops = data;
+  });
+
+
 });
+
