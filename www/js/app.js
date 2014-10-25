@@ -17,10 +17,12 @@ var mockApi = {
     { id: 5, name: 'Les Houches' }
   ],
   stops: [
-    { id: 132, name: 'Stop 1' },
-    { id: 12, name: 'Stop 2' },
-    { id: 2, name: 'Stop 3' },
-    { id: 32, name: 'Stop 4' }
+    { id: 1, name: 'Les Praz Flégèr', lines: [ 1, 2, 11, 12] },
+    { id: 2, name: 'Les Praz Poste', lines: [ 2, 11 ] },
+    { id: 3, name: 'Les Vardesses', lines: [ 1, 12 ] },
+    { id: 4, name: 'L\'Arveyron', lines: [ 1, 12 ] },
+    { id: 5, name: 'Les Ilettes', lines: [ 2, 11 ] },
+    { id: 6, name: 'Les Nants', lines: [ 2, 11 ] }
   ]
 };
 
@@ -57,6 +59,11 @@ angular.module('starter', ['ionic'])
       url: '/area/:id',
       templateUrl: 'partials/area.html',
       controller: 'AreaCtrl'
+    })
+    .state('stop', {
+      url: '/stop/:id',
+      templateUrl: 'partials/stop.html',
+      controller: 'StopCtrl'
     });
 
    $urlRouterProvider.otherwise('/');
@@ -64,22 +71,34 @@ angular.module('starter', ['ionic'])
 })
 
 
-.factory('BusAPI', function(){
+.factory('BusAPI', function($q){
   return {
-    getAreas: function getAreas(callback) {
-      return callback(mockApi.areas);
+
+    getAreas: function getAreas() {
+      var deferred = $q.defer();
+      deferred.resolve(mockApi.areas);
+      return deferred.promise;
     },
-    getAreaById: function(id, callback) {
+
+
+    getAreaById: function(id) {
+      var deferred = $q.defer();
+
       var area = {};
       mockApi.areas.forEach(function(value){
         if(value.id == id) {
           area = value;
         }
       });
-      return callback(area);
+
+      deferred.resolve(area);
+
+      return deferred.promise;
     },
-    getStops: function getStops(id, callback) {
-      return callback(mockApi.stops);
+    getStops: function getStops(id) {
+      var deferred = $q.defer();
+      deferred.resolve(mockApi.stops);
+      return deferred.promise;
     }
   };
 })
@@ -89,7 +108,7 @@ angular.module('starter', ['ionic'])
 
   $scope.areas = [];
 
-  BusAPI.getAreas(function(data){
+  BusAPI.getAreas().then(function(data){
     $scope.areas = data;
   });
 
@@ -106,14 +125,28 @@ angular.module('starter', ['ionic'])
   $scope.stops = [];
 
 
-  BusAPI.getAreaById($stateParams.id, function(data){
+  BusAPI.getAreaById($stateParams.id).then(function(data){
     $scope.area = data;
   });
 
-  BusAPI.getStops('id', function(data){
+  BusAPI.getStops('id').then(function(data){
     $scope.stops = data;
   });
 
+  $scope.linesClass = function(lines) {
+    var cssClasses = '';
+    lines.forEach(function(line){
+      cssClasses += ' line-'+ line;
+    });
+    return cssClasses;
+  };
 
+})
+
+
+.controller('StopCtrl', function($scope, $stateParams, BusAPI) {
+  $scope.stop = {
+    name: 'The stop'
+  };
 });
 
