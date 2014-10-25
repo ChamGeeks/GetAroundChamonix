@@ -1,4 +1,4 @@
-cordova.define("com.brodysoft.sqlitePlugin.SQLitePlugin", function(require, exports, module) { (function() {
+(function() {
   var READ_ONLY_REGEX, SQLiteFactory, SQLitePlugin, SQLitePluginTransaction, argsArray, nextTick, root, txLocks;
 
   root = this;
@@ -443,5 +443,3 @@ cordova.define("com.brodysoft.sqlitePlugin.SQLitePlugin", function(require, expo
   };
 
 }).call(this);
-
-});
