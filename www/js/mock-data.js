@@ -16,7 +16,7 @@ var mockApi = {
   searchResult: [
     [{
       line: {
-        short_name: "1",
+        number: "1",
         direction: "Le Tour > Les houches",
       },
       departure: {
@@ -36,7 +36,7 @@ var mockApi = {
     }],
     [{
       line: {
-        short_name: "12",
+        number: "12",
         direction: "Le Tour > Chamonix Süd",
       },
       departure: {
@@ -56,7 +56,7 @@ var mockApi = {
     }],
     [{
       line: {
-        short_name: "11",
+        number: "11",
         direction: "Gran Montets > Chamonix Süd",
       },
       departure: {

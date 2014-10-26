@@ -22,9 +22,9 @@
 
 
     <ul class="list">
-      <li class="item line-box line-box-{{ time[0].line.short_name }}" ng-repeat="time in times">
+      <li class="item line-box line-box-{{ time[0].line.number }}" ng-repeat="time in times">
         <span class="line-badge">
-          {{ time[0].line.short_name }}
+          {{ time[0].line.number }}
         </span>
         {{ time[0].departure.time }} - {{ time[0].destination.time }}<br>
         {{ time[0].departure.stop.name }} - {{ time[0].destination.stop.name }}
