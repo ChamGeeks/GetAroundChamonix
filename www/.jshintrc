@@ -4,6 +4,7 @@
     "angular": true,
     "cordova": true,
     "console": true,
-    "StatusBar": true
+    "StatusBar": true,
+    "mockApi": true
   }
 }
