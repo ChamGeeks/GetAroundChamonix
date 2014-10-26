@@ -116,7 +116,6 @@ angular.module('chamBus')
       trip.end = stop;
     }
     $location.path('/result');
-    console.log('Show times', trip.start, trip.end);
   };
 
 })
@@ -126,10 +125,7 @@ angular.module('chamBus')
 .controller('ResultCtrl', function($scope, trip, $ionicPopup, BusAPI){
   $scope.trip = trip;
 
-  $scope.dateTime = {
-    time: false,
-    date: false
-  };
+  $scope.dateTime = {};
 
   $scope.selectDateTime = function() {
 
@@ -156,7 +152,6 @@ angular.module('chamBus')
 
   $scope.times = [];
   BusAPI.findTimes().then(function(times){
-    console.log(times);
     $scope.times = times;
   });
 

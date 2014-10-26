@@ -8,7 +8,7 @@ angular.module('chamBus')
 .factory('trip', function($location){
   return {
     start: false,
-    stop: false,
+    end: false,
 
     started: function(){
       return !!this.start;
@@ -19,7 +19,7 @@ angular.module('chamBus')
 
     reset: function() {
       this.start = false;
-      this.stop = false;
+      this.end = false;
       $location.path('/area');
     }
   };
@@ -145,12 +145,17 @@ angular.module('chamBus')
 
     findTimes: function() {
 
-      trip.start;
-      trip.stop;
+      var url = 'https://peaceful-chamber-9756.herokuapp.com/api';
+      url += '/plan/departure?from='+ trip.start.id +'&to='+ trip.end.id;
+      console.log(url);
 
-      var deferred = $q.defer();
-      deferred.resolve(mockApi.searchResult);
-      return deferred.promise;
+      return $http.get(url).then(function(resp){
+        return resp.data;
+      });
+
+      // var deferred = $q.defer();
+      // deferred.resolve(mockApi.searchResult);
+      // return deferred.promise;
     }
   };
 });
