@@ -1,13 +1,24 @@
+<ion-view title="{{ selectAreaTitle }}">
+  <ion-content class="padding">
 
-<div class="areas" ng-controller="SelectAreaCtrl">
-  <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
+    <h3 ng-show="closeStops">Stops near by</h3>
+    <ul class="stops list">
+      <li class="stop item" ng-repeat="aStop in closeStops" ng-click="setStartRoute(aStop.id)">
+        {{ aStop.name }}
+      </li>
+    </ul>
 
-    <div class="item item-text-wrap">
-      {{ area.name }}
-      <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
-        <small>{{ area.meta.lifts.join(', ') }}</small>
+    <div class="areas">
+      <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
+
+        <div class="item item-text-wrap">
+          {{ area.name }}
+          <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
+            <small>{{ area.meta.lifts.join(', ') }}</small>
+          </div>
+        </div>
+
       </div>
     </div>
-
-  </div>
-</div>
+  </ion-content>
+</ion-view>
