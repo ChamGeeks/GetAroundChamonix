@@ -3,7 +3,12 @@
 
 angular.module('chamBus')
 
-.controller('MainCtrl', function($scope, trip){
+.controller('MainCtrl', function($scope, trip, $translate, $location){
+
+  $scope.selectStartLang = function(lang) {
+    $translate.use(lang);
+    $location.path('/area');
+  }
 
   this.isPlaning = function() {
     return trip.start;
@@ -15,7 +20,18 @@ angular.module('chamBus')
 })
 
 
-.controller('HomeCtrl', function($scope) {
+.controller('HomeCtrl', function($scope) { // , $cordovaGlobalization
+
+  /**
+   * @todo Correct default lang
+   */
+  // $cordovaGlobalization.getPreferredLanguage().then(
+  //   function(result) {
+  //     console.log(result);
+  //   },
+  //   function(error) {
+  //     console.log(error);
+  // });
 
   $scope.homeTitle = 'ChamBus';
 

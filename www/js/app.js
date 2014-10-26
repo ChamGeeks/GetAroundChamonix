@@ -6,7 +6,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('chamBus', ['ionic', 'ngCordova'])
+angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
 
 // Iconic code
 .run(function($ionicPlatform) {
@@ -59,4 +59,23 @@ angular.module('chamBus', ['ionic', 'ngCordova'])
 
    $urlRouterProvider.otherwise('/');
 
-});
+})
+
+.config(['$translateProvider', function ($translateProvider) {
+  $translateProvider.translations('en', {
+    'SELECT_AREA': 'Select area',
+    'STOPS_NEAR': 'Stops near by'
+  });
+
+  $translateProvider.translations('fr', {
+    'SELECT_AREA': 'Oi hu hu',
+    'STOPS_NEAR': 'Fu du fafa'
+  });
+
+  $translateProvider.translations('sv', {
+    'SELECT_AREA': 'Välj område',
+    'STOPS_NEAR': 'Hållplatser nära'
+  });
+
+  $translateProvider.preferredLanguage('en');
+}]);
