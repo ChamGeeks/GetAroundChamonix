@@ -3,15 +3,7 @@
 
 angular.module('chamBus')
 
-.controller('MainCtrl', function($scope, trip, chamDb){
-
-
-  chamDb.init();
-
-  // chamDb.insertDb().then(function(resp){
-  //   console.log('Done: ', data);
-  // });
-
+.controller('MainCtrl', function($scope, trip){
 
   this.isPlaning = function() {
     return trip.start;
