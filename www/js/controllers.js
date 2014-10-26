@@ -3,7 +3,15 @@
 
 angular.module('chamBus')
 
-.controller('MainCtrl', function($scope, trip){
+.controller('MainCtrl', function($scope, trip, chamDb){
+
+
+  chamDb.init();
+
+  // chamDb.insertDb().then(function(resp){
+  //   console.log('Done: ', data);
+  // });
+
 
   this.isPlaning = function() {
     return trip.start;
@@ -74,7 +82,7 @@ angular.module('chamBus')
   });
 
   BusAPI.getStops($stateParams.id).then(function(resp){
-    $scope.stops = resp.data;
+    $scope.stops = resp;
   });
 
 
