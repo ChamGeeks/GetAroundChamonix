@@ -29,6 +29,11 @@
         {{ time[0].departure.time }} - {{ time[0].destination.time }}<br>
         {{ time[0].departure.stop.name }} - {{ time[0].destination.stop.name }}
       </li>
+      <li class="item" ng-show="!times.length">
+        {{ 'NO_TIMES_FOUND' | translate }}
+        <br>
+        {{ trip.start.name }} &raquo; {{ trip.end.name }}
+      </li>
     </ul>
 
   </ion-content>

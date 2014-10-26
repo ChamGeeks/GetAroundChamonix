@@ -153,7 +153,7 @@ angular.module('chamBus')
         return resp.data;
       }, function(err){
         console.log('Get times error: ', err);
-        return mockApi.searchResult;
+        return [];//mockApi.searchResult;
       });
 
       // var deferred = $q.defer();

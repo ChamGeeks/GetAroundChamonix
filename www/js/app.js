@@ -69,7 +69,8 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
     'FROM': 'From',
     'TO': 'To',
     'BUSS_TIMES_TITLE': 'Bus times',
-    'SELECT_OTHER_TIME': 'Select a time'
+    'SELECT_OTHER_TIME': 'Select a time',
+    'NO_TIMES_FOUND': 'No times found for this trip.'
   });
 
   $translateProvider.translations('fr', {
@@ -79,7 +80,8 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
     'FROM': 'Le start',
     'TO': 'la fin',
     'BUSS_TIMES_TITLE': 'la time',
-    'SELECT_OTHER_TIME': 'selectir un time'
+    'SELECT_OTHER_TIME': 'selectir un time',
+    'NO_TIMES_FOUND': 'No french times found for this trip'
   });
 
   $translateProvider.translations('sv', {
@@ -89,7 +91,8 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
     'FROM': 'Från',
     'TO': 'Till',
     'BUSS_TIMES_TITLE': 'Buss tider',
-    'SELECT_OTHER_TIME': 'Välj en tid'
+    'SELECT_OTHER_TIME': 'Välj en tid',
+    'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.'
   });
 
   $translateProvider.preferredLanguage('en');
