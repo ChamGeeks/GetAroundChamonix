@@ -3,7 +3,7 @@
 
     <h3 ng-show="closeStops">Stops near by</h3>
     <ul class="stops list">
-      <li class="stop item" ng-repeat="aStop in closeStops" ng-click="setStartRoute(aStop)">
+      <li class="stop item" ng-repeat="aStop in closeStops" ng-click="selectStop(aStop.id)">
         {{ aStop.name }}
       </li>
     </ul>

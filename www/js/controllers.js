@@ -41,6 +41,19 @@ angular.module('chamBus')
       });
   }
 
+  // TODO: fix duplicate from SelectStopCtrl
+  $scope.selectStop = function(stop) {
+    if(!trip.start){
+      trip.start = stop;
+      $location.path('/area');
+      return;
+    }else{
+      trip.end = stop;
+    }
+    $location.path('/result');
+    console.log('Show times', trip.start, trip.end);
+  };
+
   if(!trip.start) {
     $scope.selectAreaTitle = 'Select start area';
   }else{
