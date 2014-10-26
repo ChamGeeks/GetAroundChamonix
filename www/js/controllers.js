@@ -94,7 +94,36 @@ angular.module('chamBus')
 
 
 
-.controller('ResultCtrl', function($scope, trip){
+.controller('ResultCtrl', function($scope, trip, $ionicPopup){
   $scope.trip = trip;
+
+  $scope.dateTime = {
+    time: false,
+    date: false
+  };
+
+  $scope.selectDateTime = function() {
+
+    var myPopup = $ionicPopup.show({
+      template: '<input type="date" ng-model="dateTime.date"><br><input type="time" ng-model="dateTime.time">',
+      title: 'Select depature time',
+      subTitle: 'Please',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Save</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            if (!$scope.dateTime.date || !$scope.dateTime.time) {
+              //don't allow the user to close unless he enters wifi password
+              e.preventDefault();
+            }
+          }
+        },
+      ]
+    });
+  }
+
 });
 
