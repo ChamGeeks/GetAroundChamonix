@@ -27,7 +27,7 @@ angular.module('chamBus')
 
 
 
-.factory('chamDb', function($http, $q){
+.factory('chamDb', function($http, $q, $ionicLoading){
 
   // Open the db
   html5sql.openDatabase('com.chamgeeks.chambus', 'ChamBus Database', 3*1024*1024);
@@ -35,11 +35,16 @@ angular.module('chamBus')
   // Update db
   if(html5sql.database && html5sql.database.version === ''){
     console.log('DB version: ', html5sql.database.version);
+    $ionicLoading.show({
+      template: 'Downloading database...'
+    });
     $http.get('https://peaceful-chamber-9756.herokuapp.com/api/export/sql').then(function(resp){
 
       html5sql.changeVersion('', '0.1', resp.data, function(){
+          $ionicLoading.hide();
           console.log('Db updated');
         }, function(error, statement){
+          $ionicLoading.hide();
           console.error('Error: ' + error.message + ' when processing ' + statement);
         });
     });
