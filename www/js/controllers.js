@@ -8,7 +8,7 @@ angular.module('chamBus')
   $scope.selectStartLang = function(lang) {
     $translate.use(lang);
     $location.path('/area');
-  }
+  };
 
   this.isPlaning = function() {
     return trip.start;
@@ -123,7 +123,7 @@ angular.module('chamBus')
 
 
 
-.controller('ResultCtrl', function($scope, trip, $ionicPopup){
+.controller('ResultCtrl', function($scope, trip, $ionicPopup, BusAPI){
   $scope.trip = trip;
 
   $scope.dateTime = {
@@ -152,7 +152,13 @@ angular.module('chamBus')
         },
       ]
     });
-  }
+  };
+
+  $scope.times = [];
+  BusAPI.findTimes().then(function(times){
+    console.log(times);
+    $scope.times = times;
+  });
 
 });
 

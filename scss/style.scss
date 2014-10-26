@@ -1,5 +1,18 @@
 
 
+$line_1: #EE3030;
+$line_2: #00B2EF;
+$line_3: #F69130;
+$line_5: #808A9D;
+$line_11: #82C557;
+$line_12: #B0773D;
+$line_13: #B45A87;
+$line_14: #F7A4A8;
+$line_15: #15A057;
+$line_16: #351C07;
+$line_17: #FCF12C;
+
+
 img { max-width: 100%; height: auto; }
 
 .flag {
@@ -23,7 +36,32 @@ img { max-width: 100%; height: auto; }
 .line-11 { background: #82C557; left: 19px; }
 .line-12 { background: #B0773D; left: 26px; }
 
-.line-badge { color: #fff; padding: 1px 7px 3px; border-radius: 100%;}
+.line-box { margin: 0 -1px 2px; padding: 7px; }
+.line-box-1 { border-color: $line_1; }
+.line-box-2 { border-color: $line_2; }
+.line-box-3 { border-color: $line_3; }
+.line-box-5 { border-color: $line_5; }
+.line-box-11 { border-color: $line_11; }
+.line-box-12 { border-color: $line_12; }
+.line-box-13 { border-color: $line_13; }
+.line-box-14 { border-color: $line_14; }
+.line-box-15 { border-color: $line_15; }
+.line-box-16 { border-color: $line_16; }
+.line-box-17 { border-color: $line_17; }
+
+.line-badge { font-weight: bold; position: absolute; top: 0; right: 2px; }
+.line-box-1 .line-badge { color: $line_1; }
+.line-box-2 .line-badge { color: $line_2; }
+.line-box-3 .line-badge { color: $line_3; }
+.line-box-5 .line-badge { color: $line_5; }
+.line-box-11 .line-badge { color: $line_11; }
+.line-box-12 .line-badge { color: $line_12; }
+.line-box-13 .line-badge { color: $line_13; }
+.line-box-14 .line-badge { color: $line_14; }
+.line-box-15 .line-badge { color: $line_15; }
+.line-box-16 .line-badge { color: $line_16; }
+.line-box-17 .line-badge { color: $line_17; }
+
 
 .desc { margin: 0 0 20px; border: 1px solid #43cee6; padding: 5px; font-size: 12px; overflow: hidden }
 .desc button { float: right }

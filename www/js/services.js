@@ -96,25 +96,7 @@ angular.module('chamBus')
 
 
 
-.factory('BusAPI', function($q, $http, chamDb){
-
-  // var db = window.openDatabase('gtfs', '1.0', 'my first database', 2 * 1024 * 1024);
-
-  // db.transaction(function (tx) {
-  //   console.log(tx);
-  //   // tx.executeSql('create table block (id INTEGER, name TEXT, PRIMARY KEY(id))');
-  //   // tx.executeSql('insert into block (id,name) values (1,'Chamonix')');
-  //   tx.executeSql('SELECT * FROM block', [], function(tx, result){
-  //     console.log(tx, result);
-  //     for
-  //   });
-  // });
-
-  // db.transaction(function (tx) {
-  //   tx.executeSql('SELECT * FROM block', [], function(tx, result){
-  //     console.log(tx, result);
-  //   });
-  // });
+.factory('BusAPI', function($q, $http, chamDb, trip){
 
   return {
 
@@ -154,6 +136,16 @@ angular.module('chamBus')
       var url = 'https://afternoon-cliffs-4353.herokuapp.com/api/closest';
 
       return $http.get(url +'?lat='+ coords.latitude +'&lng='+ coords.longitude +'&radius='+ radius);
+    },
+
+    findTimes: function() {
+
+      trip.start;
+      trip.stop;
+
+      var deferred = $q.defer();
+      deferred.resolve(mockApi.searchResult);
+      return deferred.promise;
     }
   };
 });
