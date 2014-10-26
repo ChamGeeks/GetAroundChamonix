@@ -2,6 +2,9 @@ img {
   max-width: 100%;
   height: auto; }
 
+.center {
+  text-align: center; }
+
 .flag {
   font-size: 30px;
   margin: 0 0 10px;

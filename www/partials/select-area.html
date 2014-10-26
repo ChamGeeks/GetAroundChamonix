@@ -1,6 +1,11 @@
 <ion-view title="{{ 'SELECT_AREA' | translate }}">
   <ion-content class="padding">
 
+    <h2 class="center">
+      <span ng-hide="main.isPlaning()">{{ 'FROM' | translate }}</span>
+      <span ng-show="main.isPlaning()">{{ 'TO' | translate }}</span>
+    </h2>
+
     <h3 ng-show="closeStops" translate>{{ 'STOPS_NEAR' | translate }}</h3>
     <ul class="stops list">
       <li class="stop item" ng-repeat="aStop in closeStops" ng-click="selectStop(aStop.id)">

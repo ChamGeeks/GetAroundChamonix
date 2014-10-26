@@ -64,18 +64,36 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
 .config(['$translateProvider', function ($translateProvider) {
   $translateProvider.translations('en', {
     'SELECT_AREA': 'Select area',
-    'STOPS_NEAR': 'Stops near by'
+    'STOPS_NEAR': 'Stops near by',
+    'STOPS_IN': 'Stops in: ',
+    'FROM': 'From',
+    'TO': 'To',
+    'BUSS_TIMES_TITLE': 'Bus times',
+    'SELECT_OTHER_TIME': 'Select a time'
   });
 
   $translateProvider.translations('fr', {
     'SELECT_AREA': 'Oi hu hu',
-    'STOPS_NEAR': 'Fu du fafa'
+    'STOPS_NEAR': 'Fu du fafa',
+    'STOPS_IN': 'Stops du: ',
+    'FROM': 'Le start',
+    'TO': 'la fin',
+    'BUSS_TIMES_TITLE': 'la time',
+    'SELECT_OTHER_TIME': 'selectir un time'
   });
 
   $translateProvider.translations('sv', {
     'SELECT_AREA': 'Välj område',
-    'STOPS_NEAR': 'Hållplatser nära'
+    'STOPS_NEAR': 'Hållplatser nära',
+    'STOPS_IN': 'Hållplatser i: ',
+    'FROM': 'Från',
+    'TO': 'Till',
+    'BUSS_TIMES_TITLE': 'Buss tider',
+    'SELECT_OTHER_TIME': 'Välj en tid'
   });
 
   $translateProvider.preferredLanguage('en');
+
+  // remember language
+  $translateProvider.useLocalStorage();
 }]);

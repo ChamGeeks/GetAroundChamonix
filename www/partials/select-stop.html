@@ -1,5 +1,10 @@
-<ion-view title="{{ area.name }}">
+<ion-view title="{{ 'STOPS_IN' | translate }} {{ area.name }}">
   <ion-content class="padding">
+
+    <h2 class="center">
+      <span ng-hide="main.isPlaning()">{{ 'FROM' | translate }}</span>
+      <span ng-show="main.isPlaning()">{{ 'TO' | translate }}</span>
+    </h2>
 
     <ul class="stops list">
       <li class="stop item" ng-repeat="stop in stops" ng-click="selectStop(stop)">

@@ -1,13 +1,13 @@
-<ion-view title="Your trip">
+<ion-view title="{{ 'BUSS_TIMES_TITLE' | translate }}">
   <ion-content class="padding">
 
 
     <button class="button button-block button-positive" ng-click="selectDateTime()">
-      Select a time
+      {{ 'SELECT_OTHER_TIME' | translate }}
     </button>
 
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col item item-text-wrap">
         <strong>Start:</strong> {{ trip.start.name }}
         <br>
@@ -18,7 +18,7 @@
         <br>
         <small>{{ trip.end.lat +' - '+ trip.end.lon }}</small>
       </div>
-    </div>
+    </div> -->
 
 
     <ul class="list">
