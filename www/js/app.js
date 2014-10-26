@@ -74,14 +74,14 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
   });
 
   $translateProvider.translations('fr', {
-    'SELECT_AREA': 'Oi hu hu',
-    'STOPS_NEAR': 'Fu du fafa',
-    'STOPS_IN': 'Stops du: ',
-    'FROM': 'Le start',
-    'TO': 'la fin',
-    'BUSS_TIMES_TITLE': 'la time',
-    'SELECT_OTHER_TIME': 'selectir un time',
-    'NO_TIMES_FOUND': 'No french times found for this trip'
+    'SELECT_AREA': 'Choisir un quartier',
+    'STOPS_NEAR': 'Arrêt à proximité',
+    'STOPS_IN': 'Arrêts ',
+    'FROM': 'Départ',
+    'TO': 'Arrivée',
+    'BUSS_TIMES_TITLE': 'Horaire',
+    'SELECT_OTHER_TIME': 'Choisir un horaire',
+	'NO_TIMES_FOUND': 'Aucun horaire trouvé'
   });
 
   $translateProvider.translations('sv', {
