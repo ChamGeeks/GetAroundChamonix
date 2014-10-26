@@ -145,8 +145,15 @@ angular.module('chamBus')
 
     findTimes: function() {
 
+
       var url = 'https://peaceful-chamber-9756.herokuapp.com/api';
       url += '/plan/departure?from='+ trip.start.id +'&to='+ trip.end.id;
+
+      // Limit
+      url += '&limit=10';
+      // When
+      // url += '&when=01:12';
+
       console.log(url);
 
       return $http.get(url).then(function(resp){
