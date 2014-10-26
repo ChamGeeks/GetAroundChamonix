@@ -1,5 +1,19 @@
 
 
+img { max-width: 100%; height: auto; }
+
+.flag {
+  font-size: 30px;
+  margin: 0 0 10px;
+  color: #444;
+
+  img {
+    height: 50px;
+    width: 80px;
+    vertical-align: middle;
+  }
+}
+
 
 .stop { position: relative; padding-left: 50px; }
 
