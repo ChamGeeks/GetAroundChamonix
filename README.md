@@ -10,8 +10,20 @@ The app is built in [angular.js](https://angularjs.org/) with the [Ionic framewo
 
 ### Data
 
-We've gone for storing the data using [Web Database](http://dev.w3.org/html5/webdatabase/) and [html5sql.js](http://html5sql.com/).  We know that it is a deprecated standard, but the PhoneGap v3.5.0 page [shows compatibility](http://docs.phonegap.com/en/3.5.0/cordova_storage_storage.md.html#Storage), which is fine with us for the time being.  We wanted to use something that we were familiar enough with, i.e. SQL, to make progress quickly.
+We've gone for storing the data using [Web Database](http://dev.w3.org/html5/webdatabase/) and [html5sql.js](http://html5sql.com/).  We know that it is a deprecated standard, but the PhoneGap v3.5.0 page [shows compatibility](http://docs.phonegap.com/en/3.5.0/cordova_storage_storage.md.html#Storage), which is fine with us for the time being.  We wanted to use something that we were familiar enough with, i.e. SQL, to make progress quickly.  We've structured the data in [the Google GTFS transit format](https://developers.google.com/transit/gtfs/reference) so that we had an existing and tested structure for storing all of the bus lines, times, stops, etc.
 
 ### Server interaction
 
-The app retrieves the data from our server initially.  This means that we can update the bus timetable as and when it chagnes, or if we have any errors in the data that we've collected.
+The app retrieves the data from our server initially.  This means that we can update the bus timetable as and when it changes, or if we have any errors in the data that we've collected.
+
+## Getting going 
+
+You'll need npm, then install Cordova and Ionic, and set up emulation ([as per the Ionic getting started guide](http://ionicframework.com/getting-started/)).
+
+    npm install -g cordova ionic
+    ionic platform add ios
+    ionic build ios
+
+ Then you can kick off an iOS emulation:  `ionic emulate ios`
+
+ Or just fire it up in the browser: `ionic serve`
