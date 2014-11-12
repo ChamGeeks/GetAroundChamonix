@@ -36,8 +36,12 @@ angular.module('chamBus')
     if(navigator.globalization){
       $cordovaGlobalization.getPreferredLanguage().then(
         function(result) {
-          $translate.use(result.value.substr(0,2));
-          $state.go('areas');
+          var langs = ['en', 'fr', 'sv'];
+          var userLang = result.value.substr(0,2);
+          if(langs[userLang]){
+            $translate.use(userLang);
+            $state.go('areas');
+          }
         },
         function(error) {
           console.log(error);
