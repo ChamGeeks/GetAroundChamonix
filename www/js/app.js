@@ -62,6 +62,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
 })
 
 .config(['$translateProvider', function ($translateProvider) {
+
   $translateProvider.translations('en', {
     'SELECT_AREA': 'Select area',
     'STOPS_NEAR': 'Stops near by',

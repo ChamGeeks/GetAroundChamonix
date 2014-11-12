@@ -22,7 +22,12 @@ angular.module('chamBus')
 
 .controller('HomeCtrl', function($scope, $cordovaGlobalization, $state, $translate, $timeout) {
 
-  //console.log($cordovaGlobalization.getPreferredLanguage);
+  // A language has been set go to next step
+  if(window.localStorage.CHAM_LANG){
+    $state.go('areas');
+  }else{
+    window.localStorage.CHAM_LANG = true;
+  }
 
   /**
    * @todo $timeout is needed for navigator.globalization to be initiated :/
