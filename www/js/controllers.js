@@ -20,18 +20,25 @@ angular.module('chamBus')
 })
 
 
-.controller('HomeCtrl', function($scope) { // , $cordovaGlobalization
+.controller('HomeCtrl', function($scope, $cordovaGlobalization, $state, $translate, $timeout) {
+
+  //console.log($cordovaGlobalization.getPreferredLanguage);
 
   /**
-   * @todo Correct default lang
+   * @todo $timeout is needed for navigator.globalization to be initiated :/
    */
-  // $cordovaGlobalization.getPreferredLanguage().then(
-  //   function(result) {
-  //     console.log(result);
-  //   },
-  //   function(error) {
-  //     console.log(error);
-  // });
+  $timeout(function(){
+    if(navigator.globalization){
+      $cordovaGlobalization.getPreferredLanguage().then(
+        function(result) {
+          $translate.use(result.value.substr(0,2));
+          $state.go('areas');
+        },
+        function(error) {
+          console.log(error);
+      });
+    }
+  }, 200);
 
   $scope.homeTitle = 'ChamBus';
 
@@ -48,12 +55,13 @@ angular.module('chamBus')
     $cordovaGeolocation
       .getCurrentPosition()
       .then(function (position) {
-        console.log(position.coords.accuracy);
         if(position.coords.accuracy < 150){
           BusAPI.getNerbyStops(position.coords).then(function(resp){
             $scope.closeStops = resp.data.slice(0, 3);
           });
         }
+      }, function(error){
+        alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
       });
   }
 

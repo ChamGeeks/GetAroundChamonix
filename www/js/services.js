@@ -20,7 +20,7 @@ angular.module('chamBus')
     reset: function() {
       this.start = false;
       this.end = false;
-      $location.path('/'); // area
+      $location.path('/area'); // area
     }
   };
 })

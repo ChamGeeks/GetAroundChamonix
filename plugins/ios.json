@@ -23,13 +23,33 @@
                         {
                             "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
             },
             "framework": {
                 "parents": {
-                    "libsqlite3.dylib": []
+                    "libsqlite3.dylib": [],
+                    "CoreLocation.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "NSLocationWhenInUseUsageDescription": [
+                        {
+                            "xml": "<string />",
+                            "count": 1
+                        }
+                    ]
                 }
             }
         }
@@ -45,6 +65,9 @@
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         },
         "org.apache.cordova.globalization": {
+            "PACKAGE_NAME": "com.ionicframework.myapp914728"
+        },
+        "org.apache.cordova.geolocation": {
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         }
     },
