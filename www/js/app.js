@@ -67,8 +67,8 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
     'SELECT_AREA': 'Select area',
     'STOPS_NEAR': 'Stops near by',
     'STOPS_IN': 'Stops in: ',
-    'FROM': 'From',
-    'TO': 'To',
+    'FROM': 'Where are you now?',
+    'TO': 'And where are you headed?',
     'BUSS_TIMES_TITLE': 'Bus times',
     'SELECT_OTHER_TIME': 'Select a time',
     'NO_TIMES_FOUND': 'No times found for this trip.'
@@ -89,8 +89,8 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate'])
     'SELECT_AREA': 'Välj område',
     'STOPS_NEAR': 'Hållplatser nära',
     'STOPS_IN': 'Hållplatser i: ',
-    'FROM': 'Från',
-    'TO': 'Till',
+    'FROM': 'Vart är du nu?',
+    'TO': 'Var vill du åka?',
     'BUSS_TIMES_TITLE': 'Buss tider',
     'SELECT_OTHER_TIME': 'Välj en tid',
     'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.'
