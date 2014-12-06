@@ -5,13 +5,13 @@ var mockApi = {
   areas: [
     { id:  2, name: "Servoz", numberOfStops: 9 },
     { id:  4, name: "Vaudagne", numberOfStops: 2 },
-    { id:  3, name: "Les Houches", numberOfStops: 9 },
+    { id:  3, name: "Les Houches", numberOfStops: 9, meta: { lifts: ['Bellevue', 'Le Prarion'] }},
     { id:  5, name: "Bossons/Pelerins", numberOfStops: 22 },
-    { id:  1, name: "Chamonix", numberOfStops: 29, meta: {lifts: ['Aiguille du Midi', 'Brevent']} },
-    { id:  6, name: "Les Praz", numberOfStops: 10 },
+    { id:  1, name: "Chamonix", numberOfStops: 29, meta: { lifts: ['Aiguille du Midi', 'Brevent'] }},
+    { id:  6, name: "Les Praz", numberOfStops: 10, meta: { lifts: ['Flegère'] }},
     { id:  7, name: "Les Tines", numberOfStops: 5 },
-    { id:  8, name: "Argentière", numberOfStops: 6 },
-    { id:  9, name: "Le Tour/Vallorcine", numberOfStops: 2 }
+    { id:  8, name: "Argentière", numberOfStops: 6, meta: { lifts: ['Grand Montets'] }},
+    { id:  9, name: "Le Tour/Vallorcine", numberOfStops: 2, meta: { lifts: ['Le Tour', 'Vallorcine'] }}
   ],
   searchResult: [
     [{
