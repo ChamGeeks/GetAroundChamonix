@@ -3,15 +3,15 @@
 
 var mockApi = {
   areas: [
-    { id:  2, name: "Servoz" },
-    { id:  4, name: "Vaudagne" },
-    { id:  3, name: "Les Houches" },
-    { id:  5, name: "Bossons/Pelerins" },
-    { id:  1, name: "Chamonix" },
-    { id:  6, name: "Les Praz" },
-    { id:  7, name: "Les Tines" },
-    { id:  8, name: "Argentière" },
-    { id:  9, name: "Le Tour" }
+    { id:  2, name: "Servoz", numberOfStops: 9 },
+    { id:  4, name: "Vaudagne", numberOfStops: 2 },
+    { id:  3, name: "Les Houches", numberOfStops: 9 },
+    { id:  5, name: "Bossons/Pelerins", numberOfStops: 22 },
+    { id:  1, name: "Chamonix", numberOfStops: 29 },
+    { id:  6, name: "Les Praz", numberOfStops: 10 },
+    { id:  7, name: "Les Tines", numberOfStops: 5 },
+    { id:  8, name: "Argentière", numberOfStops: 6 },
+    { id:  9, name: "Le Tour/Vallorcine", numberOfStops: 2 }
   ],
   searchResult: [
     [{

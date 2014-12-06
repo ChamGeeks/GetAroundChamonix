@@ -17,7 +17,7 @@
       <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
 
         <div class="item item-text-wrap">
-          {{ area.name }}
+          {{ area.name }} ({{area.numberOfStops}} stops)
           <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
             <small>{{ area.meta.lifts.join(', ') }}</small>
           </div>
