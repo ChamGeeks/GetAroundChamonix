@@ -13,15 +13,15 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"DatePickerPlugin\"><param name=\"android-package\" value=\"com.plugin.datepicker.DatePickerPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"DatePickerPlugin\"><param name=\"android-package\" value=\"com.plugin.datepicker.DatePickerPlugin\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -47,6 +47,9 @@
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         },
+        "com.plugin.datepicker": {
+            "PACKAGE_NAME": "com.ionicframework.myapp914728"
+        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         },
@@ -57,9 +60,6 @@
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         },
         "org.apache.cordova.globalization": {
-            "PACKAGE_NAME": "com.ionicframework.myapp914728"
-        },
-        "com.plugin.datepicker": {
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         }
     },
