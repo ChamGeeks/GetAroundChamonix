@@ -1,6 +1,8 @@
 <ion-view title="{{ 'SELECT_AREA' | translate }}">
   <ion-content>
 
+    <div ng-include src=" 'partials/journey-info.html' "></div>
+
     <h2 class="center">
       <span ng-hide="isPlanning()">{{ 'FROM' | translate }}</span>
       <span ng-show="isPlanning()">{{ 'TO' | translate }}</span>

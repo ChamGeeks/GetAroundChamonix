@@ -56,7 +56,7 @@ angular.module('chamBus')
 
 })
 
-.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner) {
+.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, JourneyInfo) {
 
   $scope.closeStops = [];
 
@@ -87,6 +87,9 @@ angular.module('chamBus')
   $scope.selectArea = function(area) {
     $location.path('/area/'+ area);
   };
+
+  $scope.from = JourneyInfo.getEmptyInfo();
+  $scope.to = JourneyInfo.getEmptyInfo();
 })
 
 .controller('ToAreaController', function($scope, $location, $stateParams, TripPlanner) {
@@ -100,6 +103,17 @@ angular.module('chamBus')
     console.log('Going from ' + $stateParams.id + ' to ' + area);
     $location.path('/area/' + $stateParams.id + '/to/' + area);
   };
+
+  var departure = TripPlanner.getDeparture();
+  $scope.from = {
+    "stop": departure ? departure.name : 'n/a', 
+    "area": ''
+  };
+  TripPlanner.getAreaById($stateParams.id).then(function(data) {
+    $scope.from.area = data.name;
+  });
+
+  $scope.to = {"stop":"...", "area":"..."};
 })
 
 
@@ -119,7 +133,7 @@ angular.module('chamBus')
 
   $scope.selectStop = function(stop) {
     TripPlanner.setDeparture(stop);
-    console.log('going to ToArea...');
+    console.log('going to ToArea ' + $scope.area.id);
     $location.path('/area/' + $scope.area.id + '/to');
   };
 
