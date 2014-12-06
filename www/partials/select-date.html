@@ -1,10 +1,25 @@
 
-{{ dateTime.date }} - {{ dateTime.time }}
+<!-- <input type="input" ng-model="dateTime.date">
+<input type="input" ng-model="dateTime.time"> -->
 
+<div class="button-bar">
 
-<input type="input" ng-model="dateTime.date">
-<input type="input" ng-model="dateTime.time">
+  <button class="button button-outline button-positive" ng-click="selectTime()">
+    <span ng-show="dateTime.time">
+      {{ dateTime.time | date:'HH:mm' }}
+    </span>
+    <span ng-hide="dateTime.time">
+      Pick time
+    </span>
+  </button>
 
+  <button class="button button-outline button-positive" ng-click="selectDate()">
+    <span ng-show="dateTime.date">
+      {{ dateTime.date | date:'d MMM' }}
+    </span>
+    <span ng-hide="dateTime.date">
+      Pick date
+    </span>
+  </button>
 
-<button class="button" ng-click="selectDate()">Date</button>
-<button class="button" ng-click="selectTime()">Time</button>
+</div>

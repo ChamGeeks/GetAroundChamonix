@@ -154,11 +154,20 @@ angular.module('chamBus')
 
   $scope.selectDate = function() {
     var options = {date: new Date(), mode: 'date'};
-    //var options = {date: new Date(), mode: 'time'}; for time
     $cordovaDatePicker.show(options).then(function(date){
-      alert(date);
+      $scope.dateTime.date = date;
+      // alert(date);
     });
-  }
+  };
+
+  $scope.selectTime = function() {
+    var options = {date: new Date(), mode: 'time'};
+    $cordovaDatePicker.show(options).then(function(date){
+      $scope.dateTime.time = date;
+      // alert(date);
+      // 2014-12-06T17:09:51.000Z
+    });
+  };
 
   $scope.selectDateTime = function() {
 
@@ -166,17 +175,20 @@ angular.module('chamBus')
       //template: '<input type="date" ng-model="dateTime.date"><br><input type="time" ng-model="dateTime.time">',
       templateUrl: 'partials/select-date.html',
       title: 'Select depature time',
-      subTitle: 'Please',
       scope: $scope,
       buttons: [
         { text: 'Cancel' },
         {
-          text: '<b>Save</b>',
+          text: '<b>Get times</b>',
           type: 'button-positive',
           onTap: function(e) {
-            if (!$scope.dateTime.date || !$scope.dateTime.time) {
+            if (!$scope.dateTime.date && !$scope.dateTime.time) {
+              alert('You have to select a time or date');
+
               //don't allow the user to close unless he enters wifi password
               e.preventDefault();
+            } else {
+              // Do cool stuff
             }
           }
         }
