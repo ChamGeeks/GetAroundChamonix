@@ -15,7 +15,7 @@ angular.module('chamBus').factory('Database', function($http, $q, $ionicLoading)
 		$ionicLoading.show({
 			template: 'Downloading database...'
 		});
-		$http.get('https://peaceful-chamber-9756.herokuapp.com/api/export/sql').then(function(resp){
+		$http.get('https://chx-transit-db.herokuapp.com/api/export/sql').then(function(resp){
 
 			html5sql.changeVersion('', '0.1', resp.data, function(){
 				$ionicLoading.hide();
