@@ -1,7 +1,7 @@
 {
-  "name": "myapp",
+  "name": "chamride",
   "version": "1.0.0",
-  "description": "myApp: An Ionic project",
+  "description": "Chamonix valley trip planner",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
