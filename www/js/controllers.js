@@ -3,19 +3,20 @@
 
 angular.module('chamBus')
 
-.controller('MainCtrl', function($scope, trip, $translate, $location){
+.controller('MainCtrl', function($scope, TripPlanner, $translate, $state, $location){
 
   $scope.selectStartLang = function(lang) {
     $translate.use(lang);
     $location.path('/area');
   };
 
-  this.isPlaning = function() {
-    return trip.start;
+  $scope.isPlanning = function() {
+    return TripPlanner.planning();
   };
 
   this.reset = function() {
-    trip.reset();
+    TripPlanner.reset();
+    $state.go('areas');
   };
 })
 
@@ -55,19 +56,17 @@ angular.module('chamBus')
 
 
 
-.controller('SelectAreaCtrl', function($scope, $location, trip, $cordovaGeolocation, BusAPI) {
+.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner) {
 
 
   $scope.closeStops = [];
 
-  if( trip.notStarted() ){
+  if(!TripPlanner.planning()){
     $cordovaGeolocation
       .getCurrentPosition()
       .then(function (position) {
         if(position.coords.accuracy < 150){
-          BusAPI.getNerbyStops(position.coords).then(function(resp){
-            $scope.closeStops = resp.data.slice(0, 3);
-          });
+          $scope.closeStops = GeoTree.closest(position.coords).slice(0, 3);
         }
       }, function(error){
         alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
@@ -76,27 +75,27 @@ angular.module('chamBus')
 
   // TODO: fix duplicate from SelectStopCtrl
   $scope.selectStop = function(stop) {
-    if(!trip.start){
-      trip.start = stop;
+    if (!TripPlanner.planning()) {
+      TripPlanner.setDeparture(stop);
       $location.path('/area');
       return;
-    }else{
-      trip.end = stop;
+    } else {
+      TripPlanner.setDestination(stop);
     }
     $location.path('/result');
-    console.log('Show times', trip.start, trip.end);
+    console.log('Show times', TripPlanner.getDeparture(), TripPlanner.getDestination());
   };
 
-  if(!trip.start) {
+  if(!TripPlanner.planning()) {
     $scope.selectAreaTitle = 'Select start area';
-  }else{
+  } else {
     $scope.selectAreaTitle = 'Select end area';
   }
 
 
   $scope.areas = [];
 
-  BusAPI.getAreas().then(function(data){
+  TripPlanner.getAreas().then(function(data){
     $scope.areas = data;
   });
 
@@ -109,28 +108,27 @@ angular.module('chamBus')
 
 
 
-.controller('SelectStopCtrl', function($scope, $stateParams, BusAPI, $location, trip) {
+.controller('SelectStopCtrl', function($scope, $stateParams, TripPlanner, $location) {
 
   $scope.area = '';
   $scope.stops = [];
 
-
-  BusAPI.getAreaById($stateParams.id).then(function(data){
+      TripPlanner.getAreaById($stateParams.id).then(function(data){
     $scope.area = data;
   });
 
-  BusAPI.getStops($stateParams.id).then(function(resp){
+      TripPlanner.getAreaStops($stateParams.id).then(function(resp){
     $scope.stops = resp;
   });
 
 
   $scope.selectStop = function(stop) {
-    if(!trip.start){
-      trip.start = stop;
+    if(!TripPlanner.planning()){
+      TripPlanner.setDeparture(stop);
       $location.path('/area');
       return;
-    }else{
-      trip.end = stop;
+    } else {
+      TripPlanner.setDestination(stop);
     }
     $location.path('/result');
   };
@@ -139,8 +137,11 @@ angular.module('chamBus')
 
 
 
-.controller('ResultCtrl', function($scope, trip, $ionicPopup, BusAPI){
-  $scope.trip = trip;
+.controller('ResultCtrl', function($scope, $ionicPopup, TripPlanner){
+  $scope.trip = {
+    start: TripPlanner.getDeparture(),
+    end: TripPlanner.getDestination()
+  };
 
   $scope.dateTime = {};
 
@@ -162,13 +163,13 @@ angular.module('chamBus')
               e.preventDefault();
             }
           }
-        },
+        }
       ]
     });
   };
 
   $scope.times = [];
-  BusAPI.findTimes().then(function(times){
+  TripPlanner.plan().then(function(times){
     $scope.times = times;
   });
 
