@@ -90,7 +90,7 @@ angular.module('chamBus')
   $scope.to = JourneyInfo.getEmptyInfo();
 })
 
-.controller('ToAreaController', function($scope, $location, $stateParams, TripPlanner) {
+.controller('ToAreaController', function($scope, $location, $stateParams, JourneyInfo, TripPlanner) {
   $scope.areas = [];
 
   TripPlanner.getAreas().then(function(data){
@@ -110,18 +110,24 @@ angular.module('chamBus')
   TripPlanner.getAreaById($stateParams.id).then(function(data) {
     $scope.from.area = data.name;
   });
+  $scope.from = JourneyInfo.getEmptyInfo();
+  $scope.to = JourneyInfo.getEmptyInfo();
 
-  $scope.to = {"stop":"...", "area":"..."};
+  JourneyInfo.getFromInfo($stateParams.id).then(function(data) {
+    $scope.from = data;
+  });
 })
 
 
-.controller('SelectStopCtrl', function($scope, $stateParams, TripPlanner, $location) {
+.controller('SelectStopCtrl', function($scope, $stateParams, JourneyInfo, TripPlanner, $location) {
 
   $scope.area = '';
   $scope.stops = [];
+  $scope.from = JourneyInfo.getEmptyInfo();
 
   TripPlanner.getAreaById($stateParams.id).then(function(data){
     $scope.area = data;
+    $scope.from.area = data.name;
   });
 
   TripPlanner.getAreaStops($stateParams.id).then(function(resp){
@@ -135,26 +141,35 @@ angular.module('chamBus')
     $location.path('/area/' + $scope.area.id + '/to');
   };
 
+  $scope.to = JourneyInfo.getEmptyInfo();
 })
 
-.controller('DestinationController', function($scope, $stateParams, TripPlanner, $location) {
+.controller('DestinationController', function($scope, $stateParams, JourneyInfo, TripPlanner, $location) {
 
   $scope.area = '';
   $scope.stops = [];
+  $scope.to = JourneyInfo.getEmptyInfo();
 
   TripPlanner.getAreaById($stateParams.id).then(function(data){
     $scope.area = data;
+    $scope.to.area = data.name;
   });
 
   TripPlanner.getAreaStops($stateParams.id).then(function(resp){
     $scope.stops = resp;
   });
 
-
   $scope.selectStop = function(stop) {
     TripPlanner.setDestination(stop);
     $location.path('/result');
   };
+
+  $scope.from = JourneyInfo.getEmptyInfo();
+  $scope.to = JourneyInfo.getEmptyInfo();
+
+  JourneyInfo.getFromInfo($stateParams.departureId).then(function(data) {
+    $scope.from = data;
+  });
 })
 
 .controller('ResultCtrl', function($scope, $ionicPopup, TripPlanner, $cordovaDatePicker){
