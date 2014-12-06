@@ -55,6 +55,12 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       url: '/result',
       templateUrl: 'partials/result.html',
       controller: 'ResultCtrl'
+    })
+
+    // About page
+    .state('about', {
+      url: '/about',
+      templateUrl: 'partials/about.html'
     });
 
    $urlRouterProvider.otherwise('/');
