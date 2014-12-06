@@ -35,17 +35,31 @@
   </head>
   <body ng-app="chamBus" ng-controller="MainCtrl as main">
 
-    <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
-      <ion-nav-back-button class="button-icon ion-arrow-left-c">
-      </ion-nav-back-button>
+    <ion-side-menus>
 
-      <ion-nav-buttons side="right">
-        <!-- ng-show="main.isPlaning()" -->
-        <button class="button icon ion-ios7-reload" ng-click="main.reset()"></button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+    B
+    </ion-side-menu>
 
-    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    <ion-side-menu-content>
+      <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
+        <!-- <ion-nav-back-button class="button-icon ion-arrow-left-c">
+        </ion-nav-back-button> -->
+        <ion-nav-buttons side="left">
+          <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+          <!-- ng-show="main.isPlaning()" -->
+          <button class="button icon ion-ios7-reload" ng-click="main.reset()"></button>
+        </ion-nav-buttons>
+      </ion-nav-bar>
+
+      <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+
+  </ion-side-menus>
 
   </body>
 </html>

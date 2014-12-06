@@ -1,9 +1,8 @@
-<ion-view title="{{ 'STOPS_IN' | translate }} {{ area.name }}">
+<ion-view title="{{ 'SELECT_STOP' | translate }}">
   <ion-content>
 
     <h2 class="center">
-      <span ng-hide="main.isPlaning()">{{ 'FROM' | translate }}</span>
-      <span ng-show="main.isPlaning()">{{ 'TO' | translate }}</span>
+      {{ 'WHERE_AREA' | translate }} {{ area.name }}?
     </h2>
 
     <ul class="stops list">
