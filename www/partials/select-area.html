@@ -19,8 +19,8 @@
         <div class="item item-text-wrap">
           {{ area.name }} ({{area.numberOfStops}} {{ 'stops' | translate}})
           <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
-            <big><i style="font-size: 24px" class="icon icon-left ion-ios7-snowy"></i></big>
-            <small>{{ 'Lifts' | translate}} : {{ area.meta.lifts.join(', ') }}</small>
+            <i class="icon icon-left ion-ios7-snowy"></i>
+            <small>{{ area.meta.lifts.join(', ') }}</small>
           </div>
         </div>
 

@@ -11,7 +11,7 @@ var mockApi = {
     { id:  6, name: "Les Praz", numberOfStops: 10, meta: { lifts: ['Flegère'] }},
     { id:  7, name: "Les Tines", numberOfStops: 5 },
     { id:  8, name: "Argentière", numberOfStops: 6, meta: { lifts: ['Grand Montets'] }},
-    { id:  9, name: "Le Tour/Vallorcine", numberOfStops: 2, meta: { lifts: ['Le Tour', 'Vallorcine'] }}
+    { id:  9, name: "Le Tour/Vallorcine", numberOfStops: 2, meta: { lifts: ['Balme'] }}
   ],
   searchResult: [
     [{
