@@ -150,12 +150,20 @@ img {
   float: right; }
 
 .menu-footer {
-  height: auto;
-  text-align: center;
-  display: block; }
+  line-height: 34px; }
   .menu-footer a {
     color: #444;
     text-decoration: none; }
+  .menu-footer img {
+    width: auto;
+    height: 12px;
+    margin: 0 0 0 10px; }
+
+.menu-flags {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px; }
 
 .item-icon-right .icon {
   font-size: inherit;
