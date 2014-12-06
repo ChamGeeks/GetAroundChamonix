@@ -56,7 +56,7 @@ angular.module('chamBus')
 
 
 
-.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, $ionicModal) {
+.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner) {
 
 
   $scope.closeStops = [];
@@ -92,67 +92,15 @@ angular.module('chamBus')
     $scope.selectAreaTitle = 'Select end area';
   }
 
-
-  $ionicModal.fromTemplateUrl('partials/select-stop-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-  $scope.openModal = function(area) {
-    console.log('Opened stop modal for ' + area.name);
-    $scope.area = area;
-    $scope.stops = [];
-
-    TripPlanner.getAreaStops(area.id).then(function(resp){
-      $scope.stops = resp;
-    });
-
-
-    $scope.selectStop = function(stop) {
-      if(!TripPlanner.planning()){
-        TripPlanner.setDeparture(stop);
-        $scope.closeModal();
-        $location.path('/area');
-        return;
-      } else {
-        TripPlanner.setDestination(stop);
-      }
-      $scope.closeModal();
-      $location.path('/result');
-    };
-
-    $scope.modal.show();
-  };
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
-  //Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modal.remove();
-  });
-  // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
-    // Execute action
-  });
-  // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
-    // Execute action
-  });
-
-
   $scope.areas = [];
 
   TripPlanner.getAreas().then(function(data){
     $scope.areas = data;
   });
 
-
   $scope.selectArea = function(area) {
-    //$location.path('/area/'+ area);
-
+    $location.path('/area/'+ area);
   };
-
 })
 
 

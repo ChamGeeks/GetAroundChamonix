@@ -69,8 +69,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
     'STOPS_IN': 'Stops in: ',
     'FROM': 'Where are you now?',
     'TO': 'And where are you headed?',
-    'AT_STOP': 'Which stop?',
-    'TO_STOP': 'To which stop?',
+    'STOP': 'Which stop?',
     'BUSS_TIMES_TITLE': 'Bus times',
     'SELECT_OTHER_TIME': 'Select a time',
     'NO_TIMES_FOUND': 'No times found for this trip.'
@@ -82,11 +81,10 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
     'STOPS_IN': 'Arrêts ',
     'FROM': 'Départ',
     'TO': 'Arrivée',
-    'AT_STOP': 'From which stop?',
-    'TO_STOP': 'To which stop?',
+    'STOP': 'Quelle arrêt?',
     'BUSS_TIMES_TITLE': 'Horaire',
     'SELECT_OTHER_TIME': 'Choisir un horaire',
-	'NO_TIMES_FOUND': 'Aucun horaire trouvé'
+    'NO_TIMES_FOUND': 'Aucun horaire trouvé'
   });
 
   $translateProvider.translations('sv', {
@@ -95,8 +93,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
     'STOPS_IN': 'Hållplatser i: ',
     'FROM': 'Vart är du nu?',
     'TO': 'Var vill du åka?',
-    'AT_STOP': 'From which stop?',
-    'TO_STOP': 'To which stop?',
+    'STOP': 'Vilken hållplats?',
     'BUSS_TIMES_TITLE': 'Buss tider',
     'SELECT_OTHER_TIME': 'Välj en tid',
     'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.'
