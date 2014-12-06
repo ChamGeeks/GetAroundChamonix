@@ -50,6 +50,18 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       controller: 'SelectStopCtrl'
     })
 
+    .state('toAreas', {
+      url: '/area/:id/to',
+      templateUrl: 'partials/select-area.html',
+      controller: 'ToAreaController'
+    })
+
+    .state('destination', {
+      url: '/area/:departureId/to/:id',
+      templateUrl: 'partials/select-stop.html',
+      controller: 'DestinationController'
+    })
+
     // Show the result page
     .state('result', {
       url: '/result',
@@ -77,6 +89,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
     'FROM': 'Where are you now?',
     'WHERE_AREA': 'Where in',
     'TO': 'And where are you headed?',
+    'STOP': 'Which stop?',
     'BUSS_TIMES_TITLE': 'Bus times',
     'SELECT_OTHER_TIME': 'Select a time',
     'NO_TIMES_FOUND': 'No times found for this trip.'
@@ -88,9 +101,10 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
     'STOPS_IN': 'Arrêts ',
     'FROM': 'Départ',
     'TO': 'Arrivée',
+    'STOP': 'Quelle arrêt?',
     'BUSS_TIMES_TITLE': 'Horaire',
     'SELECT_OTHER_TIME': 'Choisir un horaire',
-	'NO_TIMES_FOUND': 'Aucun horaire trouvé'
+    'NO_TIMES_FOUND': 'Aucun horaire trouvé'
   });
 
   $translateProvider.translations('sv', {
@@ -99,6 +113,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
     'STOPS_IN': 'Hållplatser i: ',
     'FROM': 'Vart är du nu?',
     'TO': 'Var vill du åka?',
+    'STOP': 'Vilken hållplats?',
     'BUSS_TIMES_TITLE': 'Buss tider',
     'SELECT_OTHER_TIME': 'Välj en tid',
     'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.'
