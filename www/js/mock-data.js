@@ -7,7 +7,7 @@ var mockApi = {
     { id:  4, name: "Vaudagne", numberOfStops: 2 },
     { id:  3, name: "Les Houches", numberOfStops: 9, meta: { lifts: ['Bellevue', 'Le Prarion'] }},
     { id:  5, name: "Bossons/Pelerins", numberOfStops: 22 },
-    { id:  1, name: "Chamonix", numberOfStops: 29, meta: { lifts: ['Aiguille du Midi', 'Brevent'] }},
+    { id:  1, name: "Chamonix", numberOfStops: 29, meta: { lifts: ['Aiguille du Midi', 'Brevent'], areasOfInterest: ['Montenvers', 'Ski jump', 'Sports centre', 'Ice rink'] }},
     { id:  6, name: "Les Praz", numberOfStops: 10, meta: { lifts: ['Flegère'] }},
     { id:  7, name: "Les Tines", numberOfStops: 5 },
     { id:  8, name: "Argentière", numberOfStops: 6, meta: { lifts: ['Grand Montets'] }},
