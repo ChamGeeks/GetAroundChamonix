@@ -54,7 +54,7 @@ angular.module('chamBus')
 
 })
 
-.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner) {
+.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, JourneyInfo) {
 
   $scope.closeStops = [];
 
@@ -86,8 +86,8 @@ angular.module('chamBus')
     $location.path('/area/'+ area);
   };
 
-  $scope.from = {"stop":"...", "area":"..."};
-  $scope.to = {"stop":"...", "area":"..."};
+  $scope.from = JourneyInfo.getEmptyInfo();
+  $scope.to = JourneyInfo.getEmptyInfo();
 })
 
 .controller('ToAreaController', function($scope, $location, $stateParams, TripPlanner) {
