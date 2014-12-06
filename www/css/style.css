@@ -1,7 +1,8 @@
 .scroll {
   background: #fff url(../img/bg-42.jpg) center;
   background-size: cover;
-  padding-bottom: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   min-height: 100%; }
 
 .card {

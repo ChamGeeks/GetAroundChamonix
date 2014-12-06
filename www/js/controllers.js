@@ -151,7 +151,7 @@ angular.module('chamBus')
   };
 })
 
-.controller('ResultCtrl', function($scope, $ionicPopup, TripPlanner){
+.controller('ResultCtrl', function($scope, $ionicPopup, TripPlanner, $cordovaDatePicker){
   $scope.trip = {
     start: TripPlanner.getDeparture(),
     end: TripPlanner.getDestination()
@@ -159,10 +159,20 @@ angular.module('chamBus')
 
   $scope.dateTime = {};
 
+
+  $scope.selectDate = function() {
+    var options = {date: new Date(), mode: 'date'};
+    //var options = {date: new Date(), mode: 'time'}; for time
+    $cordovaDatePicker.show(options).then(function(date){
+      alert(date);
+    });
+  }
+
   $scope.selectDateTime = function() {
 
     var myPopup = $ionicPopup.show({
-      template: '<input type="date" ng-model="dateTime.date"><br><input type="time" ng-model="dateTime.time">',
+      //template: '<input type="date" ng-model="dateTime.date"><br><input type="time" ng-model="dateTime.time">',
+      templateUrl: 'partials/select-date.html',
       title: 'Select depature time',
       subTitle: 'Please',
       scope: $scope,
