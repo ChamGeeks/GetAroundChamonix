@@ -14,7 +14,7 @@
     </ul> -->
 
     <div class="areas">
-      <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
+      <div class="card area" ng-repeat="area in areas" ng-click="openModal(area)">
 
         <div class="item item-text-wrap">
           {{ area.name }} ({{area.numberOfStops}} {{ 'stops' | translate}})

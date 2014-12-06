@@ -1,0 +1,16 @@
+<ion-modal-view>
+  <button class="button button-positive" ng-click="closeModal()">Close</button>
+  
+    <h2 class="center">
+      <span ng-hide="main.isPlaning()">{{ area.name }}: {{ 'AT_STOP' | translate }}</span>
+      <span ng-show="main.isPlaning()">{{ 'TO_STOP' | translate }}</span>
+    </h2>
+
+    <ul class="stops list">
+      <li class="stop item" ng-repeat="stop in stops" ng-click="selectStop(stop)">
+        <div class="line line-{{line}}" ng-repeat="line in stop.lines"></div>
+        {{ stop.name }}
+      </li>
+    </ul>
+
+</ion-modal-view>
