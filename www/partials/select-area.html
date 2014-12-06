@@ -1,16 +1,7 @@
 <ion-view title="{{ 'SELECT_AREA' | translate }}">
   <ion-content>
 
-    <div id="journey" class="row">
-      <div class="item col">
-        <div>From</div>
-        <div>{{ from().stop }} ({{ from().area }})</div>
-      </div>
-      <div class="item col">
-        <div>To</div>
-        <div>{{ to().stop }} ({{ to().area }})</div>
-      </div>
-    </div>
+    <div ng-include src=" 'partials/journey-info.html' "></div>
 
     <h2 class="center">
       <span ng-hide="isPlanning()">{{ 'FROM' | translate }}</span>

@@ -165,9 +165,11 @@ angular.module('chamBus').factory('TripPlanner', function($q, Model, GeoTree, Ti
 	api.getAreaById = function(id) {
 		var deferred = $q.defer();
 
+    id = ~~(id);
+
 		var area = {};
 		mockApi.areas.forEach(function(value){
-			if(value.id == id) {
+			if(value.id === id) {
 				area = value;
 			}
 		});
