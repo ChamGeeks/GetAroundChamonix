@@ -27,6 +27,10 @@
                         {
                             "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -68,6 +72,9 @@
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         },
         "org.apache.cordova.geolocation": {
+            "PACKAGE_NAME": "com.ionicframework.myapp914728"
+        },
+        "com.plugin.datepicker": {
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         }
     },
