@@ -1,21 +1,27 @@
 <ion-view title="{{ homeTitle }}">
-  <ion-content class="padding">
+  <ion-content>
 
     <h2>
       Bonjour / Welcome
     </h2>
 
-    <div class="flag" ng-click="selectStartLang('fr')">
-      <img src="img/fr.svg" alt="">
-      Fr
+    <div class="card">
+      <div class="flag item" ng-click="selectStartLang('fr')">
+        <img src="img/fr.svg" alt="">
+        Français
+      </div>
     </div>
-    <div class="flag" ng-click="selectStartLang('en')">
-      <img src="img/gb.svg" alt="">
-      English
+    <div class="card">
+      <div class="flag item" ng-click="selectStartLang('en')">
+        <img src="img/gb.svg" alt="">
+        English
+      </div>
     </div>
-    <div class="flag" ng-click="selectStartLang('sv')">
-      <img src="img/se.svg" alt="">
-      Svenska
+    <div class="card">
+      <div class="flag item" ng-click="selectStartLang('sv')">
+        <img src="img/se.svg" alt="">
+        Svenska
+      </div>
     </div>
 
 

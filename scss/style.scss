@@ -1,4 +1,29 @@
 
+.scroll {
+  background: #fff url(../img/bg-42.jpg) center;
+  background-size: cover;
+  padding-bottom: 2px;
+  min-height: 100%;
+}
+
+.card {
+  background: none;
+}
+.item {
+  background: rgba(255,255,255,.8);
+}
+
+h2 {
+  color: #fff;
+  text-shadow: 1px 1px 0 #222, 0 0 5px #777;
+  margin: 0 0 20px;
+  padding: 20px 0 0;
+  text-align: center;
+}
+
+h3 {
+  margin: 0 0 10px
+}
 
 $line_1: #EE3030;
 $line_2: #00B2EF;
@@ -24,7 +49,7 @@ img { max-width: 100%; height: auto; }
 
   img {
     height: 50px;
-    width: 80px;
+    width: 75px;
     vertical-align: middle;
   }
 }
