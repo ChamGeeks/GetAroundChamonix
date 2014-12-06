@@ -54,43 +54,27 @@ angular.module('chamBus')
 
 })
 
-
-
 .controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner) {
-
 
   $scope.closeStops = [];
 
-  if(!TripPlanner.planning()){
-    $cordovaGeolocation
-      .getCurrentPosition()
-      .then(function (position) {
-        if(position.coords.accuracy < 150){
-          $scope.closeStops = GeoTree.closest(position.coords).slice(0, 3);
-        }
-      }, function(error){
-        alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-      });
-  }
+  $cordovaGeolocation
+    .getCurrentPosition()
+    .then(function (position) {
+      if(position.coords.accuracy < 150){
+        $scope.closeStops = GeoTree.closest(position.coords).slice(0, 3);
+      }
+    }, function(error){
+      alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+    });
 
   // TODO: fix duplicate from SelectStopCtrl
   $scope.selectStop = function(stop) {
-    if (!TripPlanner.planning()) {
-      TripPlanner.setDeparture(stop);
-      $location.path('/area');
-      return;
-    } else {
-      TripPlanner.setDestination(stop);
-    }
-    $location.path('/result');
-    console.log('Show times', TripPlanner.getDeparture(), TripPlanner.getDestination());
+    TripPlanner.setDeparture(stop);
+    $location.path('/area');
   };
 
-  if(!TripPlanner.planning()) {
-    $scope.selectAreaTitle = 'Select start area';
-  } else {
-    $scope.selectAreaTitle = 'Select end area';
-  }
+  $scope.selectAreaTitle = 'Select start area';
 
   $scope.areas = [];
 
@@ -103,6 +87,18 @@ angular.module('chamBus')
   };
 })
 
+.controller('ToAreaController', function($scope, $location, $stateParams, TripPlanner) {
+  $scope.areas = [];
+
+  TripPlanner.getAreas().then(function(data){
+    $scope.areas = data;
+  });
+
+  $scope.selectArea = function(area) {
+    console.log('Going from ' + $stateParams.id + ' to ' + area);
+    $location.path('/area/' + $stateParams.id + '/to/' + area);
+  };
+})
 
 
 .controller('SelectStopCtrl', function($scope, $stateParams, TripPlanner, $location) {
@@ -110,29 +106,42 @@ angular.module('chamBus')
   $scope.area = '';
   $scope.stops = [];
 
-      TripPlanner.getAreaById($stateParams.id).then(function(data){
+  TripPlanner.getAreaById($stateParams.id).then(function(data){
     $scope.area = data;
   });
 
-      TripPlanner.getAreaStops($stateParams.id).then(function(resp){
+  TripPlanner.getAreaStops($stateParams.id).then(function(resp){
     $scope.stops = resp;
   });
 
 
   $scope.selectStop = function(stop) {
-    if(!TripPlanner.planning()){
-      TripPlanner.setDeparture(stop);
-      $location.path('/area');
-      return;
-    } else {
-      TripPlanner.setDestination(stop);
-    }
-    $location.path('/result');
+    TripPlanner.setDeparture(stop);
+    console.log('going to ToArea...');
+    $location.path('/area/' + $scope.area.id + '/to');
   };
 
 })
 
+.controller('DestinationController', function($scope, $stateParams, TripPlanner, $location) {
 
+  $scope.area = '';
+  $scope.stops = [];
+
+  TripPlanner.getAreaById($stateParams.id).then(function(data){
+    $scope.area = data;
+  });
+
+  TripPlanner.getAreaStops($stateParams.id).then(function(resp){
+    $scope.stops = resp;
+  });
+
+
+  $scope.selectStop = function(stop) {
+    TripPlanner.setDestination(stop);
+    $location.path('/result');
+  };
+})
 
 .controller('ResultCtrl', function($scope, $ionicPopup, TripPlanner){
   $scope.trip = {

@@ -50,6 +50,18 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       controller: 'SelectStopCtrl'
     })
 
+    .state('toAreas', {
+      url: '/area/:id/to',
+      templateUrl: 'partials/select-area.html',
+      controller: 'ToAreaController'
+    })
+
+    .state('destination', {
+      url: '/area/:departureId/to/:id',
+      templateUrl: 'partials/select-stop.html',
+      controller: 'DestinationController'
+    })
+
     // Show the result page
     .state('result', {
       url: '/result',
