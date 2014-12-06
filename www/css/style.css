@@ -147,3 +147,15 @@ img {
 
 .desc button {
   float: right; }
+
+.menu-footer {
+  height: auto;
+  text-align: center;
+  display: block; }
+  .menu-footer a {
+    color: #444;
+    text-decoration: none; }
+
+.item-icon-right .icon {
+  font-size: inherit;
+  color: #aaa; }

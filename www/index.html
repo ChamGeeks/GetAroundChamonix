@@ -42,18 +42,70 @@
 
   </head>
   <body ng-app="chamBus" ng-controller="MainCtrl as main">
+    <ion-side-menus>
 
-    <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
-      <ion-nav-back-button class="button-icon ion-arrow-left-c">
-      </ion-nav-back-button>
 
-      <ion-nav-buttons side="right">
-        <!-- ng-show="main.isPlaning()" -->
-        <button class="button icon ion-ios7-reload" ng-click="main.reset()"></button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
+      <!-- Main view -->
+      <ion-side-menu-content>
 
-    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+        <!-- Header -->
+        <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
 
+          <!-- Back button -->
+          <ion-nav-back-button class="button-icon ion-arrow-left-c">
+          </ion-nav-back-button>
+
+          <!-- Menu button -->
+          <ion-nav-buttons side="right">
+            <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+          </ion-nav-buttons>
+
+          <!-- Reset button -->
+          <!-- <ion-nav-buttons side="right">
+            <button class="button icon ion-refresh" ng-click="main.reset()"></button>
+          </ion-nav-buttons> -->
+        </ion-nav-bar>
+
+        <!-- Content -->
+        <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+      </ion-side-menu-content>
+
+
+
+
+      <!-- Menu -->
+      <ion-side-menu side="right">
+
+        <!-- Menu - Title -->
+        <div class="bar bar-header bar-dark">
+          <h1 class="title">Menu</h1>
+        </div>
+
+        <!-- Menu - Content -->
+        <div class="content has-header">
+          <div class="list">
+
+            <a menu-close class="item item-icon-right" ng-click="main.reset()">
+              Plan a new journey
+              <i class="icon ion-chevron-right"></i>
+            </a>
+            <a href="#/about" menu-close class="item item-icon-right">
+              About
+              <i class="icon ion-chevron-right"></i>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- Menu - Footer -->
+        <div class="bar bar-footer bar-stable menu-footer">
+          <a href="http://chamgeeks.com">ChamGeeks</a>
+        </div>
+
+      </ion-side-menu>
+
+
+    </ion-side-menus>
   </body>
 </html>

@@ -55,6 +55,12 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       url: '/result',
       templateUrl: 'partials/result.html',
       controller: 'ResultCtrl'
+    })
+
+    // About page
+    .state('about', {
+      url: '/about',
+      templateUrl: 'partials/about.html'
     });
 
    $urlRouterProvider.otherwise('/');
@@ -65,9 +71,11 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
 
   $translateProvider.translations('en', {
     'SELECT_AREA': 'Select area',
+    'SELECT_STOP': 'Select stop',
     'STOPS_NEAR': 'Stops near by',
     'STOPS_IN': 'Stops in: ',
     'FROM': 'Where are you now?',
+    'WHERE_AREA': 'Where in',
     'TO': 'And where are you headed?',
     'STOP': 'Which stop?',
     'BUSS_TIMES_TITLE': 'Bus times',
