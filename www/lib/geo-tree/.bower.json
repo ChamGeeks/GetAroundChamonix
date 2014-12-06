@@ -1,0 +1,13 @@
+{
+  "name": "geo-tree",
+  "homepage": "https://github.com/salsita/geo-tree",
+  "_release": "cb6f50ce58",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "cb6f50ce581304446a7b69143927d77a95e503a1"
+  },
+  "_source": "git://github.com/salsita/geo-tree.git",
+  "_target": "*",
+  "_originalSource": "salsita/geo-tree"
+}
