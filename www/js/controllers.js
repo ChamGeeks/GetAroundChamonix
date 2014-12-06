@@ -58,46 +58,38 @@ angular.module('chamBus')
 
 .controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, JourneyInfo) {
 
-  $scope.closeStops = [];
+    $scope.closeStops = [];
 
-  $cordovaGeolocation
-    .getCurrentPosition()
-    .then(function (position) {
-      if(position.coords.accuracy < 150){
-        $scope.closeStops = GeoTree.closest(position.coords).slice(0, 3);
-      }
-    }, function(error){
-      alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-    });
+    $cordovaGeolocation
+      .getCurrentPosition()
+      .then(function (position) {
+        if (position.coords.accuracy < 150) {
+          $scope.closeStops = GeoTree.closest(position.coords).slice(0, 3);
+        }
+      }, function (error) {
+        alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+      });
 
-  // TODO: fix duplicate from SelectStopCtrl
-  $scope.selectStop = function(stop) {
-    TripPlanner.setDeparture(stop);
-    $location.path('/area');
-  };
+    // TODO: fix duplicate from SelectStopCtrl
+    $scope.selectStop = function (stop) {
+      TripPlanner.setDeparture(stop);
+      $location.path('/area');
+    };
 
-  $scope.selectAreaTitle = 'Select start area';
+    $scope.selectAreaTitle = 'Select start area';
 
-  $scope.areas = [];
+    $scope.areas = TripPlanner.getAreas();
 
-  TripPlanner.getAreas().then(function(data){
-    $scope.areas = data;
-  });
+    $scope.selectArea = function (area) {
+      $location.path('/area/' + area);
+    };
 
-  $scope.selectArea = function(area) {
-    $location.path('/area/'+ area);
-  };
-
-  $scope.from = JourneyInfo.getEmptyInfo();
-  $scope.to = JourneyInfo.getEmptyInfo();
-})
+    $scope.from = JourneyInfo.getEmptyInfo();
+    $scope.to = JourneyInfo.getEmptyInfo();
+  })
 
 .controller('ToAreaController', function($scope, $location, $stateParams, JourneyInfo, TripPlanner) {
-  $scope.areas = [];
-
-  TripPlanner.getAreas().then(function(data){
-    $scope.areas = data;
-  });
+  $scope.areas = TripPlanner.getAreas();
 
   $scope.selectArea = function(area) {
     console.log('Going from ' + $stateParams.id + ' to ' + area);

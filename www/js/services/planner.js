@@ -156,9 +156,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, Model, GeoTree, Ti
 
 	api.getAreas = function getAreas() {
 		// todo lookup database
-		var deferred = $q.defer();
-		deferred.resolve(mockApi.areas);
-		return deferred.promise;
+		return Model.getAreas();
 	};
 
 
@@ -207,6 +205,10 @@ angular.module('chamBus').factory('TripPlanner', function($q, Model, GeoTree, Ti
 
 	api.planning = function() {
 		return !!_departure
+	};
+
+	api.init = function() {
+		return Model.init();
 	};
 
 	return api;

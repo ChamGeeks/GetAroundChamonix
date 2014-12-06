@@ -6,9 +6,6 @@
 
 angular.module('chamBus').factory('Database', function($http, $q, $ionicLoading){
 
-	// Open the db
-	html5sql.openDatabase('com.chamgeeks.chambus', 'ChamBus Database', 3*1024*1024);
-
 	function updateDatabase() {
 		$http.get('https://chx-transit-db.herokuapp.com/api/export/sql').then(function(resp) {
 
@@ -24,32 +21,36 @@ angular.module('chamBus').factory('Database', function($http, $q, $ionicLoading)
 		});
 	}
 
-	// Update db
-	if(html5sql.database && html5sql.database.version === ''){
-		console.log('DB version: ', html5sql.database.version);
-		$ionicLoading.show({
-			template: 'Downloading database...'
-		});
-
-		updateDatabase();
-
-	} else if(html5sql.database) {
-		$http.get('https://chx-transit-db.herokuapp.com/api/status')
-			.then(function(resp) {
-				if(resp && resp.data && resp.data.version != html5sql.database.version) {
-					console.log('Update: ', resp.data.version, html5sql.database.version);
-					// Update database
-					updateDatabase();
-				}
-			});
-	}
-
 	function toSQL(o) {
 		return (typeof o === 'string') ? '\'' + o + '\'' : o;
 	}
 
 	var db = {
-		init: function() { return 'Yay'; },
+		init: function() {
+			// Open the db
+			html5sql.openDatabase('com.chamgeeks.chambus', 'ChamBus Database', 3*1024*1024);
+
+			// Update db
+			if(html5sql.database && html5sql.database.version === ''){
+				console.log('DB version: ', html5sql.database.version);
+				$ionicLoading.show({
+					template: 'Downloading database...'
+				});
+
+				updateDatabase();
+
+			} else if(html5sql.database) {
+				$http.get('https://chx-transit-db.herokuapp.com/api/status')
+					.then(function(resp) {
+						if(resp && resp.data && resp.data.version != html5sql.database.version) {
+							console.log('Update: ', resp.data.version, html5sql.database.version);
+							// Update database
+							updateDatabase();
+						}
+					});
+			}
+
+		},
 		find: function(sql, params) {
 
 			var query = [];

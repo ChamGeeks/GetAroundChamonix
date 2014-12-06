@@ -31,11 +31,24 @@ angular.module('chamBus').factory('Model', function($q, Time, Database) {
 		this.transferTime = transferTime;
 	}
 
-	var _stops = {}, _routes = {};
+	var _stops = {}, _routes = {}, _areas = {};
 	function loadStops() {
 		Database.find("select * from stop;").then(function(stops) {
 			stops.forEach(function(stop) {
 				_stops["_" + stop.id] = stop;
+			});
+			Database.find("select * from stop_block;").then(function(records) {
+				records.forEach(function(record) {
+					var stop = getStop(record.stop_id);
+					if (stop) {
+						stop.areas = stop.areas || [];
+						var area = getArea(record.block_id);
+						if (area) {
+							stop.areas.push(area);
+							area.numberOfStops++;
+						}
+					}
+				});
 			});
 		});
 	}
@@ -48,15 +61,36 @@ angular.module('chamBus').factory('Model', function($q, Time, Database) {
 		});
 	}
 
-	var model = {};
+	function loadAreas() {
+		Database.find("select * from block;").then(function(areas) {
+			areas.forEach(function(area) {
+				_areas["_" + area.id] = area;
+				area.numberOfStops = 0;
+				area.meta = mockApi.areas_meta[area.id];
+			});
+			areas.sort(function(a1, a2) {
+				return a1.display_order - a2.display_order;
+			});
+		});
+	}
 
-
-	model.getStop = function(id) {
+	function getStop(id) {
 		return _stops["_" + id]
 	};
 
-	model.getRoute = function(id) {
+	function getRoute(id) {
 		return _routes["_" + id]
+	};
+
+	function getArea(id) {
+		return _areas["_" + id]
+	};
+
+
+	var model = {
+		getStop: getStop,
+		getRoute: getRoute,
+		getArea: getArea
 	};
 
 	model.searchStops = function (filter) {
@@ -250,7 +284,11 @@ angular.module('chamBus').factory('Model', function($q, Time, Database) {
 		return deferred.promise;
 	};
 
-	model.getBlockStops = function(block_id) {
+	model.getAreas = function() {
+		return _areas;
+	};
+
+	model.getAreaStops = function(block_id) {
 		var deferred = $q.defer();
 
 		Database.find('select distinct stop_id,' +
@@ -266,9 +304,21 @@ angular.module('chamBus').factory('Model', function($q, Time, Database) {
 		return deferred.promise;
 	};
 
-	// cache routes and stops (async so may not be complete before use)
-	loadRoutes();
-	loadStops();
+	model.init = function() {
+		var deferred = $q.defer();
+		// cache routes and stops (async so may not be complete before use)
+		loadRoutes()
+			.then(function () {
+				return loadAreas();
+			})
+			.then(function () {
+				return loadStops();
+			})
+			.then(function () {
+				deferred.resolve(true);
+			});
+		return deferred.promise;
+	};
 
 	return model;
 });
