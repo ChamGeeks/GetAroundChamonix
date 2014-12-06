@@ -5,9 +5,11 @@ angular.module('chamBus')
 
 .controller('MainCtrl', function($scope, TripPlanner, $translate, $state, $location){
 
-  $scope.selectStartLang = function(lang) {
+  $scope.selectStartLang = function(lang, redirect) {
     $translate.use(lang);
-    $location.path('/area');
+    if(redirect) {
+      $location.path('/'+ redirect);
+    }
   };
 
   $scope.isPlanning = function() {

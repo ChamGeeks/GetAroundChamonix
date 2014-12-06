@@ -96,13 +96,26 @@ img { max-width: 100%; height: auto; }
 
 
 .menu-footer {
-  height: auto;
-  text-align: center;
-  display: block;
+  // height: auto;
+  // text-align: center;
+  // display: block;
+  line-height: 34px;
   a {
     color: #444;
     text-decoration: none;
   }
+
+  img {
+    width: auto;
+    height: 12px;
+    margin: 0 0 0 10px;
+  }
+}
+.menu-flags {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
 }
 
 .item-icon-right .icon {
