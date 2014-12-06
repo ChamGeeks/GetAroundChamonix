@@ -1,17 +1,17 @@
 <ion-view title="{{ 'SELECT_AREA' | translate }}">
-  <ion-content class="padding">
+  <ion-content>
 
     <h2 class="center">
       <span ng-hide="main.isPlaning()">{{ 'FROM' | translate }}</span>
       <span ng-show="main.isPlaning()">{{ 'TO' | translate }}</span>
     </h2>
 
-    <h3 ng-show="closeStops" translate>{{ 'STOPS_NEAR' | translate }}</h3>
-    <ul class="stops list">
+    <!-- <h3 ng-show="closeStops" translate>{{ 'STOPS_NEAR' | translate }}</h3>
+    <ul class="stops list" ng-show="closeStops">
       <li class="stop item" ng-repeat="aStop in closeStops" ng-click="selectStop(aStop.id)">
         {{ aStop.name }}
       </li>
-    </ul>
+    </ul> -->
 
     <div class="areas">
       <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
