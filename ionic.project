@@ -2,8 +2,6 @@
   "name": "myApp",
   "app_id": "",
   "gulpStartupTasks": [
-    "sass",
-    "watch"
   ],
   "watchPatterns": [
     "www/**/*",
