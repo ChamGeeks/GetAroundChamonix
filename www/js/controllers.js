@@ -108,6 +108,20 @@ angular.module('chamBus')
       $scope.stops = resp;
     });
 
+
+    $scope.selectStop = function(stop) {
+      if(!TripPlanner.planning()){
+        TripPlanner.setDeparture(stop);
+        $scope.closeModal();
+        $location.path('/area');
+        return;
+      } else {
+        TripPlanner.setDestination(stop);
+      }
+      $scope.closeModal();
+      $location.path('/result');
+    };
+
     $scope.modal.show();
   };
   $scope.closeModal = function() {
