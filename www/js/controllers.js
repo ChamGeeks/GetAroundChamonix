@@ -85,6 +85,14 @@ angular.module('chamBus')
   $scope.selectArea = function(area) {
     $location.path('/area/'+ area);
   };
+
+  $scope.from = function() {
+    return {"stop":"...", "area":"..."};
+  };
+
+  $scope.to = function() {
+    return {"stop":"...", "area":"..."};
+  };
 })
 
 .controller('ToAreaController', function($scope, $location, $stateParams, TripPlanner) {
