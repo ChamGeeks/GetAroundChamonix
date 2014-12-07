@@ -18,7 +18,9 @@
     <div class="areas">
       <div class="card area" ng-repeat="area in areas | areasOrder">
         <div class="row item">
-          <button class="button button-clear button-positive ion-information-circled big info" ng-click="toggleInfo(area)"></button>
+          <button class="button button-clear button-positive info" ng-click="toggleInfo(area)">
+            <i class="icon really_big ion-information-circled"></i>
+          </button>
           <button class="button button-block button-stable area item-icon-right" ng-click="selectArea(area.id)">
             <i class="icon big ion-arrow-right-c"></i>
             {{ area.name }} 
