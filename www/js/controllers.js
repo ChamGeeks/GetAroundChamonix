@@ -72,7 +72,6 @@ angular.module('chamBus')
         console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
       });
 
-    // TODO: fix duplicate from SelectStopCtrl
     $scope.selectStop = function (stop) {
       TripPlanner.setDeparture(stop);
       $location.path('/area');
@@ -85,6 +84,11 @@ angular.module('chamBus')
     $scope.selectArea = function (area) {
       $location.path('/area/' + area);
     };
+
+    $scope.toggleInfo = function(area) {
+      area.showInfo = !area.showInfo;
+      console.log('Show info for ' + area.name + '? ' + area.showInfo);
+    }
 
     $scope.from = JourneyInfo.getEmptyInfo();
     $scope.to = JourneyInfo.getEmptyInfo();

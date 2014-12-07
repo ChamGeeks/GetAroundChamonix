@@ -17,25 +17,23 @@
 
     <div class="areas">
       <div class="card area" ng-repeat="area in areas | areasOrder">
-      <div class="row">
-        <button class="button button-stable ion-information-circled big info"></button>
-        <button class="button button-block button-stable area item-icon-right" ng-click="selectArea(area.id)">
-          <i class="icon big ion-arrow-right-c"></i>
-          {{ area.name }} 
-        </button> 
-      </div>
-      <div class="row" ng-show="area.withInfo">
-        <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
-          <i class="ion-ios7-snowy"></i>
-          <small>{{ area.meta.lifts.join(', ') }}</small>
+        <div class="row item">
+          <button class="button button-clear button-positive ion-information-circled big info" ng-click="toggleInfo(area)"></button>
+          <button class="button button-block button-stable area item-icon-right" ng-click="selectArea(area.id)">
+            <i class="icon big ion-arrow-right-c"></i>
+            {{ area.name }} 
+          </button> 
         </div>
-        <div class="meta-interests" ng-show="{{ area.meta && area.meta.areasOfInterest }}">
-          <i class="ion-flag"></i>
-          <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
+        <div class="row item" ng-show="area.showInfo">
+          <div class="meta-lifts" ng-show="area.meta && area.meta.lifts">
+            <i class="ion-ios7-snowy"></i>
+            <small>{{ area.meta.lifts.join(', ') }}</small>
+          </div>
+          <div class="meta-interests" ng-show="area.meta && area.meta.areasOfInterest">
+            <i class="ion-flag"></i>
+            <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
+          </div>
         </div>
-    </div>
-
-
       </div>
     </div>
   </ion-content>
