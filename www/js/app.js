@@ -42,7 +42,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       resolve: {
         preLoadData: function(TripPlanner, $ionicLoading) {
           $ionicLoading.show({
-            template: 'Downloading database...'
+            template: 'Loading database...'
           });
           TripPlanner.init().finally(function() {
             $ionicLoading.hide();

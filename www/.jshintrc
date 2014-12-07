@@ -5,7 +5,6 @@
     "cordova": true,
     "console": true,
     "StatusBar": true,
-    "mockApi": true,
     "html5sql": true
   }
 }
