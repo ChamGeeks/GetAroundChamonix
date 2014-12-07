@@ -1,0 +1,11 @@
+{
+  "folders":
+  [{
+    "folder_exclude_patterns": ["platforms", "node_modules", "plugins", ".sass-cache"],
+    "follow_symlinks": true,
+    "path": "."
+  }],
+  "settings": {
+    "translate_tabs_to_spaces": true
+  }
+}
