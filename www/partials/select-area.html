@@ -16,7 +16,7 @@
     </ul> -->
 
     <div class="areas">
-      <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
+      <div class="card area" ng-repeat="area in areas | areasOrder" ng-click="selectArea(area.id)">
 
         <div class="item item-text-wrap">
           {{ area.name }} ({{area.numberOfStops}} {{ 'stops' | translate}})
@@ -28,7 +28,7 @@
             <i class="ion-flag"></i>
             <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
           </div>
-        </div> 
+        </div>
 
       </div>
     </div>
