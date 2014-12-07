@@ -16,11 +16,18 @@
     </ul> -->
 
     <div class="areas">
+      <div class="card area">
+          <a class="item item-icon-right">
+            My position
+            <i class="icon ion-ios7-location icon-positive"></i>
+          </a>
+      </div>
+
       <div class="card area" ng-repeat="area in areas | areasOrder" ng-click="selectArea(area.id)">
 
         <a class="item item-text-wrap item-icon-right">
             <i class="icon next ion-arrow-right-c"></i>
-            {{ area.name }} 
+            {{ area.name }}
             <i ng-show="area.meta && area.meta.lifts" class="ion-ios7-snowy"></i>
             <i ng-show="area.meta && area.meta.areasOfInterest" class="ion-flag"></i>
             <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
@@ -31,7 +38,7 @@
               <i class="ion-flag"></i>
               <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
             </div>
-        </a> 
+        </a>
 
 
       </div>
