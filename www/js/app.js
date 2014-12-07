@@ -21,7 +21,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       }
     });
   })
-  
+
 /**
  * Routes
  */
