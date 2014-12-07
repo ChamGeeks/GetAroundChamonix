@@ -13,6 +13,16 @@
   min-height: 100%;
 }
 
+.half-pad {
+  padding: 0.5rem;
+}
+
+#journey .item {
+  text-align: center;
+  .area {
+    text-transform: uppercase;
+  }
+}
 .card {
   background: none;
   button.area {
@@ -32,6 +42,17 @@
   .info {
     padding: 0px;
     min-width: 46px;
+    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    max-height:250px;
+  }
+
+  .info.closed {
+    max-height: 0px;
+  }
+
+  .half-pad {
+    padding: 0.5rem;
   }
 }
 

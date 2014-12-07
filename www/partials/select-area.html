@@ -3,11 +3,6 @@
 
     <div ng-include src=" 'partials/journey-info.html' "></div>
 
-    <h2 class="center">
-      <span ng-hide="isPlanning()">{{ 'FROM' | translate }}</span>
-      <span ng-show="isPlanning()">{{ 'TO' | translate }}</span>
-    </h2>
-
     <!-- <h3 ng-show="closeStops" translate>{{ 'STOPS_NEAR' | translate }}</h3>
     <ul class="stops list" ng-show="closeStops">
       <li class="stop item" ng-repeat="aStop in closeStops" ng-click="selectStop(aStop.id)">
@@ -26,12 +21,12 @@
             {{ area.name }}
           </button>
         </div>
-        <div class="row item" ng-show="area.showInfo">
-          <div class="meta-lifts" ng-show="area.meta && area.meta.lifts">
+        <div class="info" ng-class="area.showInfo ? '' : 'closed'">
+          <div class="item item-text-wrap half-pad meta-lifts" ng-show="area.meta && area.meta.lifts">
             <i class="ion-ios7-snowy"></i>
             <small>{{ area.meta.lifts.join(', ') }}</small>
           </div>
-          <div class="meta-interests" ng-show="area.meta && area.meta.areasOfInterest">
+          <div class="item item-text-wrap half-pad meta-interests" ng-show="area.meta && area.meta.areasOfInterest">
             <i class="ion-flag"></i>
             <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
           </div>

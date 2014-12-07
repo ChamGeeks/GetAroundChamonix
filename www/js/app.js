@@ -94,6 +94,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
     $translateProvider.translations('en', {
       'SELECT_AREA': 'Select area',
       'SELECT_STOP': 'Select stop',
+      'PICK_A_START': 'Pick a journey start below',
       'STOPS_NEAR': 'Stops near by',
       'STOPS_IN': 'Stops in: ',
       'FROM': 'Where are you now?',
@@ -107,6 +108,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
 
     $translateProvider.translations('fr', {
       'SELECT_AREA': 'Choisir un quartier',
+      'PICK_A_START': 'Pick a journey start below',
       'STOPS_NEAR': 'Arrêt à proximité',
       'STOPS_IN': 'Arrêts ',
       'FROM': 'Départ',
@@ -120,6 +122,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
 
     $translateProvider.translations('sv', {
       'SELECT_AREA': 'Välj område',
+      'PICK_A_START': 'Pick a journey start below',
       'STOPS_NEAR': 'Hållplatser nära',
       'STOPS_IN': 'Hållplatser i: ',
       'FROM': 'Vart är du nu?',

@@ -1,12 +1,13 @@
-<div id="journey" class="row">
-  <div class="item col">
-    <div>From</div>
-    <div><small>{{ from.stop }}</small></div>
-    <div><small>({{ from.area }})</small></div>
+<div id="journey">
+  <div class="item item-divider" ng-hide="from">
+    <small>{{ 'PICK_A_START' | translate }}</small>
   </div>
-  <div class="item col">
-    <div>To</div>
-    <div><small>{{ to.stop }}</small></div>
-    <div><small>({{ to.area }})</small></div>
+  <div class="item item-divider" ng-show="from">
+    <span class="area"><small>{{ from.area }}</small></span> 
+    <span><small>{{ from.stop }}</small></span>
+  </div>
+  <div class="item item-divider" ng-show="to">
+    <span class="area"><small>{{ to.area }}</small></span> 
+    <span><small>{{ to.stop }}</small></span>
   </div>
 </div>
