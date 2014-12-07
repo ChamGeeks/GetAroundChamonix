@@ -81,7 +81,6 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 			areas.forEach(function(area) {
 				_areas["_" + area.id] = area;
 				area.numberOfStops = 0;
-				area.meta = mockApi.areas_meta[area.id];
 			});
 			console.log("Loaded " + areas.length + " areas");
 		}).then(function() {
@@ -332,7 +331,7 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 	var modelInit = false;
 	model.init = function() {
 
-		// If init already has been initated just return the promise
+		// If init already has been initiated just return the promise
 		if(modelInit) {
 			return modelInit;
 		}
