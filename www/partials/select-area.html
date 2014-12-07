@@ -26,13 +26,15 @@
             {{ area.name }} 
           </button> 
         </div>
-        <div class="item item-text-wrap half-pad meta-lifts" ng-show="area.showInfo && area.meta && area.meta.lifts">
-          <i class="ion-ios7-snowy"></i>
-          <small>{{ area.meta.lifts.join(', ') }}</small>
-        </div>
-        <div class="item item-text-wrap half-pad meta-interests" ng-show="area.showInfo && area.meta && area.meta.areasOfInterest">
-          <i class="ion-flag"></i>
-          <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
+        <div class="info" ng-class="area.showInfo ? '' : 'closed'">
+          <div class="item item-text-wrap half-pad meta-lifts" ng-show="area.meta && area.meta.lifts">
+            <i class="ion-ios7-snowy"></i>
+            <small>{{ area.meta.lifts.join(', ') }}</small>
+          </div>
+          <div class="item item-text-wrap half-pad meta-interests" ng-show="area.meta && area.meta.areasOfInterest">
+            <i class="ion-flag"></i>
+            <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
+          </div>
         </div>
       </div>
     </div>
