@@ -2,6 +2,8 @@
   "name": "chamride",
   "app_id": "",
   "gulpStartupTasks": [
+    "sass",
+    "watch"
   ],
   "watchPatterns": [
     "www/**/*",
