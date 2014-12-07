@@ -16,13 +16,18 @@
 }
 .card.area {
   margin: 10px 0px 10px 0px;
+
+  .icon.big {
+    font-size: 1.4rem;
+  }
+  .info {
+    padding: 0px;
+    min-width: 46px;
+  }
 }
 
 .item {
   background: rgba(255,255,255,.8);
-  .icon.big {
-    font-size: 1.6rem;
-  }
 }
 
 h2 {

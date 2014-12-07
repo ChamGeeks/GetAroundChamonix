@@ -18,12 +18,10 @@
     <div class="areas">
       <div class="card area" ng-repeat="area in areas | areasOrder">
       <div class="row">
-        <button class="button button-stable ion-information-circled"></button>
+        <button class="button button-stable ion-information-circled big info"></button>
         <button class="button button-block button-stable area item-icon-right" ng-click="selectArea(area.id)">
-            <i class="icon big ion-arrow-right-c"></i>
-            <i ng-show="area.meta && area.meta.lifts" class="ion-ios7-snowy"></i>
-            <i ng-show="area.meta && area.meta.areasOfInterest" class="ion-flag"></i>
-            {{ area.name }} 
+          <i class="icon big ion-arrow-right-c"></i>
+          {{ area.name }} 
         </button> 
       </div>
       <div class="row" ng-show="area.withInfo">
