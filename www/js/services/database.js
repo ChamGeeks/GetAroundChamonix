@@ -18,8 +18,7 @@ angular.module('chamBus').factory('Database', function($http, $q){
 					console.log('Dataset updated to version ' + version);
 					deferred.resolve();
 				}, function (error, statement) {
-					console.log(error);
-					console.error('Error: ' + error.message + ' when processing ' + statement);
+					console.log('Error: ' + error.message + ' when processing ' + statement);
 					deferred.resolve();
 				});
 			}).catch(function(error) {
@@ -28,12 +27,16 @@ angular.module('chamBus').factory('Database', function($http, $q){
 				if (error.status == 304) {
 					console.log("Data is up to date");
 				} else {
-					console.error("Data could not be updated", data);
+					console.log("Data could not be updated", error.data);
 				}
 				deferred.resolve();
 			});
 		return deferred.promise;
 	}
+
+	// Open the db
+	html5sql.openDatabase('com.chamgeeks.chambus', 'ChamBus Database', 3*1024*1024);
+	var dbInit = updateDatabase();
 
 	function toSQL(o) {
 		return (typeof o === 'string') ? '\'' + o + '\'' : o;
@@ -41,32 +44,7 @@ angular.module('chamBus').factory('Database', function($http, $q){
 
 	var db = {
 		init: function() {
-			// Open the db
-			html5sql.openDatabase('com.chamgeeks.chambus', 'ChamBus Database', 3*1024*1024);
-			return updateDatabase();
-
-			/*
-			// Update db
-			if(html5sql.database && html5sql.database.version === ''){
-				console.log('DB version: ', html5sql.database.version);
-				return updateDatabase();
-
-			} else if(html5sql.database) {
-				return $http.get('https://chx-transit-db.herokuapp.com/api/status')
-					.then(function(resp) {
-						if(resp && resp.data && resp.data.version != html5sql.database.version) {
-							console.log('Update: ', resp.data.version, html5sql.database.version);
-							// Update database
-							return updateDatabase();
-						} else {
-							console.log('Update not performed: ', resp);
-							return null;
-							// todo
-						}
-					});
-			}
-			*/
-
+			return dbInit;
 		},
 
 		find: function(sql, params) {
