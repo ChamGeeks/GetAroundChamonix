@@ -89,9 +89,6 @@ angular.module('chamBus')
       area.showInfo = !area.showInfo;
       console.log('Show info for ' + area.name + '? ' + area.showInfo);
     }
-
-    $scope.from = JourneyInfo.getEmptyInfo();
-    $scope.to = JourneyInfo.getEmptyInfo();
   })
 
 .controller('ToAreaController', function($scope, $location, $stateParams, JourneyInfo, TripPlanner) {
@@ -132,8 +129,6 @@ angular.module('chamBus')
     console.log('going to ToArea ' + $scope.area.id);
     $location.path('/area/' + $scope.area.id + '/to');
   };
-
-  $scope.to = JourneyInfo.getEmptyInfo();
 })
 
 .controller('DestinationController', function($scope, $stateParams, JourneyInfo, TripPlanner, $location) {

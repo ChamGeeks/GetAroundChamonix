@@ -5,6 +5,9 @@
   padding-bottom: 1px;
   min-height: 100%; }
 
+.half-pad {
+  padding: 0.5rem; }
+
 .card {
   background: none; }
   .card button.area {
