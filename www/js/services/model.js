@@ -328,7 +328,15 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 		return deferred.promise;
 	};
 
+	// store the status of the init
+	var modelInit = false;
 	model.init = function() {
+
+		// If init already has been initated just return the promise
+		if(modelInit) {
+			return modelInit;
+		}
+
 		var deferred = $q.defer();
 		Database.init().then(function() {
 			// cache routes and stops (async so may not be complete before use)
@@ -345,7 +353,9 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 					console.log("TripPlanner initialized");
 				});
 		});
-		return deferred.promise;
+
+		modelInit = deferred.promise;
+		return modelInit;
 	};
 
 	return model;

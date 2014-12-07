@@ -27,8 +27,6 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
  */
 .config(function($stateProvider, $urlRouterProvider) {
 
-  var dbLoaded = false;
-
   $stateProvider
 
     // Starting point
@@ -43,15 +41,12 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       // Wait for all data to be loaded
       resolve: {
         preLoadData: function(TripPlanner, $ionicLoading) {
-          if(!dbLoaded) {
-            $ionicLoading.show({
-              template: 'Downloading database...'
-            });
-            TripPlanner.init().finally(function() {
-              $ionicLoading.hide();
-            });
-            dbLoaded = true;
-          }
+          $ionicLoading.show({
+            template: 'Downloading database...'
+          });
+          TripPlanner.init().finally(function() {
+            $ionicLoading.hide();
+          });
         }
       },
       templateUrl: 'partials/select-area.html',
