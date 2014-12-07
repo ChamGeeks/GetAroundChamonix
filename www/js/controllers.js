@@ -103,12 +103,6 @@ angular.module('chamBus')
   };
 
   var departure = TripPlanner.getDeparture();
-  $scope.from = {
-    'stop': departure ? departure.name : 'n/a',
-    'area': ''
-  };
-
-  $scope.from.area = TripPlanner.getAreaById($stateParams.id).name;
 
   $scope.from = JourneyInfo.getEmptyInfo();
   $scope.to = JourneyInfo.getEmptyInfo();
@@ -149,7 +143,6 @@ angular.module('chamBus')
   $scope.to = JourneyInfo.getEmptyInfo();
 
   $scope.area = TripPlanner.getAreaById($stateParams.id);
-  $scope.to.area = $scope.area.name;
 
   TripPlanner.getAreaStops($stateParams.id).then(function(resp){
     $scope.stops = resp;
@@ -162,6 +155,7 @@ angular.module('chamBus')
 
   $scope.from = JourneyInfo.getEmptyInfo();
   $scope.to = JourneyInfo.getEmptyInfo();
+  $scope.to.area = $scope.area.name;
 
   JourneyInfo.getFromInfo($stateParams.departureId).then(function(data) {
     $scope.from = data;
