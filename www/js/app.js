@@ -21,20 +21,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       }
     });
   })
-
-  // data init
-  .run(function($ionicPlatform, $ionicLoading, TripPlanner) {
-    $ionicPlatform.ready(function() {
-      $ionicLoading.show({
-        template: 'Downloading database...'
-      });
-      TripPlanner.init().finally(function() {
-        $ionicLoading.hide();
-      })
-    });
-  })
-
-
+  
 /**
  * Routes
  */
@@ -53,8 +40,13 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
         url: '/area',
         // Wait for all data to be loaded
         resolve: {
-          trip: function(TripPlanner) {
-            return TripPlanner.init();
+          trip: function(TripPlanner, $ionicLoading) {
+            $ionicLoading.show({
+              template: 'Downloading database...'
+            });
+            TripPlanner.init().finally(function() {
+              $ionicLoading.hide();
+            });
           }
         },
         templateUrl: 'partials/select-area.html',
