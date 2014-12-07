@@ -4,9 +4,13 @@
 
 'use strict';
 
-angular.module('chamBus').factory('TripPlanner', function($q, Model, GeoTree, Time) {
+angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model, GeoTree, Time) {
 
 	var api = {};
+	var myPositionLabel;
+	$translate('My position').then(function(text) {
+		myPositionLabel = text;
+	});
 
 	function getItinerary(legs) {
 		var iti = [];
@@ -186,12 +190,16 @@ angular.module('chamBus').factory('TripPlanner', function($q, Model, GeoTree, Ti
 
 	// state variables
 	var _departure, _destination;
-	api.setDeparture = function(stop) {
-		_departure = stop.id ? stop : Model.getStop(stop);
+	api.setDeparture = function(position) {
+		_departure = (typeof position == 'number') ? Model.getStop(position) : position;
+		_departure.name = _departure.name || myPositionLabel;
 	};
-	api.setDestination = function(stop) {
-		_destination = stop.id ? stop : Model.getStop(stop);
+
+	api.setDestination = function(position) {
+		_destination = (typeof position == 'number') ? Model.getStop(position) : position;
+		_destination.name = _destination.name || myPositionLabel;
 	};
+
 	api.getDeparture = function() {
 		return _departure;
 	};
