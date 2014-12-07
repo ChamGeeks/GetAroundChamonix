@@ -65,7 +65,7 @@ angular.module('chamBus')
     $cordovaGeolocation
       .getCurrentPosition()
       .then(function (position) {
-        if (position.coords.accuracy < 1500000) {
+        if (position.coords.accuracy < 150) {
           $scope.positionFound = position.coords;
           $scope.positionStatus = 'found';
         } else {
