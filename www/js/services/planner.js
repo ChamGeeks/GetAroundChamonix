@@ -178,13 +178,17 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
 	// state variables
 	var _departure, _destination;
 	api.setDeparture = function(position) {
-		_departure = (typeof position == 'number') ? Model.getStop(position) : position;
-		_departure.name = _departure.name || myPositionLabel;
+		_departure = (typeof position == 'number') ? Model.getStop(position): position;
+		if (!_departure.name) {
+			_departure.name = myPositionLabel;
+		}
 	};
 
 	api.setDestination = function(position) {
 		_destination = (typeof position == 'number') ? Model.getStop(position) : position;
-		_destination.name = _destination.name || myPositionLabel;
+		if (!_destination.name) {
+			_destination.name = myPositionLabel;
+		}
 	};
 
 	api.getDeparture = function() {
