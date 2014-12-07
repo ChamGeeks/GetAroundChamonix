@@ -60,17 +60,60 @@ angular.module('chamBus')
 
 .controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, JourneyInfo) {
 
-    $scope.closeStops = [];
-
+    $scope.positionFound = false;
+    $scope.positionStatus = 'loading';
     $cordovaGeolocation
       .getCurrentPosition()
       .then(function (position) {
-        if (position.coords.accuracy < 150) {
-          $scope.closeStops = GeoTree.closest(position.coords).slice(0, 3);
+        if (position.coords.accuracy < 1500000) {
+          $scope.positionFound = position.coords;
+          $scope.positionStatus = 'found';
+        } else {
+          $scope.positionStatus = 'inaccurate';
         }
       }, function (error) {
+        $scope.positionStatus = 'error';
         console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
       });
+
+    $scope.locationClass = function() {
+      var htmlclass = '';
+      switch($scope.positionStatus) {
+        case 'loading':
+          htmlclass = 'ion-loading-c';
+          break;
+        case 'found':
+          htmlclass = 'ion-android-locate';
+          break
+        default:
+          htmlclass = 'ion-close-round button-assertive';
+      }
+      return htmlclass;
+    };
+
+    $scope.getPositionInfo = function() {
+      var message = '';
+      switch($scope.positionStatus) {
+        case 'loading':
+          message = 'Trying to locate your current position.';
+          break;
+        case 'found':
+          break
+        default:
+          message = 'The GPS was to inaccurate or could not load.';
+      }
+      if(message) {
+        window.alert(message);
+      }
+    };
+
+    $scope.useMyLocation = function() {
+      TripPlanner.setDeparture($scope.positionFound);
+      $location.path('/area/my-location/to/');
+    };
+
+
+
 
     $scope.selectStop = function (stop) {
       TripPlanner.setDeparture(stop);
@@ -88,7 +131,7 @@ angular.module('chamBus')
     $scope.toggleInfo = function(area) {
       area.showInfo = !area.showInfo;
       console.log('Show info for ' + area.name + '? ' + area.showInfo);
-    }
+    };
 
     $scope.from = JourneyInfo.getEmptyInfo();
     $scope.to = JourneyInfo.getEmptyInfo();

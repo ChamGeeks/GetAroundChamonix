@@ -23,8 +23,8 @@
           </button>
           <button class="button button-block button-stable area item-icon-right" ng-click="selectArea(area.id)">
             <i class="icon big ion-arrow-right-c"></i>
-            {{ area.name }} 
-          </button> 
+            {{ area.name }}
+          </button>
         </div>
         <div class="row item" ng-show="area.showInfo">
           <div class="meta-lifts" ng-show="area.meta && area.meta.lifts">
@@ -37,6 +37,23 @@
           </div>
         </div>
       </div>
+
+
+      <!-- My location -->
+      <div class="card area" ng-show="!isPlanning()">
+        <div class="row item">
+          <button class="button button-clear button-positive icon" ng-class="locationClass()"
+                  ng-click="getPositionInfo()">
+          </button>
+          <button class="button button-block button-stable area item-icon-right"
+                  ng-disabled="!positionFound" ng-click="useMyLocation()">
+            <i class="icon big ion-arrow-right-c"></i>
+            My position
+          </button>
+        </div>
+      </div>
+
+
     </div>
   </ion-content>
 </ion-view>
