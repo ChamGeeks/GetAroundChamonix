@@ -24,6 +24,11 @@ You'll need npm, then install Cordova and Ionic, and set up emulation ([as per t
     ionic platform add ios
     ionic build ios
 
+(or)
+
+    ionic platform add android
+    ionic build android
+
  Then you can kick off an iOS emulation:  `ionic emulate ios`
 
  Or just fire it up in the browser: `ionic serve`
