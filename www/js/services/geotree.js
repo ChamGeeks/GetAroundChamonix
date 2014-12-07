@@ -17,9 +17,8 @@ angular.module('chamBus').factory('GeoTree', function($q, Database){
 		});
 	}
 
-	loadGeoTree();
-
 	return {
+		init: loadGeoTree,
 		closest: function (position, radius) {
 			var res = geoTree.find({
 				lat: position.latitude || position.lat,

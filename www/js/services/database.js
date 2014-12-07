@@ -4,21 +4,36 @@
 
 'use strict';
 
-angular.module('chamBus').factory('Database', function($http, $q, $ionicLoading){
+angular.module('chamBus').factory('Database', function($http, $q){
 
 	function updateDatabase() {
-		$http.get('https://chx-transit-db.herokuapp.com/api/export/sql').then(function(resp) {
-
-			var version = resp.headers['db-version'] || 1;
-
-			html5sql.changeVersion(html5sql.database.version, version, resp.data, function(){
-				$ionicLoading.hide();
-				console.log('Db updated');
-			}, function(error, statement){
-				$ionicLoading.hide();
-				console.error('Error: ' + error.message + ' when processing ' + statement);
+		var deferred = $q.defer();
+		$http.get('https://chx-transit-db.herokuapp.com/api/export/sql', {
+			headers: {
+				'If-None-Match': window.localStorage['dbver']
+			}
+		}).then(function(response) {
+				var version = response.headers('Etag');
+				html5sql.changeVersion(html5sql.database.version, version, response.data, function () {
+					console.log('Dataset updated to version ' + version);
+					window.localStorage['dbver'] = version;
+					deferred.resolve();
+				}, function (error, statement) {
+					console.log(error);
+					console.error('Error: ' + error.message + ' when processing ' + statement);
+					deferred.resolve();
+				});
+			}).catch(function(error) {
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
+				if (error.status == 304) {
+					console.log("Data is up to date");
+				} else {
+					console.error("Data could not be updated", data);
+				}
+				deferred.resolve();
 			});
-		});
+		return deferred.promise;
 	}
 
 	function toSQL(o) {
@@ -29,28 +44,32 @@ angular.module('chamBus').factory('Database', function($http, $q, $ionicLoading)
 		init: function() {
 			// Open the db
 			html5sql.openDatabase('com.chamgeeks.chambus', 'ChamBus Database', 3*1024*1024);
+			return updateDatabase();
 
+			/*
 			// Update db
 			if(html5sql.database && html5sql.database.version === ''){
 				console.log('DB version: ', html5sql.database.version);
-				$ionicLoading.show({
-					template: 'Downloading database...'
-				});
-
-				updateDatabase();
+				return updateDatabase();
 
 			} else if(html5sql.database) {
-				$http.get('https://chx-transit-db.herokuapp.com/api/status')
+				return $http.get('https://chx-transit-db.herokuapp.com/api/status')
 					.then(function(resp) {
 						if(resp && resp.data && resp.data.version != html5sql.database.version) {
 							console.log('Update: ', resp.data.version, html5sql.database.version);
 							// Update database
-							updateDatabase();
+							return updateDatabase();
+						} else {
+							console.log('Update not performed: ', resp);
+							return null;
+							// todo
 						}
 					});
 			}
+			*/
 
 		},
+
 		find: function(sql, params) {
 
 			var query = [];

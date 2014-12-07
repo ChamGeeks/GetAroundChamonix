@@ -7,7 +7,7 @@
 
 'use strict';
 
-angular.module('chamBus').factory('Model', function($q, Time, Database) {
+angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree) {
 
 	function StopTime(data, trip) {
 		this.departure_time = new Time(data.departure_time);
@@ -33,11 +33,13 @@ angular.module('chamBus').factory('Model', function($q, Time, Database) {
 
 	var _stops = {}, _routes = {}, _areas = {};
 	function loadStops() {
-		Database.find("select * from stop;").then(function(stops) {
+		return Database.find("select * from stop;").then(function(stops) {
 			stops.forEach(function(stop) {
 				_stops["_" + stop.id] = stop;
 			});
-			Database.find("select * from stop_block;").then(function(records) {
+			console.log("Loaded " + stops.length + " stops");
+
+			return Database.find("select * from stop_block;").then(function(records) {
 				records.forEach(function(record) {
 					var stop = getStop(record.stop_id);
 					if (stop) {
@@ -49,20 +51,22 @@ angular.module('chamBus').factory('Model', function($q, Time, Database) {
 						}
 					}
 				});
+				console.log("Stops linked to areas");
 			});
 		});
 	}
 
 	function loadRoutes() {
-		Database.find("select * from route;").then(function(routes) {
+		return Database.find("select * from route;").then(function(routes) {
 			routes.forEach(function(route) {
 				_routes["_" + route.id] = route;
 			});
+			console.log("Loaded " + routes.length + " routes");
 		});
 	}
 
 	function loadAreas() {
-		Database.find("select * from block;").then(function(areas) {
+		return Database.find("select * from block;").then(function(areas) {
 			areas.forEach(function(area) {
 				_areas["_" + area.id] = area;
 				area.numberOfStops = 0;
@@ -71,6 +75,7 @@ angular.module('chamBus').factory('Model', function($q, Time, Database) {
 			areas.sort(function(a1, a2) {
 				return a1.display_order - a2.display_order;
 			});
+			console.log("Loaded " + areas.length + " areas");
 		});
 	}
 
@@ -306,17 +311,21 @@ angular.module('chamBus').factory('Model', function($q, Time, Database) {
 
 	model.init = function() {
 		var deferred = $q.defer();
-		// cache routes and stops (async so may not be complete before use)
-		loadRoutes()
-			.then(function () {
-				return loadAreas();
-			})
-			.then(function () {
-				return loadStops();
-			})
-			.then(function () {
-				deferred.resolve(true);
-			});
+		Database.init().then(function() {
+			// cache routes and stops (async so may not be complete before use)
+			loadRoutes()
+				.then(function () {
+					return loadAreas();
+				})
+				.then(function () {
+					return loadStops();
+				})
+				.then(function () {
+					GeoTree.init();
+					deferred.resolve(true);
+					console.log("TripPlanner initialized");
+				});
+		});
 		return deferred.promise;
 	};
 
