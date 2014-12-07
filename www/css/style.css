@@ -10,6 +10,8 @@
 
 #journey .item {
   text-align: center; }
+  #journey .item .area {
+    text-transform: uppercase; }
 
 .card {
   background: none; }

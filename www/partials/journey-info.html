@@ -3,11 +3,11 @@
     <small>{{ 'PICK_A_START' | translate }}</small>
   </div>
   <div class="item item-divider" ng-show="from">
+    <span class="area"><small>{{ from.area }}</small></span> 
     <span><small>{{ from.stop }}</small></span>
-    <span><small>({{ from.area }})</small></span>
   </div>
   <div class="item item-divider" ng-show="to">
+    <span class="area"><small>{{ to.area }}</small></span> 
     <span><small>{{ to.stop }}</small></span>
-    <span><small>({{ to.area }})</small></div>
   </div>
 </div>
