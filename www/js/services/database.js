@@ -109,6 +109,10 @@ angular.module('chamBus').factory('Database', function($http, $q){
 			return db.find(sql, params).then(function(data) {
 				return data[0];
 			});
+		},
+
+		getVersion: function() {
+			return html5sql.database.version;
 		}
 	};
 

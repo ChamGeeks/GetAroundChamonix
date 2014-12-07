@@ -3,7 +3,7 @@
 
 angular.module('chamBus')
 
-.controller('MainCtrl', function($scope, TripPlanner, $translate, $state, $location){
+.controller('MainCtrl', function($scope, TripPlanner, $translate, $state, $location, Database){
 
   $scope.selectStartLang = function(lang, redirect) {
     $translate.use(lang);
@@ -11,6 +11,8 @@ angular.module('chamBus')
       $location.path('/'+ redirect);
     }
   };
+
+  $scope.dbVersion = Database.getVersion();
 
   $scope.isPlanning = function() {
     return TripPlanner.planning();
@@ -67,7 +69,7 @@ angular.module('chamBus')
           $scope.closeStops = GeoTree.closest(position.coords).slice(0, 3);
         }
       }, function (error) {
-        alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+        console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
       });
 
     // TODO: fix duplicate from SelectStopCtrl
@@ -98,8 +100,8 @@ angular.module('chamBus')
 
   var departure = TripPlanner.getDeparture();
   $scope.from = {
-    "stop": departure ? departure.name : 'n/a',
-    "area": ''
+    'stop': departure ? departure.name : 'n/a',
+    'area': ''
   };
 
   $scope.from.area = TripPlanner.getAreaById($stateParams.id).name;
@@ -190,7 +192,7 @@ angular.module('chamBus')
 
   $scope.selectDateTime = function() {
 
-    var myPopup = $ionicPopup.show({
+    $ionicPopup.show({
       //template: '<input type="date" ng-model="dateTime.date"><br><input type="time" ng-model="dateTime.time">',
       templateUrl: 'partials/select-date.html',
       title: 'Select depature time',
@@ -202,7 +204,7 @@ angular.module('chamBus')
           type: 'button-positive',
           onTap: function(e) {
             if (!$scope.dateTime.date && !$scope.dateTime.time) {
-              alert('You have to select a time or date');
+              window.alert('You have to select a time or date');
 
               //don't allow the user to close unless he enters wifi password
               e.preventDefault();
