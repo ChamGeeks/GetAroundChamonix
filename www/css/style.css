@@ -20,6 +20,8 @@
   .card.area .info {
     padding: 0px;
     min-width: 46px; }
+  .card.area .half-pad {
+    padding: 0.5rem; }
 
 .item {
   background: rgba(255, 255, 255, 0.8); }
