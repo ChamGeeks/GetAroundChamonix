@@ -9,6 +9,10 @@
 
 .card {
   background: none;
+  button.area {
+    margin: 0px;
+    text-align: left;
+  }
 }
 .item {
   background: rgba(255,255,255,.8);

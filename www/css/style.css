@@ -7,6 +7,9 @@
 
 .card {
   background: none; }
+  .card button.area {
+    margin: 0px;
+    text-align: left; }
 
 .item {
   background: rgba(255, 255, 255, 0.8); }
