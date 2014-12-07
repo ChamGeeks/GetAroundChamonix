@@ -34,13 +34,13 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 	var _stops = {}, _routes = {}, _areas = {};
 	function loadStops() {
 		return Database.find("select * from stop;").then(function(stops) {
-			stops.forEach(function(stop) {
+			stops.forEach(function (stop) {
 				_stops["_" + stop.id] = stop;
 			});
 			console.log("Loaded " + stops.length + " stops");
 
-			return Database.find("select * from stop_block;").then(function(records) {
-				records.forEach(function(record) {
+			return Database.find("select * from stop_block;").then(function (records) {
+				records.forEach(function (record) {
 					var stop = getStop(record.stop_id);
 					if (stop) {
 						stop.areas = stop.areas || [];
@@ -52,6 +52,17 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 					}
 				});
 				console.log("Stops linked to areas");
+			}).then(function () {
+				return Database.find("select * from stop_metadata;").then(function (records) {
+					records.forEach(function (record) {
+						var stop = getStop(record.stop_id);
+						if (stop) {
+							stop.meta = stop.meta || {};
+							stop.meta[record.name] = JSON.parse(record.json_value);
+						}
+					});
+					console.log("medadata added to stops");
+				});
 			});
 		});
 	}
@@ -72,10 +83,18 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 				area.numberOfStops = 0;
 				area.meta = mockApi.areas_meta[area.id];
 			});
-			areas.sort(function(a1, a2) {
-				return a1.display_order - a2.display_order;
-			});
 			console.log("Loaded " + areas.length + " areas");
+		}).then(function() {
+			return Database.find("select * from area_metadata;").then(function (records) {
+				records.forEach(function (record) {
+					var area = getArea(record.area_id);
+					if (area) {
+						area.meta = area.meta || {};
+						area.meta[record.name] = JSON.parse(record.json_value);
+					}
+				});
+				console.log("medadata added to areas");
+			});
 		});
 	}
 

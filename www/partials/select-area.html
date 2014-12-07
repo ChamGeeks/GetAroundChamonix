@@ -16,7 +16,7 @@
     </ul> -->
 
     <div class="areas">
-      <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
+      <div class="card area" ng-repeat="area in areas | areasOrder" ng-click="selectArea(area.id)">
 
         <a class="item item-text-wrap item-icon-right">
             <i class="icon next ion-arrow-right-c"></i>
