@@ -26,7 +26,7 @@
             {{ area.name }} 
         </button> 
       </div>
-      <div class="row">
+      <div class="row" ng-show="area.withInfo">
         <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
           <i class="ion-ios7-snowy"></i>
           <small>{{ area.meta.lifts.join(', ') }}</small>

@@ -11,6 +11,9 @@
     margin: 0px;
     text-align: left; }
 
+.card.area {
+  margin: 10px 0px 10px 0px; }
+
 .item {
   background: rgba(255, 255, 255, 0.8); }
   .item .icon.big {
