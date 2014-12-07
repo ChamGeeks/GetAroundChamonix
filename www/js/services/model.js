@@ -23,7 +23,26 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 		this.id = data.id;
 		this.headsign = data.headsign;
 		this.route = _routes["_" + data.route_id];
+		if (data.service_id) {
+			this.service = getService(data.service_id);
+		}
 	}
+
+	function Service(data) {
+		this.id = this.id;
+		this.route = getRoute(data.route_id);
+		this.from = moment(data.from_date);
+		this.to = moment(data.to_date);
+		this.filter = JSON.parse(data.json_days);
+	}
+
+	Service.prototype.isRunning = function(when) {
+		when = moment(when);
+		var dow = when.isoWeekday();
+		return (this.filter.indexOf(dow) >= 0) &&
+			this.from.isBefore(when) &&
+			this.to.isAfter(when);
+	};
 
 	function Transfer(from, to, transferTime) {
 		this.from = from;
@@ -31,7 +50,7 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 		this.transferTime = transferTime;
 	}
 
-	var _stops = {}, _routes = {}, _areas = {};
+	var _stops = {}, _routes = {}, _areas = {}, _services = {};
 	function loadStops() {
 		return Database.find("select * from stop;").then(function(stops) {
 			stops.forEach(function (stop) {
@@ -64,6 +83,15 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 					console.log("medadata added to stops");
 				});
 			});
+		});
+	}
+
+	function loadServices() {
+		return Database.find("select * from service;").then(function(services) {
+			services.forEach(function(service) {
+				_services["_" + service.id] = new Service(service);
+			});
+			console.log("Loaded " + services.length + " services");
 		});
 	}
 
@@ -109,6 +137,9 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 		return _areas["_" + id]
 	};
 
+	function getService(id) {
+		return _services["_" + id]
+	};
 
 	var model = {
 		getStop: getStop,
@@ -158,7 +189,8 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 			});
 	};
 
-	model.getDepartureStopTimes = function (stops, minTime, maxTime) {
+	model.getDepartureStopTimes = function (stops, minTime, maxTime, day) {
+    day = day || new Date();
 		var trips = {};
 		var promises = [];
 		stops.forEach(function (stop) {
@@ -168,6 +200,7 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 			" stop_time.arrival_time as arrival_time, " +
 			" trip.id as tripid," +
 			" trip.headsign as headsign," +
+			" trip.service_id as service_id," +
 			" trip.route_id as route_id" +
 			" from stop_time inner join trip on trip.id = stop_time.trip_id" +
 			" where stop_time.stop_id=?;", [stop.id]).then(function (records) {
@@ -175,11 +208,15 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 				return records.reduce(function (arr, el) {
 					if (minTime.before(el.departure_time) &&
 						maxTime.after(el.departure_time)) {
-						arr.push(new StopTime(el, new Trip({
+						var t = new Trip({
 							id: el.tripid,
 							headsign: el.headsign,
-							route_id: el.route_id
-						})));
+							route_id: el.route_id,
+							service_id: el.service_id
+						});
+						if (!t.service || t.service.isRunning(day)) {
+							arr.push(new StopTime(el, t));
+						}	
 					}
 					return arr;
 				}, []);
@@ -248,12 +285,12 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 		return deferred.promise;
 	};
 
-	function _getTransfers(from, toStopId, transferTime) {
+	function _getTransfers(from, toStopId, transferTime, day) {
 		var promises = [];
 		var transfers = [];
 		var minTime = (new Time(from.arrival_time)).add(transferTime);
 		var maxTime = (new Time(minTime)).add(30);  // max transfer wait time = 30 minutes
-		promises.push(model.getDepartureStopTimes([{id: toStopId}], minTime, maxTime)
+		promises.push(model.getDepartureStopTimes([{id: toStopId}], minTime, maxTime, day)
 			.then(function (times) {
 				console.log("_getTransfers. found " + times.length + " departure stop times from " + toStopId + " after " + minTime);
 				times.forEach(function (st) {
@@ -273,7 +310,7 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 		return deferred.promise;
 	}
 
-	model.getTransferStopTimes = function (st) {
+	model.getTransferStopTimes = function (st, day) {
 		var deferred = $q.defer();
 		Database.find("select" +
 		" transfer.from_stop_id as from_stop_id," +
@@ -294,7 +331,7 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 						arrival_time: el.arrival_time,
 						departure_time: el.departure_time
 					}, st.trip);
-					promises.push(_getTransfers(transferFromStopTime, el.to_stop_id, el.transfer_time).then(function (xfers) {
+					promises.push(_getTransfers(transferFromStopTime, el.to_stop_id, el.transfer_time, day).then(function (xfers) {
 						transfers.push.apply(transfers, xfers);
 					}));
 				}
@@ -342,6 +379,9 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
 			loadRoutes()
 				.then(function () {
 					return loadAreas();
+				})
+				.then(function () {
+					return loadServices();
 				})
 				.then(function () {
 					return loadStops();

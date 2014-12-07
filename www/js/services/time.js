@@ -24,10 +24,13 @@ angular.module('chamBus').factory('Time', function() {
 		} else if (typeof minutes === 'string') {
 			this.s = minutes;
 			var a = minutes.split(":");
-			this.t = parseInt(a[0].replace(/^0/, "")) * 60 + parseInt(a[1].replace(/^0/, ""))
+			if (a.length != 2) {
+				console.error("invalid time format", minutes);
+			}
+			this.t = parseInt(a[0].replace(/^0/, "")) * 60 + parseInt(a[1].replace(/^0/, ""));
 		} else {
 			// assume date or moment
-			this.s = moment(minutes).tz("Europe/Paris").format("HH:mm");
+			this.s = moment(minutes).format("HH:mm");
 			var a = this.s.split(":");
 			this.t = parseInt(a[0].replace(/^0/, "")) * 60 + parseInt(a[1].replace(/^0/, ""))
 		}
