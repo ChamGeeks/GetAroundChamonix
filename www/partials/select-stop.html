@@ -4,11 +4,12 @@
     <div ng-include src=" 'partials/journey-info.html' "></div>
 
     <h2 class="center">
-      <span>{{ area.name }} - {{ 'STOP' | translate }}</span>
+      <span>{{ 'STOP' | translate }}</span>
     </h2>
 
     <ul class="stops list">
-      <li class="stop item" ng-repeat="stop in stops" ng-click="selectStop(stop)">
+      <li class="stop item item-icon-right" ng-repeat="stop in stops" ng-click="selectStop(stop)">
+        <i class="icon big ion-arrow-right-c"></i>
         <div class="line line-{{line}}" ng-repeat="line in stop.lines"></div>
         {{ stop.name }}
       </li>

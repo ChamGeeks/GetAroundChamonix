@@ -10,11 +10,22 @@
 
 .card {
   background: none; }
+  .card button.area {
+    margin: 0px;
+    text-align: left; }
+
+.card.area {
+  margin: 10px 0px 10px 0px; }
+  .card.area .icon.really_big {
+    font-size: 1.8rem; }
+  .card.area .icon.big {
+    font-size: 1.4rem; }
+  .card.area .info {
+    padding: 0px;
+    min-width: 46px; }
 
 .item {
   background: rgba(255, 255, 255, 0.8); }
-  .item .icon.next {
-    font-size: 1.6rem; }
 
 h2 {
   color: #fff;
