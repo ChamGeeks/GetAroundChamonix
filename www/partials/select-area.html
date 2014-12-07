@@ -19,7 +19,9 @@
       <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
 
         <div class="item item-text-wrap">
-          {{ area.name }} ({{area.numberOfStops}} {{ 'stops' | translate}})
+          {{ area.name }} 
+          <i ng-show="area.meta && area.meta.lifts" class="icon icon-left ion-ios7-snowy"></i>
+          <i ng-show="area.meta && area.meta.areasOfInterest" class="ion-flag"></i>
           <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
             <i class="icon icon-left ion-ios7-snowy"></i>
             <small>{{ area.meta.lifts.join(', ') }}</small>
