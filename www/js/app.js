@@ -21,7 +21,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       }
     });
   })
-  
+
 /**
  * Routes
  */
@@ -40,7 +40,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
         url: '/area',
         // Wait for all data to be loaded
         resolve: {
-          trip: function(TripPlanner, $ionicLoading) {
+          preLoadData: function(TripPlanner, $ionicLoading) {
             $ionicLoading.show({
               template: 'Downloading database...'
             });
