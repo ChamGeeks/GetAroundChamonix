@@ -143,8 +143,6 @@ angular.module('chamBus')
     $location.path('/area/' + $stateParams.id + '/to/' + area);
   };
 
-  // var departure = TripPlanner.getDeparture();
-
   $scope.from = JourneyInfo.getEmptyInfo();
   $scope.to = JourneyInfo.getEmptyInfo();
 
