@@ -18,19 +18,21 @@
     <div class="areas">
       <div class="card area" ng-repeat="area in areas" ng-click="selectArea(area.id)">
 
-        <div class="item item-text-wrap">
-          {{ area.name }} 
-          <i ng-show="area.meta && area.meta.lifts" class="icon icon-left ion-ios7-snowy"></i>
-          <i ng-show="area.meta && area.meta.areasOfInterest" class="ion-flag"></i>
-          <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
-            <i class="icon icon-left ion-ios7-snowy"></i>
-            <small>{{ area.meta.lifts.join(', ') }}</small>
-          </div>
-          <div class="meta-interests" ng-show="{{ area.meta && area.meta.areasOfInterest }}">
-            <i class="ion-flag"></i>
-            <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
-          </div>
-        </div> 
+        <a class="item item-text-wrap item-icon-right">
+            <i class="icon next ion-arrow-right-c"></i>
+            {{ area.name }} 
+            <i ng-show="area.meta && area.meta.lifts" class="ion-ios7-snowy"></i>
+            <i ng-show="area.meta && area.meta.areasOfInterest" class="ion-flag"></i>
+            <div class="meta-lifts" ng-show="{{ area.meta && area.meta.lifts }}">
+              <i class="ion-ios7-snowy"></i>
+              <small>{{ area.meta.lifts.join(', ') }}</small>
+            </div>
+            <div class="meta-interests" ng-show="{{ area.meta && area.meta.areasOfInterest }}">
+              <i class="ion-flag"></i>
+              <small>{{ area.meta.areasOfInterest.join(', ') }}</small>
+            </div>
+        </a> 
+
 
       </div>
     </div>
