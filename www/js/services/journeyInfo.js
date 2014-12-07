@@ -10,14 +10,13 @@ angular.module('chamBus').factory('JourneyInfo', function($q, TripPlanner) {
 
     var departure = TripPlanner.getDeparture();
     var from = {
-      "stop": departure ? departure.name : 'n/a', 
+      "stop": departure ? departure.name : 'n/a',
       "area": ''
     };
     TripPlanner.getAreaById(areaId).then(function(data) {
       from.area = data.name;
+      deferred.resolve(from);
     });
-
-    deferred.resolve(from);   
 
     return deferred.promise;
   };
