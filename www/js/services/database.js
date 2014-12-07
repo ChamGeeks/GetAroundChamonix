@@ -10,13 +10,12 @@ angular.module('chamBus').factory('Database', function($http, $q){
 		var deferred = $q.defer();
 		$http.get('https://chx-transit-db.herokuapp.com/api/export/sql', {
 			headers: {
-				'If-None-Match': window.localStorage['dbver']
+				'If-None-Match': html5sql.database.version
 			}
 		}).then(function(response) {
 				var version = response.headers('Etag');
 				html5sql.changeVersion(html5sql.database.version, version, response.data, function () {
 					console.log('Dataset updated to version ' + version);
-					window.localStorage['dbver'] = version;
 					deferred.resolve();
 				}, function (error, statement) {
 					console.log(error);
