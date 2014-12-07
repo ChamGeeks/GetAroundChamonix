@@ -13,10 +13,9 @@ angular.module('chamBus').factory('JourneyInfo', function($q, TripPlanner) {
       "stop": departure ? departure.name : 'n/a',
       "area": ''
     };
-    TripPlanner.getAreaById(areaId).then(function(data) {
-      from.area = data.name;
-      deferred.resolve(from);
-    });
+
+    from.area = TripPlanner.getAreaById(areaId).name;
+    deferred.resolve(from);
 
     return deferred.promise;
   };

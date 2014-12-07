@@ -51,6 +51,12 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
 
       .state('areas', {
         url: '/area',
+        // Wait for all data to be loaded
+        resolve: {
+          trip: function(TripPlanner) {
+            return TripPlanner.init();
+          }
+        },
         templateUrl: 'partials/select-area.html',
         controller: 'SelectAreaCtrl'
       })

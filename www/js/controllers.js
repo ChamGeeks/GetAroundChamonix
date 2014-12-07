@@ -98,12 +98,12 @@ angular.module('chamBus')
 
   var departure = TripPlanner.getDeparture();
   $scope.from = {
-    "stop": departure ? departure.name : 'n/a', 
+    "stop": departure ? departure.name : 'n/a',
     "area": ''
   };
-  TripPlanner.getAreaById($stateParams.id).then(function(data) {
-    $scope.from.area = data.name;
-  });
+
+  $scope.from.area = TripPlanner.getAreaById($stateParams.id).name;
+
   $scope.from = JourneyInfo.getEmptyInfo();
   $scope.to = JourneyInfo.getEmptyInfo();
 
@@ -119,10 +119,8 @@ angular.module('chamBus')
   $scope.stops = [];
   $scope.from = JourneyInfo.getEmptyInfo();
 
-  TripPlanner.getAreaById($stateParams.id).then(function(data){
-    $scope.area = data;
-    $scope.from.area = data.name;
-  });
+  $scope.area = TripPlanner.getAreaById($stateParams.id);
+  $scope.from.area = $scope.area.name;
 
   TripPlanner.getAreaStops($stateParams.id).then(function(resp){
     $scope.stops = resp;
@@ -144,10 +142,8 @@ angular.module('chamBus')
   $scope.stops = [];
   $scope.to = JourneyInfo.getEmptyInfo();
 
-  TripPlanner.getAreaById($stateParams.id).then(function(data){
-    $scope.area = data;
-    $scope.to.area = data.name;
-  });
+  $scope.area = TripPlanner.getAreaById($stateParams.id);
+  $scope.to.area = $scope.area.name;
 
   TripPlanner.getAreaStops($stateParams.id).then(function(resp){
     $scope.stops = resp;

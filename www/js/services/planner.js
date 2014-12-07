@@ -165,20 +165,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
 
 
 	api.getAreaById = function(id) {
-		var deferred = $q.defer();
-
-    id = ~~(id);
-
-		var area = {};
-		mockApi.areas.forEach(function(value){
-			if(value.id === id) {
-				area = value;
-			}
-		});
-
-		deferred.resolve(area);
-
-		return deferred.promise;
+		return Model.getArea(id);
 	};
 
 	api.getAreaStops = function(area) {
