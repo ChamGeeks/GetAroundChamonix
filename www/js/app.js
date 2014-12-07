@@ -129,7 +129,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       'STOP': 'Vilken hållplats?',
       'BUSS_TIMES_TITLE': 'Buss tider',
       'SELECT_OTHER_TIME': 'Välj en tid',
-      'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.'
+      'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.',
       'My position': 'My position in sv'
     });
 
