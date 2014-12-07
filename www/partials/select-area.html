@@ -3,11 +3,6 @@
 
     <div ng-include src=" 'partials/journey-info.html' "></div>
 
-    <h2 class="center">
-      <span ng-hide="isPlanning()">{{ 'FROM' | translate }}</span>
-      <span ng-show="isPlanning()">{{ 'TO' | translate }}</span>
-    </h2>
-
     <!-- <h3 ng-show="closeStops" translate>{{ 'STOPS_NEAR' | translate }}</h3>
     <ul class="stops list" ng-show="closeStops">
       <li class="stop item" ng-repeat="aStop in closeStops" ng-click="selectStop(aStop.id)">

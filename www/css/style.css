@@ -8,6 +8,9 @@
 .half-pad {
   padding: 0.5rem; }
 
+#journey .item {
+  text-align: center; }
+
 .card {
   background: none; }
   .card button.area {
