@@ -9,85 +9,90 @@
 angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCookies'])
 
 // Iconic code
-  .run(function($ionicPlatform) {
-    $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if(window.cordova && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      }
-      if(window.StatusBar) {
-        StatusBar.styleDefault();
-      }
-    });
-  })
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+  });
+})
 
 /**
  * Routes
  */
 .config(function($stateProvider, $urlRouterProvider) {
 
-    $stateProvider
+  var dbLoaded = false;
 
-      // Starting point
-      .state('home', {
-        url: '/',
-        templateUrl: 'partials/home.html',
-        controller: 'HomeCtrl'
-      })
+  $stateProvider
 
-      .state('areas', {
-        url: '/area',
-        // Wait for all data to be loaded
-        resolve: {
-          preLoadData: function(TripPlanner, $ionicLoading) {
+    // Starting point
+    .state('home', {
+      url: '/',
+      templateUrl: 'partials/home.html',
+      controller: 'HomeCtrl'
+    })
+
+    .state('areas', {
+      url: '/area',
+      // Wait for all data to be loaded
+      resolve: {
+        preLoadData: function(TripPlanner, $ionicLoading) {
+          if(!dbLoaded) {
             $ionicLoading.show({
               template: 'Downloading database...'
             });
             TripPlanner.init().finally(function() {
               $ionicLoading.hide();
             });
+            dbLoaded = true;
           }
-        },
-        templateUrl: 'partials/select-area.html',
-        controller: 'SelectAreaCtrl'
-      })
+        }
+      },
+      templateUrl: 'partials/select-area.html',
+      controller: 'SelectAreaCtrl'
+    })
 
-      // Select a stop in an area
-      .state('stops', {
-        url: '/area/:id',
-        templateUrl: 'partials/select-stop.html',
-        controller: 'SelectStopCtrl'
-      })
+    // Select a stop in an area
+    .state('stops', {
+      url: '/area/:id',
+      templateUrl: 'partials/select-stop.html',
+      controller: 'SelectStopCtrl'
+    })
 
-      .state('toAreas', {
-        url: '/area/:id/to',
-        templateUrl: 'partials/select-area.html',
-        controller: 'ToAreaController'
-      })
+    .state('toAreas', {
+      url: '/area/:id/to',
+      templateUrl: 'partials/select-area.html',
+      controller: 'ToAreaController'
+    })
 
-      .state('destination', {
-        url: '/area/:departureId/to/:id',
-        templateUrl: 'partials/select-stop.html',
-        controller: 'DestinationController'
-      })
+    .state('destination', {
+      url: '/area/:departureId/to/:id',
+      templateUrl: 'partials/select-stop.html',
+      controller: 'DestinationController'
+    })
 
-      // Show the result page
-      .state('result', {
-        url: '/result',
-        templateUrl: 'partials/result.html',
-        controller: 'ResultCtrl'
-      })
+    // Show the result page
+    .state('result', {
+      url: '/result',
+      templateUrl: 'partials/result.html',
+      controller: 'ResultCtrl'
+    })
 
-      // About page
-      .state('about', {
-        url: '/about',
-        templateUrl: 'partials/about.html'
-      });
+    // About page
+    .state('about', {
+      url: '/about',
+      templateUrl: 'partials/about.html'
+    });
 
-    $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/');
 
-  })
+})
 
 .config(['$translateProvider', function ($translateProvider) {
 
