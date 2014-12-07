@@ -58,7 +58,7 @@ angular.module('chamBus')
 
 })
 
-.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, JourneyInfo) {
+.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, TripPlanner) {
 
     $scope.positionFound = false;
     $scope.positionStatus = 'loading';
@@ -67,6 +67,7 @@ angular.module('chamBus')
       .then(function (position) {
         if (position.coords.accuracy < 150) {
           $scope.positionFound = position.coords;
+          $scope.positionFound.name = 'My position';
           $scope.positionStatus = 'found';
         } else {
           $scope.positionStatus = 'inaccurate';
@@ -84,7 +85,7 @@ angular.module('chamBus')
           break;
         case 'found':
           htmlclass = 'ion-android-locate';
-          break
+          break;
         default:
           htmlclass = 'ion-close-round button-assertive';
       }
@@ -98,7 +99,7 @@ angular.module('chamBus')
           message = 'Trying to locate your current position.';
           break;
         case 'found':
-          break
+          break;
         default:
           message = 'The GPS was to inaccurate or could not load.';
       }
@@ -109,7 +110,7 @@ angular.module('chamBus')
 
     $scope.useMyLocation = function() {
       TripPlanner.setDeparture($scope.positionFound);
-      $location.path('/area/my-location/to/');
+      $location.path('/area/my-location/to');
     };
 
 
@@ -131,7 +132,7 @@ angular.module('chamBus')
     $scope.toggleInfo = function(area) {
       area.showInfo = !area.showInfo;
       console.log('Show info for ' + area.name + '? ' + area.showInfo);
-    }
+    };
   })
 
 .controller('ToAreaController', function($scope, $location, $stateParams, JourneyInfo, TripPlanner) {
@@ -142,7 +143,7 @@ angular.module('chamBus')
     $location.path('/area/' + $stateParams.id + '/to/' + area);
   };
 
-  var departure = TripPlanner.getDeparture();
+  // var departure = TripPlanner.getDeparture();
 
   $scope.from = JourneyInfo.getEmptyInfo();
   $scope.to = JourneyInfo.getEmptyInfo();

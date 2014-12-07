@@ -14,7 +14,11 @@ angular.module('chamBus').factory('JourneyInfo', function($q, TripPlanner) {
       "area": ''
     };
 
-    from.area = TripPlanner.getAreaById(areaId).name;
+    if(areaId != 'my-location') {
+      from.area = TripPlanner.getAreaById(areaId).name;
+    } else {
+      from.area = '';
+    }
     deferred.resolve(from);
 
     return deferred.promise;
