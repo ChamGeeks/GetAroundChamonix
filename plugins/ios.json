@@ -31,6 +31,10 @@
                         {
                             "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -39,6 +43,12 @@
                 "parents": {
                     "libsqlite3.dylib": [],
                     "CoreLocation.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "CoreGraphics.framework": [
                         {
                             "xml": "false",
                             "count": 1
@@ -75,6 +85,9 @@
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         },
         "com.plugin.datepicker": {
+            "PACKAGE_NAME": "com.ionicframework.myapp914728"
+        },
+        "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.myapp914728"
         }
     },
