@@ -1,31 +1,40 @@
 <ion-view view-title="{{ 'ABOUT' | translate }}">
-  <ion-content>
-
-    <h2>ChamTransit</h1>
+  <ion-content class="content has-header">
 
     <div class="card">
+      <div class="item item-divider">ChamRide</div>
       <div class="item item-body">
-        This is an app to help you find the next bus
+        This is an app to help you find the next bus.
+        <p>
+          The app was created during a ChamGeeks hackaton.
+        </p>
       </div>
     </div>
 
-    <h2>ChamGeeks</h3>
     <div class="card">
+      <div class="item item-divider">ChamGeeks</div>
       <div class="item item-body">
-        The app was created during a ChamGeeks hackaton.
+        ChamGeeks is a organisation created for geeks in Chamonix to come together and talk, create
+        and help each other. We usualy meet up one night each month during the first week and
+        sometimes throw a hackaton.
       </div>
     </div>
 
-    <h2>Created by</h3>
     <div class="card">
       <div class="item item-body">
-        Spathon,
-        Jacques,
-        Neill,
-        Eystain,
-        Petter,
-        Hibri,
-        Shankar
+        <small>
+          <strong>Created by:</strong>
+          <a href="http://spathon.com">Spathon</a>,
+          Jacques,
+          Neill,
+          Eystain,
+          Petter,
+          Hibri,
+          Shankar
+        </small>
+        <p>
+          <small>Database version: {{ db.version }}</small>
+        </p>
       </div>
     </div>
 
