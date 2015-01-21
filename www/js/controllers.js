@@ -47,7 +47,10 @@ angular.module('chamBus')
 })
 
 
-.controller('SettingsCtrl', function() {
+.controller('SettingsCtrl', function($scope, $translate) {
+  $scope.settings = {
+    language: $translate.use()
+  }
 })
 
 .controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, TripPlanner) {
