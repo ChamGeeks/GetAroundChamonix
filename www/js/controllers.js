@@ -3,7 +3,8 @@
 
 angular.module('chamBus')
 
-.controller('MainCtrl', function($scope, TripPlanner, $translate, $state, $location, Database){
+.controller('MainCtrl', function($scope, TripPlanner, $translate, $state, $location,
+                                  Database, $cordovaGlobalization, $timeout) {
 
   $scope.selectStartLang = function(lang, redirect) {
     $translate.use(lang);
@@ -12,9 +13,30 @@ angular.module('chamBus')
     }
   };
 
-  $scope.dbVersion = Database.getVersion();
 
-  $scope.isPlanning = function() {
+  if(!window.localStorage.CHAM_LANG_IS_SET) {
+    $timeout(function(){
+      if(navigator.globalization) {
+        $cordovaGlobalization.getPreferredLanguage().then(
+          function(result) {
+            var langs = ['en', 'fr', 'sv'];
+            var userLang = result.value.substr(0,2);
+            if(langs.indexOf(userLang) >= 0) {
+              $translate.use(userLang);
+            }
+          },
+          function(error) {
+            console.log('Lang err: ', error);
+        });
+      }
+    }, 1000);
+    window.localStorage.CHAM_LANG_IS_SET = true;
+  }
+
+
+  $scope.db = Database;
+
+  this.isPlanning = function() {
     return TripPlanner.planning();
   };
 
@@ -25,37 +47,7 @@ angular.module('chamBus')
 })
 
 
-.controller('HomeCtrl', function($scope, $cordovaGlobalization, $state, $translate, $timeout) {
-
-  // A language has been set go to next step
-  if(window.localStorage.CHAM_LANG){
-    $state.go('areas');
-  }else{
-    window.localStorage.CHAM_LANG = true;
-  }
-
-  /**
-   * @todo $timeout is needed for navigator.globalization to be initiated :/
-   */
-  $timeout(function(){
-    if(navigator.globalization){
-      $cordovaGlobalization.getPreferredLanguage().then(
-        function(result) {
-          var langs = ['en', 'fr', 'sv'];
-          var userLang = result.value.substr(0,2);
-          if(langs[userLang]){
-            $translate.use(userLang);
-            $state.go('areas');
-          }
-        },
-        function(error) {
-          console.log(error);
-      });
-    }
-  }, 200);
-
-  $scope.homeTitle = 'ChamBus';
-
+.controller('SettingsCtrl', function() {
 })
 
 .controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, TripPlanner) {
