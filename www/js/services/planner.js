@@ -68,6 +68,14 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
 		});
 	}
 
+	/**
+	 *
+	 * @param options
+	 * 	when : yyyy-mm-dd hh:mm:ss  or date
+	 * 	allowTransfers
+	 *
+	 * @returns {*}
+	 */
 	api.plan = function (options) {
 		options = options || {};
 		var mom = options.when ? moment(options.when) : moment();
