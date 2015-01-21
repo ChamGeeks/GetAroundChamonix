@@ -22,6 +22,16 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
   });
 })
 
+.config(function($ionicConfigProvider) {
+  $ionicConfigProvider.tabs
+    .style("standard")
+    .position("bottom");
+  $ionicConfigProvider.navBar.alignTitle("center");
+})
+
+
+
+
 /**
  * Routes
  */
@@ -30,10 +40,14 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
   $stateProvider
 
     // Starting point
-    .state('home', {
-      url: '/',
-      templateUrl: 'partials/home.html',
-      controller: 'HomeCtrl'
+    .state('settings', {
+      url: '/settings',
+       views: {
+        'settings': {
+          templateUrl: 'partials/settings.html',
+          controller: 'SettingsCtrl'
+        }
+      }
     })
 
     .state('areas', {
@@ -49,43 +63,67 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
           });
         }
       },
-      templateUrl: 'partials/select-area.html',
-      controller: 'SelectAreaCtrl'
+      views: {
+        'planner': {
+          templateUrl: 'partials/select-area.html',
+          controller: 'SelectAreaCtrl'
+        }
+      }
     })
 
     // Select a stop in an area
     .state('stops', {
       url: '/area/:id',
-      templateUrl: 'partials/select-stop.html',
-      controller: 'SelectStopCtrl'
+      views: {
+        'planner': {
+          templateUrl: 'partials/select-stop.html',
+          controller: 'SelectStopCtrl'
+        }
+      }
     })
 
     .state('toAreas', {
       url: '/area/:id/to',
-      templateUrl: 'partials/select-area.html',
-      controller: 'ToAreaController'
+      views: {
+        'planner': {
+          templateUrl: 'partials/select-area.html',
+          controller: 'ToAreaController'
+        }
+      }
     })
 
     .state('destination', {
       url: '/area/:departureId/to/:id',
-      templateUrl: 'partials/select-stop.html',
-      controller: 'DestinationController'
+      views: {
+        'planner': {
+          templateUrl: 'partials/select-stop.html',
+          controller: 'DestinationController'
+        }
+      }
     })
 
     // Show the result page
     .state('result', {
       url: '/result',
-      templateUrl: 'partials/result.html',
-      controller: 'ResultCtrl'
+      views: {
+        'planner': {
+          templateUrl: 'partials/result.html',
+          controller: 'ResultCtrl'
+        }
+      }
     })
 
     // About page
     .state('about', {
       url: '/about',
-      templateUrl: 'partials/about.html'
+      views: {
+        'about': {
+          templateUrl: 'partials/about.html'
+        }
+      }
     });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/area');
 
 })
 
