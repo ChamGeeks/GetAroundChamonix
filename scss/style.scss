@@ -1,4 +1,50 @@
 
+$positive: #267ab8;
+$line_1: #EE3030;
+$line_2: #00B2EF;
+$line_3: #F69130;
+$line_5: #808A9D;
+$line_11: #82C557;
+$line_12: #B0773D;
+$line_13: #B45A87;
+$line_14: #F7A4A8;
+$line_15: #15A057;
+$line_16: #351C07;
+$line_17: #FCF12C;
+$nuit: #263850;
+
+$lines: 1 #EE3030,
+  2 #00B2EF,
+  3 #F69130,
+  5 #808A9D,
+  11 #82C557,
+  12 #B0773D,
+  13 #B45A87,
+  14 #F7A4A8,
+  15 #15A057,
+  16 #351C07,
+  17 #FCF12C,
+  Chamonuit #263850;
+
+
+a {
+  color: $positive;
+  text-decoration: none;
+  &:hover {
+    color: #000;
+    text-decoration: underline;
+  }
+}
+h2 {
+  color: #fff;
+  text-shadow: 1px 1px 0 #222, 0 0 5px #777;
+  margin: 0 0 20px;
+  padding: 20px 0 0;
+  text-align: center;
+}
+h3 { margin: 0 0 10px }
+img { max-width: 100%; height: auto; }
+
 
 .icon-positive:before {
   color: #267ab8;
@@ -56,7 +102,8 @@
   }
 }
 
-.item {
+.list .item,
+.area .item {
   background: rgba(255,255,255,.8);
 }
 
@@ -65,43 +112,14 @@
   font-size: inherit;
 }
 
-h2 {
-  color: #fff;
-  text-shadow: 1px 1px 0 #222, 0 0 5px #777;
-  margin: 0 0 20px;
-  padding: 20px 0 0;
-  text-align: center;
-}
-
-h3 {
-  margin: 0 0 10px
-}
-
-$line_1: #EE3030;
-$line_2: #00B2EF;
-$line_3: #F69130;
-$line_5: #808A9D;
-$line_11: #82C557;
-$line_12: #B0773D;
-$line_13: #B45A87;
-$line_14: #F7A4A8;
-$line_15: #15A057;
-$line_16: #351C07;
-$line_17: #FCF12C;
-
-
-img { max-width: 100%; height: auto; }
 
 .center { text-align: center; }
 
 .flag {
-  font-size: 30px;
-  margin: 0 0 10px;
-  color: #444;
 
   img {
-    height: 50px;
-    width: 75px;
+    width: 24px;
+    height: 16px;
     vertical-align: middle;
   }
 }
@@ -116,30 +134,18 @@ img { max-width: 100%; height: auto; }
 .line-12 { background: #B0773D; left: 26px; }
 
 .line-box { margin: 0 -1px 2px; padding: 7px; }
-.line-box-1 { border-color: $line_1; }
-.line-box-2 { border-color: $line_2; }
-.line-box-3 { border-color: $line_3; }
-.line-box-5 { border-color: $line_5; }
-.line-box-11 { border-color: $line_11; }
-.line-box-12 { border-color: $line_12; }
-.line-box-13 { border-color: $line_13; }
-.line-box-14 { border-color: $line_14; }
-.line-box-15 { border-color: $line_15; }
-.line-box-16 { border-color: $line_16; }
-.line-box-17 { border-color: $line_17; }
+@each $line in $lines {
+  .line-box-#{nth($line, 1)} { border-color: #{nth($line, 2)}}
+}
 
-.line-badge { font-weight: bold; position: absolute; top: 0; right: 2px; }
-.line-box-1 .line-badge { color: $line_1; }
-.line-box-2 .line-badge { color: $line_2; }
-.line-box-3 .line-badge { color: $line_3; }
-.line-box-5 .line-badge { color: $line_5; }
-.line-box-11 .line-badge { color: $line_11; }
-.line-box-12 .line-badge { color: $line_12; }
-.line-box-13 .line-badge { color: $line_13; }
-.line-box-14 .line-badge { color: $line_14; }
-.line-box-15 .line-badge { color: $line_15; }
-.line-box-16 .line-badge { color: $line_16; }
-.line-box-17 .line-badge { color: $line_17; }
+.line-badge { font-weight: bold; position: absolute; top: 0; right: 0;
+  padding: 1px 3px 2px 5px; border-radius: 0 0 0 4px; color: #fff; }
+@each $line in $lines {
+  .line-box-#{nth($line, 1)} .line-badge {
+    background: #{nth($line, 2)};
+    text-shadow: 1px 1px 0 darken(nth($line, 2), 20%), 0 0 2px darken(nth($line, 2), 10%);
+  }
+}
 
 
 .desc { margin: 0 0 20px; border: 1px solid #43cee6; padding: 5px; font-size: 12px; overflow: hidden }

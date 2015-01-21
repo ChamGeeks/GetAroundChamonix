@@ -1,3 +1,24 @@
+a {
+  color: #267ab8;
+  text-decoration: none; }
+  a:hover {
+    color: #000;
+    text-decoration: underline; }
+
+h2 {
+  color: #fff;
+  text-shadow: 1px 1px 0 #222, 0 0 5px #777;
+  margin: 0 0 20px;
+  padding: 20px 0 0;
+  text-align: center; }
+
+h3 {
+  margin: 0 0 10px; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
 .icon-positive:before {
   color: #267ab8; }
 
@@ -39,38 +60,20 @@
   .card.area .half-pad {
     padding: 0.5rem; }
 
-.item {
+.list .item, .area .item {
   background: rgba(255, 255, 255, 0.8); }
 
 .item p {
   color: inherit;
   font-size: inherit; }
 
-h2 {
-  color: #fff;
-  text-shadow: 1px 1px 0 #222, 0 0 5px #777;
-  margin: 0 0 20px;
-  padding: 20px 0 0;
-  text-align: center; }
-
-h3 {
-  margin: 0 0 10px; }
-
-img {
-  max-width: 100%;
-  height: auto; }
-
 .center {
   text-align: center; }
 
-.flag {
-  font-size: 30px;
-  margin: 0 0 10px;
-  color: #444; }
-  .flag img {
-    height: 50px;
-    width: 75px;
-    vertical-align: middle; }
+.flag img {
+  width: 24px;
+  height: 16px;
+  vertical-align: middle; }
 
 .stop {
   position: relative;
@@ -135,44 +138,65 @@ img {
 .line-box-17 {
   border-color: #FCF12C; }
 
+.line-box-Chamonuit {
+  border-color: #263850; }
+
 .line-badge {
   font-weight: bold;
   position: absolute;
   top: 0;
-  right: 2px; }
+  right: 0;
+  padding: 1px 3px 2px 5px;
+  border-radius: 0 0 0 4px;
+  color: #fff; }
 
 .line-box-1 .line-badge {
-  color: #EE3030; }
+  background: #EE3030;
+  text-shadow: 1px 1px 0 #aa0e0e, 0 0 2px #d91212; }
 
 .line-box-2 .line-badge {
-  color: #00B2EF; }
+  background: #00B2EF;
+  text-shadow: 1px 1px 0 #006789, 0 0 2px #008dbc; }
 
 .line-box-3 .line-badge {
-  color: #F69130; }
+  background: #F69130;
+  text-shadow: 1px 1px 0 #b85d08, 0 0 2px #e9760a; }
 
 .line-box-5 .line-badge {
-  color: #808A9D; }
+  background: #808A9D;
+  text-shadow: 1px 1px 0 #505867, 0 0 2px #667084; }
 
 .line-box-11 .line-badge {
-  color: #82C557; }
+  background: #82C557;
+  text-shadow: 1px 1px 0 #52872f, 0 0 2px #69ad3c; }
 
 .line-box-12 .line-badge {
-  color: #B0773D; }
+  background: #B0773D;
+  text-shadow: 1px 1px 0 #644423, 0 0 2px #8a5d30; }
 
 .line-box-13 .line-badge {
-  color: #B45A87; }
+  background: #B45A87;
+  text-shadow: 1px 1px 0 #743454, 0 0 2px #97446e; }
 
 .line-box-14 .line-badge {
-  color: #F7A4A8; }
+  background: #F7A4A8;
+  text-shadow: 1px 1px 0 #ef464f, 0 0 2px #f3757b; }
 
 .line-box-15 .line-badge {
-  color: #15A057; }
+  background: #15A057;
+  text-shadow: 1px 1px 0 #094625, 0 0 2px #0f733e; }
 
 .line-box-16 .line-badge {
-  color: #351C07; }
+  background: #351C07;
+  text-shadow: 1px 1px 0 black, 0 0 2px #080401; }
 
 .line-box-17 .line-badge {
-  color: #FCF12C; }
+  background: #FCF12C;
+  text-shadow: 1px 1px 0 #bfb303, 0 0 2px #f2e203; }
+
+.line-box-Chamonuit .line-badge {
+  background: #263850;
+  text-shadow: 1px 1px 0 #05080b, 0 0 2px #16202d; }
 
 .desc {
   margin: 0 0 20px;
