@@ -3,12 +3,23 @@
 
     <div ng-include src=" 'partials/journey-info.html' "></div>
 
-    <!-- <h3 ng-show="closeStops" translate>{{ 'STOPS_NEAR' | translate }}</h3>
-    <ul class="stops list" ng-show="closeStops">
-      <li class="stop item" ng-repeat="aStop in closeStops" ng-click="selectStop(aStop.id)">
-        {{ aStop.name }}
-      </li>
-    </ul> -->
+
+
+      <!-- My location -->
+      <div class="card area" ng-show="!main.isPlanning()">
+        <div class="row item">
+          <button class="button button-clear button-positive icon" ng-class="locationClass()"
+                  ng-click="getPositionInfo()">
+          </button>
+          <button class="button button-block button-stable area item-icon-right"
+                  ng-disabled="!positionFound" ng-click="useMyLocation()">
+            <i class="icon big ion-arrow-right-c"></i>
+            {{ 'My position' | translate }}
+          </button>
+        </div>
+      </div>
+
+
 
     <div class="areas">
       <div class="card area" ng-repeat="area in areas | areasOrder">
@@ -33,20 +44,6 @@
         </div>
       </div>
 
-
-      <!-- My location -->
-      <div class="card area" ng-show="!isPlanning()">
-        <div class="row item">
-          <button class="button button-clear button-positive icon" ng-class="locationClass()"
-                  ng-click="getPositionInfo()">
-          </button>
-          <button class="button button-block button-stable area item-icon-right"
-                  ng-disabled="!positionFound" ng-click="useMyLocation()">
-            <i class="icon big ion-arrow-right-c"></i>
-            My position
-          </button>
-        </div>
-      </div>
 
 
     </div>
