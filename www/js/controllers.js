@@ -253,7 +253,9 @@ angular.module('chamBus')
   };
 
   $scope.times = [];
-  TripPlanner.plan().then(function(times){
+  TripPlanner.plan({
+    allowTransfer: true   // get transfer options
+  }).then(function(times){
     $scope.times = times;
   });
 
