@@ -33,14 +33,18 @@
     min-width: 46px;
     -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
     transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
-    max-height: 250px; }
-  .card.area .info.closed {
     max-height: 0px; }
+  .card.area .info.open {
+    max-height: 250px; }
   .card.area .half-pad {
     padding: 0.5rem; }
 
 .item {
   background: rgba(255, 255, 255, 0.8); }
+
+.item p {
+  color: inherit;
+  font-size: inherit; }
 
 h2 {
   color: #fff;

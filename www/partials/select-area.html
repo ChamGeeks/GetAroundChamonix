@@ -32,7 +32,7 @@
             {{ area.name }}
           </button>
         </div>
-        <div class="info" ng-class="area.showInfo ? '' : 'closed'">
+        <div class="info" ng-class="area.showInfo ? 'open' : ''">
           <div class="item item-text-wrap half-pad meta-lifts" ng-show="area.meta && area.meta.lifts">
             <i class="ion-ios7-snowy"></i>
             <small>{{ area.meta.lifts.join(', ') }}</small>

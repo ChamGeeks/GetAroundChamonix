@@ -44,11 +44,11 @@
     min-width: 46px;
     -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
     transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    max-height:250px;
+    max-height: 0px;
   }
 
-  .info.closed {
-    max-height: 0px;
+  .info.open {
+    max-height: 250px;
   }
 
   .half-pad {
@@ -58,6 +58,11 @@
 
 .item {
   background: rgba(255,255,255,.8);
+}
+
+.item p {
+  color: inherit;
+  font-size: inherit;
 }
 
 h2 {
