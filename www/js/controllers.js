@@ -194,12 +194,26 @@ angular.module('chamBus')
   });
 })
 
+
+
+
+/**
+ * Display bus times for the choosen trip
+ *
+ * @param  {object} $scope                Angular scope
+ * @param  {object} $ionicPopup           Create ionic popup (alert-ish) for date select
+ * @param  {object} TripPlanner           Get the current trip plans and get the results
+ * @param  {Object} $cordovaDatePicker    Use native date pickers for Android and iOS (travel later)
+ */
 .controller('ResultCtrl', function($scope, $ionicPopup, TripPlanner, $cordovaDatePicker){
+
+  // Store the choosen trip
   $scope.trip = {
     start: TripPlanner.getDeparture(),
     end: TripPlanner.getDestination()
   };
 
+  // Object to store date and time
   $scope.dateTime = {};
 
 
@@ -248,10 +262,12 @@ angular.module('chamBus')
   };
 
   $scope.times = [];
+  $scope.timesLoaded = false;
   TripPlanner.plan({
     allowTransfer: true   // get transfer options
-  }).then(function(times){
+  }).then(function(times) {
     $scope.times = times;
+    $scope.timesLoaded = true;
   });
 
 });

@@ -2,26 +2,23 @@
   <ion-content>
 
 
-    <button class="button button-block button-positive" ng-click="selectDateTime()">
-      {{ 'SELECT_OTHER_TIME' | translate }}
-    </button>
-
-
-    <!-- <div class="row">
-      <div class="col item item-text-wrap">
-        <strong>Start:</strong> {{ trip.start.name }}
-        <br>
-        <small>{{ trip.start.lat +' - '+ trip.start.lon }}</small>
+    <div class="row">
+      <div class="col">
+        <button class="button button-positive button-block" ng-click="selectDateTime()">
+          {{ 'SELECT_OTHER_TIME' | translate }}
+        </button>
       </div>
-      <div class="col item item-text-wrap">
-        <strong>End:</strong> {{ trip.end.name }}
-        <br>
-        <small>{{ trip.end.lat +' - '+ trip.end.lon }}</small>
+      <div class="col">
+        <button class="button button-positive button-block icon-left ion-refresh" ng-click="main.reset()">
+          {{ 'New trip' | translate }}
+        </button>
       </div>
-    </div> -->
+    </div>
 
 
     <ul class="list">
+
+      <!-- List all busses -->
       <li class="item line-box line-box-{{ time[0].line.number }}" ng-repeat="time in times">
         <span class="line-badge">
           {{ time[0].line.number }}
@@ -29,11 +26,21 @@
         {{ time[0].departure.time }} - {{ time[0].destination.time }}<br>
         {{ time[0].departure.stop.name }} - {{ time[0].destination.stop.name }}
       </li>
+
+      <!-- If no times is set yet -->
       <li class="item" ng-show="!times.length">
-        {{ 'NO_TIMES_FOUND' | translate }}
-        <br>
-        {{ trip.start.name }} &raquo; {{ trip.end.name }}
+        <!-- Loading times -->
+        <div ng-show="!timesLoaded">
+          {{ 'Loading...' | translate }}
+        </div>
+        <!-- No times found -->
+        <div ng-show="timesLoaded">
+          {{ 'NO_TIMES_FOUND' | translate }}
+          <br>
+          {{ trip.start.name }} &raquo; {{ trip.end.name }}
+        </div>
       </li>
+
     </ul>
 
   </ion-content>
