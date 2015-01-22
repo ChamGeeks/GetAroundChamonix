@@ -6,7 +6,7 @@ angular.module('chamBus').factory('JourneyInfo', function($q, TripPlanner) {
   };
 
   api.getFromInfo = function(areaId) {
-		var deferred = $q.defer();
+    var deferred = $q.defer();
 
     var departure = TripPlanner.getDeparture();
     var from = {
