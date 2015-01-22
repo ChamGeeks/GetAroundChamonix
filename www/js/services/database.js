@@ -4,9 +4,10 @@
 
 'use strict';
 
-angular.module('chamBus').factory('Database', function($http, $q) {
+angular.module('chamBus').factory('Database', function($http, $q, $ionicLoading) {
 
-	var db = {};
+	var db = {},
+			dbInit;
 
 	function updateDatabase() {
 		var deferred = $q.defer();
@@ -37,14 +38,54 @@ angular.module('chamBus').factory('Database', function($http, $q) {
 		return deferred.promise;
 	}
 
+
+	// Check if there is a newer version of the database in the background
+	// and ask to update if there is
+	function checkForDatabaseUpdate() {
+		$http.get('https://chx-transit-db.herokuapp.com/api/status').then(function(res) {
+			// If a newer version exist
+			if(res.data.id && res.data.id > ~~(html5sql.database.version)) {
+				// ask the user first
+				var update = confirm("There is a new version of the timetable do you want to update?");
+				if(update) {
+					$ionicLoading.show({ template: 'Updating database...' });
+					// Get the new version
+					updateDatabase().finally(function() {
+						$ionicLoading.hide();
+						location.reload();
+					});;
+				}
+			}
+		});
+	}
+
+
+
+
 	// Open the db
 	html5sql.openDatabase('com.chamgeeks.chambus', 'ChamBus Database', 3*1024*1024);
-	var dbInit = updateDatabase();
+
+	// Will allways run if no database exist
+	if(~~(html5sql.database.version) < 2) {
+		dbInit = updateDatabase();
+	}else {
+
+		// Just return resolved promise
+		var deferred = $q.defer(); deferred.resolve();
+		dbInit = deferred.promise;
+
+		// Check if there is a new version of the database
+		checkForDatabaseUpdate();
+	}
+
+
 
 	function toSQL(o) {
 		return (typeof o === 'string') ? '\'' + o + '\'' : o;
 	}
 
+
+	// Returns a promise
 	db.init = function() { return dbInit; };
 
 	db.find = function(sql, params) {
