@@ -227,3 +227,6 @@ img {
 .item-icon-right .icon {
   font-size: inherit;
   color: #aaa; }
+
+.row-buttons .button {
+  margin: 0; }
