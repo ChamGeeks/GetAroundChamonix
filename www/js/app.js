@@ -22,10 +22,16 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
   });
 })
 
+
+/**
+ * Overwrite default syste configs e.g.Android tab in top
+ */
 .config(function($ionicConfigProvider) {
+  // Always display the tabs in the bottom and none striped (android)
   $ionicConfigProvider.tabs
     .style("standard")
     .position("bottom");
+  // Center the title on all systems
   $ionicConfigProvider.navBar.alignTitle("center");
 })
 
@@ -127,57 +133,66 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
 
 })
 
+
+
+/**
+ * Translations
+ */
 .config(['$translateProvider', function ($translateProvider) {
 
-    $translateProvider.translations('en', {
-      'SELECT_AREA': 'Select area',
-      'SELECT_STOP': 'Select stop',
-      'PICK_A_START': 'Pick a journey start below',
-      'STOPS_NEAR': 'Stops near by',
-      'STOPS_IN': 'Stops in: ',
-      'FROM': 'Where are you now?',
-      'WHERE_AREA': 'Where in',
-      'TO': 'And where are you headed?',
-      'STOP': 'Which stop?',
-      'BUSS_TIMES_TITLE': 'Bus times',
-      'SELECT_OTHER_TIME': 'Select a time',
-      'NO_TIMES_FOUND': 'No times found for this trip.',
-    });
+  // English
+  $translateProvider.translations('en', {
+    'SELECT_AREA': 'Select area',
+    'SELECT_STOP': 'Select stop',
+    'PICK_A_START': 'Pick a journey start below',
+    'STOPS_NEAR': 'Stops near by',
+    'STOPS_IN': 'Stops in: ',
+    'FROM': 'Where are you now?',
+    'WHERE_AREA': 'Where in',
+    'TO': 'And where are you headed?',
+    'STOP': 'Which stop?',
+    'BUSS_TIMES_TITLE': 'Bus times',
+    'SELECT_OTHER_TIME': 'Select a time',
+    'NO_TIMES_FOUND': 'No times found for this trip.',
+  });
 
-    $translateProvider.translations('fr', {
-      'SELECT_AREA': 'Choisir un quartier',
-      'PICK_A_START': 'Pick a journey start below',
-      'STOPS_NEAR': 'Arrêt à proximité',
-      'STOPS_IN': 'Arrêts ',
-      'FROM': 'Départ',
-      'TO': 'Arrivée',
-      'STOP': 'Quelle arrêt?',
-      'BUSS_TIMES_TITLE': 'Horaire',
-      'SELECT_OTHER_TIME': 'Choisir un horaire',
-      'NO_TIMES_FOUND': 'Aucun horaire trouvé',
-      'My position': 'Ma position',
-      'Settings': 'Le paramètres',
-      'Change language': 'Changer de langue',
-    });
+  // French
+  $translateProvider.translations('fr', {
+    'SELECT_AREA': 'Choisir un quartier',
+    'PICK_A_START': 'Pick a journey start below',
+    'STOPS_NEAR': 'Arrêt à proximité',
+    'STOPS_IN': 'Arrêts ',
+    'FROM': 'Départ',
+    'TO': 'Arrivée',
+    'STOP': 'Quelle arrêt?',
+    'BUSS_TIMES_TITLE': 'Horaire',
+    'SELECT_OTHER_TIME': 'Choisir un horaire',
+    'NO_TIMES_FOUND': 'Aucun horaire trouvé',
+    'My position': 'Ma position',
+    'Settings': 'Le paramètres',
+    'Change language': 'Changer de langue',
+  });
 
-    $translateProvider.translations('sv', {
-      'SELECT_AREA': 'Välj område',
-      'PICK_A_START': 'Pick a journey start below',
-      'STOPS_NEAR': 'Hållplatser nära',
-      'STOPS_IN': 'Hållplatser i: ',
-      'FROM': 'Vart är du nu?',
-      'TO': 'Var vill du åka?',
-      'STOP': 'Vilken hållplats?',
-      'BUSS_TIMES_TITLE': 'Buss tider',
-      'SELECT_OTHER_TIME': 'Välj en tid',
-      'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.',
-      'My position': 'My position in sv',
-      'Settings': 'Inställningar',
-      'Change language': 'Ändra språk',
-    });
+  // Swedish
+  $translateProvider.translations('sv', {
+    'SELECT_AREA': 'Välj område',
+    'PICK_A_START': 'Pick a journey start below',
+    'STOPS_NEAR': 'Hållplatser nära',
+    'STOPS_IN': 'Hållplatser i: ',
+    'FROM': 'Vart är du nu?',
+    'TO': 'Var vill du åka?',
+    'STOP': 'Vilken hållplats?',
+    'BUSS_TIMES_TITLE': 'Buss tider',
+    'SELECT_OTHER_TIME': 'Välj en tid',
+    'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.',
+    'My position': 'My position in sv',
+    'Settings': 'Inställningar',
+    'Change language': 'Ändra språk',
+  });
 
-    $translateProvider.preferredLanguage('en');
+  // Default language
+  $translateProvider.preferredLanguage('en');
 
-    // remember language
-    $translateProvider.useLocalStorage();
-  }]);
+  // remember language
+  $translateProvider.useLocalStorage();
+}]);
