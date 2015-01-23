@@ -250,10 +250,20 @@ angular.module('chamBus')
             if (!$scope.dateTime.date && !$scope.dateTime.time) {
               window.alert('You have to select a time or date');
 
-              //don't allow the user to close unless he enters wifi password
+              //don't allow the user to close unless he/she have selected a date and time
               e.preventDefault();
             } else {
-              // Do cool stuff
+              // var time = $scope.dateTime.time.getHours() +':'+ $scope.dateTime.time.getMinutes();
+              // var date = $scope.dateTime.date;
+              // date = date.getDate() +'-'+ (date.getMonth()+1) +'-'+ date.getFullYear();
+              // date = date +' '+ time;
+              // console.log(date);
+              TripPlanner.plan({
+                allowTransfer: true,
+                when: $scope.dateTime.time.getTime()
+              }).then(function(times) {
+                $scope.times = times;
+              });
             }
           }
         }
