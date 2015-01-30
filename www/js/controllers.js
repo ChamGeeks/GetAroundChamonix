@@ -253,14 +253,21 @@ angular.module('chamBus')
               //don't allow the user to close unless he/she have selected a date and time
               e.preventDefault();
             } else {
-              // var time = $scope.dateTime.time.getHours() +':'+ $scope.dateTime.time.getMinutes();
-              // var date = $scope.dateTime.date;
-              // date = date.getDate() +'-'+ (date.getMonth()+1) +'-'+ date.getFullYear();
-              // date = date +' '+ time;
-              // console.log(date);
+              // Generate a date based on selected time and date
+              var date = '';
+              if($scope.dateTime.time && $scope.dateTime.date) {
+                date = $scope.dateTime.date;
+                var time = $scope.dateTime.time.getHours() +':'+ $scope.dateTime.time.getMinutes(),
+                    month = ('0'+ (date.getMonth()+1)).slice(-2);
+                date = date.getFullYear() +'-'+ month +'-'+ date.getDate();
+                date = date +' '+ time;
+              } else {
+                date = $scope.dateTime.time ? $scope.dateTime.time : $scope.dateTime.date;
+              }
+
               TripPlanner.plan({
                 allowTransfer: true,
-                when: $scope.dateTime.time.getTime()
+                when: date
               }).then(function(times) {
                 $scope.times = times;
               });
