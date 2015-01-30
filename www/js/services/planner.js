@@ -14,7 +14,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
 
   function getItinerary(legs) {
     var iti = [];
-    console.log("creating itinerary from " + legs.length + " legs");
+    // console.log("creating itinerary from " + legs.length + " legs");
     for (var i = 0; i < legs.length; i++) {
       var leg = legs[i];
       var departure = leg[0];
@@ -44,14 +44,14 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
           }
         });
       } else {
-        console.log("Invalid itinerary leg: ", departure, arrival);
+        // console.log("Invalid itinerary leg: ", departure, arrival);
         return null;
       }
     }
     return iti;
   }
 
-  function getLegs(departureStopTimes, possibleDestinations, maxTime) {
+  function getLegs(departureStopTimes, possibleDestinations) { // , maxTime?
     var promises = [];
     var legs = [];
     departureStopTimes.forEach(function (st) {
@@ -110,12 +110,12 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
 
         if (options.allowTransfer) {
           // single transfer only
-          console.log("adding 2 legged routes");
+          // console.log("adding 2 legged routes");
           departureStopTimes.forEach(function (st) {
             // get possible transfers and for each apply above logic
             var deferred1 = $q.defer();
             Model.getTransferStopTimes(st, mom.toDate()).then(function (transfers) {
-              console.log("found " + transfers.length + " potential transfers.");
+              // console.log("found " + transfers.length + " potential transfers.");
               var subPromises = [];
               transfers.forEach(function (tx) {
                 var deferred2 = $q.defer();
@@ -159,7 +159,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
 
     } else {
       //todo
-      deferred.reject("unknown destination", _departure, _destination);
+      deferred.reject('unknown destination', _departure, _destination);
 
     }
     return deferred.promise;
@@ -212,7 +212,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
   };
 
   api.planning = function() {
-    return !!_departure
+    return !!_departure;
   };
 
   api.init = function() {

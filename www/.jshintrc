@@ -5,6 +5,7 @@
     "cordova": true,
     "console": true,
     "StatusBar": true,
-    "html5sql": true
+    "html5sql": true,
+    "moment": true
   }
 }
