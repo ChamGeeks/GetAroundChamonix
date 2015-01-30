@@ -205,12 +205,15 @@ angular.module('chamBus')
 /**
  * Display bus times for the choosen trip
  *
- * @param  {object} $scope                Angular scope
- * @param  {object} $ionicPopup           Create ionic popup (alert-ish) for date select
- * @param  {object} TripPlanner           Get the current trip plans and get the results
- * @param  {Object} $cordovaDatePicker    Use native date pickers for Android and iOS (travel later)
+ * @param {object} $scope               Angular scope
+ * @param {object} $ionicPopup          Create ionic popup (alert-ish) for date select
+ * @param {object} TripPlanner          Get the current trip plans and get the results
+ * @param {Object} $cordovaDatePicker   Use native date pickers for Android and iOS (travel later)
+ * @param {object} $translate           Translate popup text and buttons
  */
-.controller('ResultCtrl', function($scope, $ionicPopup, TripPlanner, $cordovaDatePicker){
+.controller('ResultCtrl', function(
+    $scope, $ionicPopup, TripPlanner, $cordovaDatePicker, $translate)
+  {
 
   // Store the choosen trip
   $scope.trip = {
@@ -239,21 +242,33 @@ angular.module('chamBus')
     });
   };
 
+  var popup_text = {};
+  $translate([
+        'TIME_POPUP_TITLE', 'CANCEL', 'GET_TIMES', 'TIME_POPUP_ALERT'
+      ]).then(function (translations) {
+    popup_text = {
+      title: translations.TIME_POPUP_TITLE,
+      cancel: translations.CANCEL,
+      get_times: translations.GET_TIMES,
+      alert: translations.TIME_POPUP_ALERT
+    }
+  });
+
   $scope.selectDateTime = function() {
 
     $ionicPopup.show({
       //template: '<input type="date" ng-model="dateTime.date"><br><input type="time" ng-model="dateTime.time">',
       templateUrl: 'partials/select-date.html',
-      title: 'Select depature time',
+      title: popup_text.title,
       scope: $scope,
       buttons: [
-        { text: 'Cancel' },
+        { text: popup_text.cancel },
         {
-          text: '<b>Get times</b>',
+          text: '<b>'+ popup_text.get_times +'</b>',
           type: 'button-positive',
           onTap: function(e) {
             if (!$scope.dateTime.date && !$scope.dateTime.time) {
-              window.alert('You have to select a time or date');
+              window.alert(popup_text.alert);
 
               //don't allow the user to close unless he/she have selected a date and time
               e.preventDefault();

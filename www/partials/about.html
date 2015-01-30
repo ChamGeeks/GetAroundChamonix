@@ -2,21 +2,14 @@
   <ion-content class="content has-header">
 
     <div class="card">
-      <div class="item item-divider">ChamRide</div>
-      <div class="item item-body">
-        This is an app to help you find the next bus.
-        <p>
-          The app was created during a ChamGeeks hackaton.
-        </p>
-      </div>
+      <div class="item item-divider">{{ 'APP_NAME' | translate }}</div>
+      <div ng-bind-html="'ABOUT_TEXT' | translate" class="item item-body"></div>
     </div>
 
     <div class="card">
       <div class="item item-divider">ChamGeeks</div>
       <div class="item item-body">
-        ChamGeeks is a organisation created for geeks in Chamonix to come together and talk, create
-        and help each other. We usualy meet up one night each month during the first week and
-        sometimes throw a hackaton.
+        {{ 'ABOUT_CHAMGEEKS' | translate }}
         <p>
           <a href="#" onclick="window.open('http://chamgeeks.com', '_system'); return false;">ChamGeeks.com</a>
         </p>
@@ -25,7 +18,7 @@
 
     <div class="card">
       <div class="item item-divider">
-        Credits
+        {{ 'CREDITS' | translate }}
       </div>
       <div class="item item-body">
         <small>

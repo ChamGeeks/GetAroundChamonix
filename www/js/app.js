@@ -142,30 +142,47 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
 
   // English
   $translateProvider.translations('en', {
+    'APP_NAME': 'ChamRide',
+    'ABOUT': 'About',
+    'ABOUT_TEXT': 'This is an app to help you find the next bus.'+
+      '<p>The app was created during a ChamGeeks hackaton.</p>',
+    'ABOUT_CHAMGEEKS': 'ChamGeeks is a organisation created for geeks in Chamonix to come'+
+      'together and talk, create and help each other. We usualy meet up one night each month'+
+      'during the first week and sometimes throw a hackaton.',
+    'CREDITS': 'Credits',
+
     'SELECT_AREA': 'Select area',
-    'SELECT_STOP': 'Select stop',
     'PICK_A_START': 'Pick a journey start below',
-    'STOPS_NEAR': 'Stops near by',
-    'STOPS_IN': 'Stops in: ',
-    'FROM': 'Where are you now?',
-    'WHERE_AREA': 'Where in',
-    'TO': 'And where are you headed?',
+    'My position': 'My position',
+
+    'SELECT_STOP': 'Select stop',
     'STOP': 'Which stop?',
-    'BUSS_TIMES_TITLE': 'Bus times',
+
+    'RESULTS_TITLE': 'Bus times',
     'SELECT_OTHER_TIME': 'Select a time',
     'NO_TIMES_FOUND': 'No times found for this trip.',
+    'New trip': 'New trip',
+    'Loading...': 'Loading...',
+    'Pick time': 'Pick time',
+    'Pick date': 'Pick date',
+
+    'TIME_POPUP_TITLE': 'Select depature time',
+    'CANCEL': 'Cancel',
+    'GET_TIMES': 'Get times',
+    'TIME_POPUP_ALERT': 'You have to select a time or date',
+
+    'Settings': 'Settings',
+    'Change language': 'Change language'
   });
 
   // French
   $translateProvider.translations('fr', {
     'SELECT_AREA': 'Choisir un quartier',
     'PICK_A_START': 'Pick a journey start below',
-    'STOPS_NEAR': 'Arrêt à proximité',
-    'STOPS_IN': 'Arrêts ',
     'FROM': 'Départ',
     'TO': 'Arrivée',
     'STOP': 'Quelle arrêt?',
-    'BUSS_TIMES_TITLE': 'Horaire',
+    'RESULTS_TITLE': 'Horaire',
     'SELECT_OTHER_TIME': 'Choisir un horaire',
     'NO_TIMES_FOUND': 'Aucun horaire trouvé',
     'My position': 'Ma position',
@@ -175,19 +192,37 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
 
   // Swedish
   $translateProvider.translations('sv', {
+    'APP_NAME': 'ChamRide',
+    'ABOUT': 'Om ChamRide',
+    // 'ABOUT_TEXT': 'This is an app to help you find the next bus.'+
+    //   '<p>The app was created during a ChamGeeks hackaton.</p>',
+    // 'ABOUT_CHAMGEEKS': 'ChamGeeks is a organisation created for geeks in Chamonix to come'+
+    //   'together and talk, create and help each other. We usualy meet up one night each month'+
+    //   'during the first week and sometimes throw a hackaton.',
+    'CREDITS': 'Credits',
+
     'SELECT_AREA': 'Välj område',
-    'PICK_A_START': 'Pick a journey start below',
-    'STOPS_NEAR': 'Hållplatser nära',
-    'STOPS_IN': 'Hållplatser i: ',
-    'FROM': 'Vart är du nu?',
-    'TO': 'Var vill du åka?',
+    'PICK_A_START': 'Välj inom vilket område resan startar',
+    'My position': 'Min position',
+
+    'SELECT_STOP': 'Välj ändhållplats',
     'STOP': 'Vilken hållplats?',
-    'BUSS_TIMES_TITLE': 'Buss tider',
+
+    'RESULTS_TITLE': 'Buss tider',
     'SELECT_OTHER_TIME': 'Välj en tid',
     'NO_TIMES_FOUND': 'Hittade inga tider för denna resa.',
-    'My position': 'My position in sv',
+    'New trip': 'Ny resa',
+    'Loading...': 'Laddar...',
+    'Pick time': 'Välj en tid',
+    'Pick date': 'Välj datum',
+
+    'TIME_POPUP_TITLE': 'Välj tid för resan',
+    'CANCEL': 'Avbryt',
+    'GET_TIMES': 'Hämta tider',
+    'TIME_POPUP_ALERT': 'Du måste välja minst en tid eller ett datum.',
+
     'Settings': 'Inställningar',
-    'Change language': 'Ändra språk',
+    'Change language': 'Ändra språk'
   });
 
   // Default language
