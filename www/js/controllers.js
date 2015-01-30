@@ -144,6 +144,11 @@ angular.module('chamBus')
   JourneyInfo.getFromInfo($stateParams.id).then(function(data) {
     $scope.from = data;
   });
+
+  $scope.toggleInfo = function(area) {
+    area.showInfo = !area.showInfo;
+    console.log('Show info for ' + area.name + '? ' + area.showInfo);
+  };
 })
 
 
