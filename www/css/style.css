@@ -114,6 +114,9 @@ img {
 .line-box-03 {
   border-color: #F69130; }
 
+.line-box-04 {
+  border-color: #7672B2; }
+
 .line-box-05 {
   border-color: #808A9D; }
 
@@ -161,6 +164,10 @@ img {
 .line-box-03 .line-badge {
   background: #F69130;
   text-shadow: 1px 1px 0 #b85d08, 0 0 2px #e9760a; }
+
+.line-box-04 .line-badge {
+  background: #7672B2;
+  text-shadow: 1px 1px 0 #46437b, 0 0 2px #59559c; }
 
 .line-box-05 .line-badge {
   background: #808A9D;
