@@ -13,7 +13,7 @@ angular.module('chamBus').factory('GeoTree', function($q, Database){
       data.forEach(function (stop) {
         geoTree.insert({lat: stop.lat, lng: stop.lon, data: stop});
       });
-      console.log(data.length + " points inserted in geo tree");
+      // console.log(data.length + " points inserted in geo tree");
     });
   }
 
@@ -24,7 +24,7 @@ angular.module('chamBus').factory('GeoTree', function($q, Database){
         lat: position.latitude || position.lat,
         lng: position.longitude || position.lng || position.lon
       }, parseFloat(radius), 'm');
-      console.log("looking for points within " + radius + "m of " + position + " - found " + res.length);
+      // console.log("looking for points within " + radius + "m of " + position + " - found " + res.length);
       return res;
     }
   }

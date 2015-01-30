@@ -113,10 +113,10 @@ angular.module('chamBus').factory('Database', function($http, $q, $ionicLoading)
       for (var i = 0; i < results.rows.length; i++) {
         records.push(results.rows.item(i));
       }
-      console.log(query, records.length);
+      // console.log(query, records.length);
       deferred.resolve(records);
     }, function(error, failingQuery) {
-      console.log(error, failingQuery);
+      // console.log(error, failingQuery);
       deferred.reject({ error: error, sql: failingQuery});
     });
 
