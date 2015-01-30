@@ -144,6 +144,9 @@ img {
 .line-box-Chamonuit {
   border-color: #263850; }
 
+.line-box-Train {
+  border-color: #CB0044; }
+
 .line-badge {
   font-weight: bold;
   position: absolute;
@@ -204,6 +207,10 @@ img {
 .line-box-Chamonuit .line-badge {
   background: #263850;
   text-shadow: 1px 1px 0 #05080b, 0 0 2px #16202d; }
+
+.line-box-Train .line-badge {
+  background: #CB0044;
+  text-shadow: 1px 1px 0 #650023, 0 0 2px #980035; }
 
 .desc {
   margin: 0 0 20px;
