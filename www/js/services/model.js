@@ -147,6 +147,20 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
     getArea: getArea
   };
 
+
+  // function getStopRoutes() {
+  //   Database.find([
+  //     'SELECT route.short_name FROM stop_time',
+  //     'JOIN trip ON stop_time.trip_id = trip.id',
+  //     'JOIN route ON trip.route_id = route.id',
+  //     'WHERE stop_time.id=?',
+  //     'GROUP BY route.id'
+  //     ].join(' '), [10328])
+  //       .then(function (records) {
+  //         console.log(records);
+  //       });
+  // }
+
   model.searchStops = function (filter) {
     var deferred = $q.defer();
     if (filter.block) {
