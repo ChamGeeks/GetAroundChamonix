@@ -81,7 +81,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
     var mom = options.when ? moment(options.when) : moment();
     var departureTime = new Time(mom);
     var maxTime = (new Time(departureTime)).add(90);
-    var maxWalk = options.walk || 200;
+    var maxWalk = options.walk || 250;
 
     var deferred = $q.defer();
 
