@@ -1,5 +1,7 @@
 /**
  * html5 sql interface
+ *
+ * Alternative? http://lokijs.org/
  */
 
 'use strict';
