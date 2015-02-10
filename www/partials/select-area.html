@@ -6,7 +6,7 @@
 
 
       <!-- My location -->
-      <div class="card area" ng-show="!main.isPlanning()">
+      <div class="card area" ng-show="!main.isPlanning()" ng-controller="MyLocationCtrl">
         <div class="row item">
           <button class="button button-clear button-positive icon" ng-class="locationClass()"
                   ng-click="getPositionInfo()">

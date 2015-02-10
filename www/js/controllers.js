@@ -53,82 +53,99 @@ angular.module('chamBus')
   }
 })
 
-.controller('SelectAreaCtrl', function($scope, $location, $cordovaGeolocation, TripPlanner) {
 
-    $scope.positionFound = false;
-    $scope.positionStatus = 'loading';
-    $cordovaGeolocation
-      .getCurrentPosition()
-      .then(function (position) {
-        if (position.coords.accuracy < 150) {
-          $scope.positionFound = position.coords;
-          $scope.positionFound.name = 'My position';
-          $scope.positionStatus = 'found';
-        } else {
-          $scope.positionStatus = 'inaccurate';
-        }
-      }, function (error) {
-        $scope.positionStatus = 'error';
-        console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-      });
 
-    $scope.locationClass = function() {
-      var htmlclass = '';
-      switch($scope.positionStatus) {
-        case 'loading':
-          htmlclass = 'ion-loading-c';
-          break;
-        case 'found':
-          htmlclass = 'ion-android-locate';
-          break;
-        default:
-          htmlclass = 'ion-close-round button-assertive';
+/**
+ *
+ * Select my location
+ *
+ */
+.controller('MyLocationCtrl', function($scope, $location, $cordovaGeolocation, TripPlanner) {
+    // Get the user location
+  $scope.positionFound = false;
+  $scope.positionStatus = 'loading';
+  $cordovaGeolocation
+    .getCurrentPosition()
+    .then(function (position) {
+
+      // Require a minimum accuracy
+      if (position.coords.accuracy < 100) {
+        $scope.positionFound = position.coords;
+        $scope.positionFound.name = 'My position';
+        $scope.positionStatus = 'found';
+      } else {
+        $scope.positionStatus = 'inaccurate';
       }
-      return htmlclass;
-    };
+    }, function (error) {
+      $scope.positionStatus = 'error';
+      console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+    });
 
-    $scope.getPositionInfo = function() {
-      var message = '';
-      switch($scope.positionStatus) {
-        case 'loading':
-          message = 'Trying to locate your current position.';
-          break;
-        case 'found':
-          break;
-        default:
-          message = 'The GPS was to inaccurate or could not load.';
-      }
-      if(message) {
-        window.alert(message);
-      }
-    };
-
-    $scope.useMyLocation = function() {
-      TripPlanner.setDeparture($scope.positionFound);
-      $location.path('/area/my-location/to');
-    };
+  // Update the location icon depending of loaction status
+  $scope.locationClass = function() {
+    var htmlclass = '';
+    switch($scope.positionStatus) {
+      case 'loading':
+        htmlclass = 'ion-loading-c';
+        break;
+      case 'found':
+        htmlclass = 'ion-android-locate';
+        break;
+      default:
+        htmlclass = 'ion-close-round button-assertive';
+    }
+    return htmlclass;
+  };
 
 
+  $scope.getPositionInfo = function() {
+    var message = '';
+    switch($scope.positionStatus) {
+      case 'loading':
+        message = 'Trying to locate your current position.';
+        break;
+      case 'found':
+        break;
+      default:
+        message = 'The GPS was to inaccurate or could not load.';
+    }
+    if(message) {
+      window.alert(message);
+    }
+  };
+
+  $scope.useMyLocation = function() {
+    TripPlanner.setDeparture($scope.positionFound);
+    $location.path('/area/my-location/to');
+  };
+})
 
 
-    $scope.selectStop = function (stop) {
-      TripPlanner.setDeparture(stop);
-      $location.path('/area');
-    };
 
-    $scope.selectAreaTitle = 'Select start area';
+/**
+ *
+ * Select starting area
+ *
+ */
+.controller('SelectAreaCtrl', function($scope, $location, TripPlanner) {
 
-    $scope.areas = TripPlanner.getAreas();
+  // Select a stop
+  $scope.selectStop = function (stop) {
+    TripPlanner.setDeparture(stop);
+    $location.path('/area');
+  };
 
-    $scope.selectArea = function (area) {
-      $location.path('/area/' + area);
-    };
+  $scope.areas = TripPlanner.getAreas();
 
-    $scope.toggleInfo = function(area) {
-      area.showInfo = !area.showInfo;
-      console.log('Show info for ' + area.name + '? ' + area.showInfo);
-    };
-  })
+  $scope.selectArea = function (area) {
+    $location.path('/area/' + area);
+  };
+
+  $scope.toggleInfo = function(area) {
+    area.showInfo = !area.showInfo;
+    console.log('Show info for ' + area.name + '? ' + area.showInfo);
+  };
+})
 
 .controller('ToAreaController', function($scope, $location, $stateParams, JourneyInfo, TripPlanner) {
   $scope.areas = TripPlanner.getAreas();
