@@ -6,8 +6,7 @@ tmp
 .DS_Store
 .idea
 .sass-cache
-platforms
-plugins
+platforms/^.*
 *.swp
 *.swo
 *.log
