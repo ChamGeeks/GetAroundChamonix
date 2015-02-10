@@ -7,5 +7,10 @@ tmp
 .idea
 .sass-cache
 platforms
+plugins
 *.swp
+*.swo
+*.log
+*.DS_Store
 getaroundchamonix.sublime-workspace
+engine
