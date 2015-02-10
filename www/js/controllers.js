@@ -1,54 +1,14 @@
-
 'use strict';
-
-function rad2deg(angle) {
-  //  discuss at: http://phpjs.org/functions/rad2deg/
-  // original by: Enrique Gonzalez
-  // improved by: Brett Zamir (http://brett-zamir.me)
-  //   example 1: rad2deg(3.141592653589793);
-  //   returns 1: 180
-
-  return angle * 57.29577951308232; // angle / Math.PI * 180
-}
-
-function deg2rad(angle) {
-  //  discuss at: http://phpjs.org/functions/deg2rad/
-  // original by: Enrique Gonzalez
-  // improved by: Thomas Grainger (http://graingert.co.uk)
-  //   example 1: deg2rad(45);
-  //   returns 1: 0.7853981633974483
-
-  return angle * .017453292519943295; // (angle / 180) * Math.PI;
-}
-
-/**
- * Calculate max min coordinates to get within distance in SQL
- *
- * @param  {float} lat    Latitude
- * @param  {float} lng    Longitude
- * @param  {float} radius The radius
- * @return {object}       The calculated max min values
- */
-function get_max_min_lat_lon(lat, lon, radius) {
-
-  var radius = radius || 0.22, // the radius in km
-      R      = 6371.0,           // the earth radius
-      values = {};
-
-  // first-cut bounding box (in degrees)
-  values.lat_max = lat + rad2deg(radius/R),
-  values.lat_min = lat - rad2deg(radius/R),
-  // compensate for degrees longitude getting smaller with increasing latitude
-  values.lon_max = lon + rad2deg(radius/R/Math.cos(deg2rad(lat))),
-  values.lon_min = lon - rad2deg(radius/R/Math.cos(deg2rad(lat)));
-
-  return values;
-}
-
-
 
 angular.module('chamBus')
 
+
+
+/**
+ *
+ * Main controller that run in all views
+ *
+ */
 .controller('MainCtrl', function($scope, TripPlanner, $translate, $state, $location,
                                   Database, $cordovaGlobalization, $timeout) {
 
@@ -106,7 +66,7 @@ angular.module('chamBus')
  * Select my location
  *
  */
-.controller('MyLocationCtrl', function($scope, $location, $cordovaGeolocation, TripPlanner, Database) {
+.controller('MyLocationCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, Database) {
 
   // Get the user location
   $scope.positionFound = false;
@@ -118,26 +78,14 @@ angular.module('chamBus')
       // Require a minimum accuracy
       if (position.coords.accuracy < 150) {
 
-        // Verify ther is any stops close by
-        var coords = get_max_min_lat_lon(position.coords.latitude, position.coords.longitude);
-        Database.find([
-          'SELECT * FROM stop',
-          'WHERE lat > '+ coords.lat_min +' AND lat < '+ coords.lat_max,
-          'AND lon > '+ coords.lon_min +' AND lon < '+ coords.lon_max
-        ].join(' ')).then(function(stops) {
-          if(stops.length) {
-            $scope.positionFound = position.coords;
-            $scope.positionFound.name = 'My position';
-            $scope.positionStatus = 'Found';
-          } else {
-            $scope.positionStatus = 'No stops found';
-          }
-
-        // Error looking in db
-        }, function (err) {
-          $scope.positionStatus = 'Error';
-          console.log('Find lat lon db error :', err);
-        });
+        var stops = GeoTree.closest(position.coords, 250);
+        if(stops.length) {
+          $scope.positionFound = position.coords;
+          $scope.positionFound.name = 'My position';
+          $scope.positionStatus = 'Found';
+        } else {
+          $scope.positionStatus = 'No stops found';
+        }
 
       // inaccurate Geo
       } else {
@@ -219,6 +167,13 @@ angular.module('chamBus')
   };
 })
 
+
+
+/**
+ *
+ * Select departure station
+ *
+ */
 .controller('ToAreaController', function($scope, $location, $stateParams, JourneyInfo, TripPlanner) {
   $scope.areas = TripPlanner.getAreas();
 
