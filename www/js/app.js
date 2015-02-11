@@ -93,7 +93,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       views: {
         'planner': {
           templateUrl: 'partials/select-area.html',
-          controller: 'ToAreaController'
+          controller: 'DestinationAreaController'
         }
       }
     })
@@ -103,7 +103,7 @@ angular.module('chamBus', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ngCo
       views: {
         'planner': {
           templateUrl: 'partials/select-stop.html',
-          controller: 'DestinationController'
+          controller: 'DestinationStopController'
         }
       }
     })

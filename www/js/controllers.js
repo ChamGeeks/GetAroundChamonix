@@ -66,7 +66,9 @@ angular.module('chamBus')
  * Select my location
  *
  */
-.controller('MyLocationCtrl', function($scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, Database) {
+.controller('MyLocationCtrl', function(
+    $scope, $location, $cordovaGeolocation, GeoTree, TripPlanner, Database
+  ) {
 
   // Get the user location
   $scope.positionFound = false;
@@ -98,7 +100,7 @@ angular.module('chamBus')
       console.log('Position error: ' + error.code + '\n' + 'message: ' + error.message + '\n');
     });
 
-  // Update the location icon depending of loaction status
+  // Update the location icon depending of loaction status (CSS class)
   $scope.locationClass = function() {
     var htmlclass = '';
     switch($scope.positionStatus) {
@@ -114,7 +116,7 @@ angular.module('chamBus')
     return htmlclass;
   };
 
-
+  // Display an alert message when clicking the icon if there is any error
   $scope.getPositionInfo = function() {
     var message = '';
     switch($scope.positionStatus) {
@@ -134,6 +136,7 @@ angular.module('chamBus')
     }
   };
 
+  // Set my location as departure and go to destination
   $scope.useMyLocation = function() {
     TripPlanner.setDeparture($scope.positionFound);
     $location.path('/area/my-location/to');
@@ -144,23 +147,20 @@ angular.module('chamBus')
 
 /**
  *
- * Select starting area
+ * Select departure area
  *
  */
 .controller('SelectAreaCtrl', function($scope, $location, TripPlanner) {
 
-  // Select a stop
-  $scope.selectStop = function (stop) {
-    TripPlanner.setDeparture(stop);
-    $location.path('/area');
-  };
-
+  // Get all areas
   $scope.areas = TripPlanner.getAreas();
 
+  // Select a area
   $scope.selectArea = function (area) {
     $location.path('/area/' + area);
   };
 
+  // Display more information about an area
   $scope.toggleInfo = function(area) {
     area.showInfo = !area.showInfo;
     console.log('Show info for ' + area.name + '? ' + area.showInfo);
@@ -174,73 +174,99 @@ angular.module('chamBus')
  * Select departure station
  *
  */
-.controller('ToAreaController', function($scope, $location, $stateParams, JourneyInfo, TripPlanner) {
-  $scope.areas = TripPlanner.getAreas();
-
-  $scope.selectArea = function(area) {
-    console.log('Going from ' + $stateParams.id + ' to ' + area);
-    $location.path('/area/' + $stateParams.id + '/to/' + area);
-  };
-
-  $scope.from = JourneyInfo.getEmptyInfo();
-  $scope.to = JourneyInfo.getEmptyInfo();
-
-  JourneyInfo.getFromInfo($stateParams.id).then(function(data) {
-    $scope.from = data;
-  });
-
-  $scope.toggleInfo = function(area) {
-    area.showInfo = !area.showInfo;
-    console.log('Show info for ' + area.name + '? ' + area.showInfo);
-  };
-})
-
-
 .controller('SelectStopCtrl', function($scope, $stateParams, JourneyInfo, TripPlanner, $location) {
 
   $scope.area = '';
   $scope.stops = [];
   $scope.from = JourneyInfo.getEmptyInfo();
 
+  // Get selected area
   $scope.area = TripPlanner.getAreaById($stateParams.id);
   $scope.from.area = $scope.area.name;
 
+  // Get all stops in selected area
   TripPlanner.getAreaStops($stateParams.id).then(function(resp){
     $scope.stops = resp;
   });
 
 
+  // Select a stop and go to select destination area
   $scope.selectStop = function(stop) {
-    TripPlanner.setDeparture(stop);
-    console.log('going to ToArea ' + $scope.area.id);
+    TripPlanner.setDeparture(stop);;
     $location.path('/area/' + $scope.area.id + '/to');
   };
 })
 
-.controller('DestinationController', function($scope, $stateParams, JourneyInfo, TripPlanner, $location) {
+
+
+/**
+ *
+ * Destination area
+ *
+ */
+.controller('DestinationAreaController', function(
+    $scope, $location, $stateParams, JourneyInfo, TripPlanner
+  ) {
+
+  // Get all areas
+  $scope.areas = TripPlanner.getAreas();
+
+  // Select an area and continue to select a destination station
+  $scope.selectArea = function(area) {
+    $location.path('/area/' + $stateParams.id + '/to/' + area);
+  };
+
+  // ?
+  $scope.from = JourneyInfo.getEmptyInfo();
+  $scope.to = JourneyInfo.getEmptyInfo();
+
+  // Get departure data
+  JourneyInfo.getFromInfo($stateParams.id).then(function(data) {
+    $scope.from = data;
+  });
+
+  // Display information about an area
+  $scope.toggleInfo = function(area) {
+    area.showInfo = !area.showInfo;
+  };
+})
+
+
+
+/**
+ *
+ * Select destination station
+ *
+ */
+.controller('DestinationStopController', function(
+    $scope, $stateParams, JourneyInfo, TripPlanner, $location
+  ) {
 
   $scope.area = '';
   $scope.stops = [];
   $scope.to = JourneyInfo.getEmptyInfo();
+  $scope.from = JourneyInfo.getEmptyInfo();
 
+  // Get the current area
   $scope.area = TripPlanner.getAreaById($stateParams.id);
+  $scope.to.area = $scope.area.name;
 
+  // Get departure data
+  JourneyInfo.getFromInfo($stateParams.departureId).then(function(data) {
+    $scope.from = data;
+  });
+
+  // Get all stops in current area
   TripPlanner.getAreaStops($stateParams.id).then(function(resp){
     $scope.stops = resp;
   });
 
+  // Select a stop and go to results
   $scope.selectStop = function(stop) {
     TripPlanner.setDestination(stop);
     $location.path('/result');
   };
 
-  $scope.from = JourneyInfo.getEmptyInfo();
-  $scope.to = JourneyInfo.getEmptyInfo();
-  $scope.to.area = $scope.area.name;
-
-  JourneyInfo.getFromInfo($stateParams.departureId).then(function(data) {
-    $scope.from = data;
-  });
 })
 
 
