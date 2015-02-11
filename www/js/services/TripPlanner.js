@@ -80,7 +80,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
     options = options || {};
     var mom = options.when ? moment(options.when) : moment();
     var departureTime = new Time(mom);
-    var maxTime = (new Time(departureTime)).add(90);
+    var maxTime = (new Time(departureTime)).add(240); // 2 hours
     var maxWalk = options.walk || 250;
 
     var deferred = $q.defer();
@@ -94,7 +94,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
 
       // for each stop find unique associated trips
 
-      Model.getDepartureStopTimes(possibleDepartures, departureTime, maxTime, mom.toDate()).then(function (departureStopTimes) {
+      Model.getDepartureStopTimes(possibleDepartures, departureTime, maxTime, mom).then(function (departureStopTimes) {
         var promises = [];
         var itineraries = [];
 
@@ -114,7 +114,7 @@ angular.module('chamBus').factory('TripPlanner', function($q, $translate, Model,
           departureStopTimes.forEach(function (st) {
             // get possible transfers and for each apply above logic
             var deferred1 = $q.defer();
-            Model.getTransferStopTimes(st, mom.toDate()).then(function (transfers) {
+            Model.getTransferStopTimes(st, mom).then(function (transfers) {
               // console.log("found " + transfers.length + " potential transfers.");
               var subPromises = [];
               transfers.forEach(function (tx) {

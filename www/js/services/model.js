@@ -203,8 +203,8 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
       });
   };
 
-  model.getDepartureStopTimes = function (stops, minTime, maxTime, day) {
-    day = day || new Date();
+  model.getDepartureStopTimes = function (stops, minTime, maxTime, when) {
+    when = when || moment();
     var trips = {};
     var promises = [];
     stops.forEach(function (stop) {
@@ -217,8 +217,8 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
       ' trip.service_id as service_id,' +
       ' trip.route_id as route_id' +
       ' from stop_time inner join trip on trip.id = stop_time.trip_id' +
-      ' where stop_time.stop_id=?;', [stop.id]).then(function (records) {
-        //console.log(records);
+      ' where stop_time.stop_id=? AND stop_time.departure_time > ?;',
+      [stop.id, when.format('HH:mm')]).then(function (records) {
         return records.reduce(function (arr, el) {
           if (minTime.before(el.departure_time) &&
             maxTime.after(el.departure_time)) {
@@ -228,7 +228,7 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
               route_id: el.route_id,
               service_id: el.service_id
             });
-            if (!t.service || t.service.isRunning(day)) {
+            if (!t.service || t.service.isRunning(when.toDate())) {
               arr.push(new StopTime(el, t));
             }
           }
