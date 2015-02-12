@@ -217,11 +217,18 @@ angular.module('chamBus').factory('Model', function($q, Time, Database, GeoTree)
       ' trip.service_id as service_id,' +
       ' trip.route_id as route_id' +
       ' from stop_time inner join trip on trip.id = stop_time.trip_id' +
-      ' where stop_time.stop_id=? AND stop_time.departure_time > ?;',
-      [stop.id, when.format('HH:mm')]).then(function (records) {
+      ' where stop_time.stop_id=?'+
+      ' AND (stop_time.departure_time > ? OR stop_time.departure_time < ?);',
+      [stop.id, when.format('HH:mm'), '02:00']).then(function (records) {
         return records.reduce(function (arr, el) {
-          if (minTime.before(el.departure_time) &&
-            maxTime.after(el.departure_time)) {
+
+          var departure_time_in_range = minTime.before(el.departure_time);
+          // If after after or 00:00 within and before
+          if( (maxTime.toInt()/60) >= 24 && el.departure_time < '02:00') {
+            departure_time_in_range = true;
+          }
+
+          if (departure_time_in_range && maxTime.after(el.departure_time)) {
             var t = new Trip({
               id: el.tripid,
               headsign: el.headsign,
