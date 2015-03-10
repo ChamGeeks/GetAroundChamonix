@@ -32,3 +32,8 @@ You'll need npm, then install Cordova and Ionic, and set up emulation ([as per t
  Then you can kick off an iOS emulation:  `ionic emulate ios`
 
  Or just fire it up in the browser: `ionic serve`
+
+
+## License
+
+GetAroundChamonix is licensed under GPL-2. See [LICENSE](https://github.com/ChamGeeks/GetAroundChamonix/blob/master/LICENSE) for more details.
