@@ -1,12 +1,13 @@
 logs/*
 !.gitkeep
 node_modules/
+platforms/
+plugins/
 bower_components/
 tmp
 .DS_Store
 .idea
 .sass-cache
-platforms/^.*
 *.swp
 *.swo
 *.log
