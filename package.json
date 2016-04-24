@@ -21,5 +21,8 @@
     "org.apache.cordova.inappbrowser",
     "org.apache.cordova.console",
     "org.apache.cordova.device"
+  ],
+  "cordovaPlatforms": [
+    "android"
   ]
 }
