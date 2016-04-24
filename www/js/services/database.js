@@ -32,10 +32,28 @@ angular.module('chamBus').factory('Database', function($http, $q, $ionicLoading)
         // or server returns response with an error status.
         if (error.status == 304) {
           console.log("Data is up to date");
+          deferred.resolve();
+        } else if (error.status == 404) {
+          console.log('Seeding database from local file...');
+          // load local db file
+          $http.get('db/local-db.sql').success(function(data) {
+            // push content in html5sql handler.  version number ??
+            var tempVersion;
+
+            tempVersion = Date.now().toString();
+            html5sql.changeVersion(html5sql.database.version, tempVersion, data, function() {
+              console.log('Seeded database from local file.');
+              db.version = tempVersion;
+              deferred.resolve();
+            }, function(error, statement) {
+              console.log('Error: ' + error.message + ' when processing ' + statement);
+              deferred.resolve();
+            });
+          }); 
         } else {
           console.log("Data could not be updated", error.data);
+          deferred.resolve();
         }
-        deferred.resolve();
       });
     return deferred.promise;
   }
